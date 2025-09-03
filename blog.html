@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>博客文章 - 我的博客</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #fafafa;
+        }
+        
+        header {
+            text-align: center;
+            margin-bottom: 40px;
+            padding-bottom: 20px;
+            border-bottom: 1px solid #eee;
+        }
+        
+        h1 {
+            font-size: 2.5rem;
+            font-weight: 300;
+            margin-bottom: 10px;
+            color: #2c3e50;
+        }
+        
+        nav {
+            display: flex;
+            justify-content: center;
+            gap: 30px;
+            margin-bottom: 30px;
+        }
+        
+        nav a {
+            color: #3498db;
+            text-decoration: none;
+            font-weight: 500;
+        }
+        
+        nav a:hover {
+            color: #2980b9;
+        }
+        
+        .content {
+            background: white;
+            padding: 30px;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+        
+        .article-list {
+            list-style: none;
+        }
+        
+        .article-item {
+            margin-bottom: 25px;
+            padding-bottom: 25px;
+            border-bottom: 1px solid #eee;
+        }
+        
+        .article-item:last-child {
+            border-bottom: none;
+            margin-bottom: 0;
+            padding-bottom: 0;
+        }
+        
+        .article-title {
+            font-size: 1.4rem;
+            margin-bottom: 10px;
+        }
+        
+        .article-title a {
+            color: #2c3e50;
+            text-decoration: none;
+        }
+        
+        .article-title a:hover {
+            color: #3498db;
+        }
+        
+        .article-meta {
+            color: #7f8c8d;
+            font-size: 0.9rem;
+            margin-bottom: 10px;
+        }
+        
+        .article-excerpt {
+            color: #555;
+            line-height: 1.6;
+        }
+        
+        .article-tags {
+            margin-top: 10px;
+        }
+        
+        .tag {
+            display: inline-block;
+            background: #ecf0f1;
+            color: #7f8c8d;
+            padding: 2px 8px;
+            border-radius: 12px;
+            font-size: 0.8rem;
+            margin-right: 5px;
+        }
+        
+        footer {
+            text-align: center;
+            margin-top: 50px;
+            padding-top: 20px;
+            border-top: 1px solid #eee;
+            color: #95a5a6;
+            font-size: 0.9rem;
+        }
+        
+        @media (max-width: 600px) {
+            body {
+                padding: 15px;
+            }
+            
+            h1 {
+                font-size: 2rem;
+            }
+            
+            nav {
+                flex-direction: column;
+                gap: 15px;
+            }
+            
+            .content {
+                padding: 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>博客文章</h1>
+    </header>
+    
+    <nav>
+        <a href="index.html">首页</a>
+        <a href="blog.html">博客</a>
+        <a href="weekly.html">周刊</a>
+        <a href="about.html">关于</a>
+    </nav>
+    
+    <div class="content">
+        <ul class="article-list">
+            <li class="article-item">
+                <h2 class="article-title"><a href="#">留学申请经验分享</a></h2>
+                <div class="article-meta">2024年12月15日 · 阅读时间 5分钟</div>
+                <div class="article-excerpt">分享我在申请海外院校过程中的经验和教训，包括文书准备、面试技巧和时间规划等方面的内容。</div>
+                <div class="article-tags">
+                    <span class="tag">留学</span>
+                    <span class="tag">申请</span>
+                    <span class="tag">经验</span>
+                </div>
+            </li>
+            
+            <li class="article-item">
+                <h2 class="article-title"><a href="#">AI工具在语言学习中的应用</a></h2>
+                <div class="article-meta">2024年12月10日 · 阅读时间 7分钟</div>
+                <div class="article-excerpt">探讨如何利用现代AI工具提升语言学习效率，包括语音识别、智能翻译和个性化学习推荐等技术的应用。</div>
+                <div class="article-tags">
+                    <span class="tag">AI</span>
+                    <span class="tag">语言学习</span>
+                    <span class="tag">工具</span>
+                </div>
+            </li>
+            
+            <li class="article-item">
+                <h2 class="article-title"><a href="#">海外工作文化差异体验</a></h2>
+                <div class="article-meta">2024年12月5日 · 阅读时间 6分钟</div>
+                <div class="article-excerpt">记录在不同国家工作时的文化差异体验，包括沟通方式、工作习惯和团队协作等方面的观察和思考。</div>
+                <div class="article-tags">
+                    <span class="tag">工作</span>
+                    <span class="tag">文化</span>
+                    <span class="tag">海外</span>
+                </div>
+            </li>
+        </ul>
+    </div>
+    
+    <footer>
+        <p>© 2024 我的博客 · 使用 Markdown 写作 · 部署于 GitHub Pages</p>
+    </footer>
+</body>
+</html>

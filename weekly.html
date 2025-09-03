@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>潮流周刊 - 我的博客</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #fafafa;
+        }
+        
+        header {
+            text-align: center;
+            margin-bottom: 40px;
+            padding-bottom: 20px;
+            border-bottom: 1px solid #eee;
+        }
+        
+        h1 {
+            font-size: 2.5rem;
+            font-weight: 300;
+            margin-bottom: 10px;
+            color: #2c3e50;
+        }
+        
+        .subtitle {
+            font-size: 1.1rem;
+            color: #7f8c8d;
+            margin-bottom: 20px;
+        }
+        
+        nav {
+            display: flex;
+            justify-content: center;
+            gap: 30px;
+            margin-bottom: 30px;
+        }
+        
+        nav a {
+            color: #3498db;
+            text-decoration: none;
+            font-weight: 500;
+        }
+        
+        nav a:hover {
+            color: #2980b9;
+        }
+        
+        .content {
+            background: white;
+            padding: 30px;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+        
+        .weekly-list {
+            list-style: none;
+        }
+        
+        .weekly-item {
+            margin-bottom: 30px;
+            padding-bottom: 30px;
+            border-bottom: 1px solid #eee;
+        }
+        
+        .weekly-item:last-child {
+            border-bottom: none;
+            margin-bottom: 0;
+            padding-bottom: 0;
+        }
+        
+        .weekly-header {
+            margin-bottom: 15px;
+        }
+        
+        .weekly-title {
+            font-size: 1.3rem;
+            color: #2c3e50;
+            margin-bottom: 5px;
+        }
+        
+        .weekly-meta {
+            color: #7f8c8d;
+            font-size: 0.9rem;
+        }
+        
+        .weekly-content {
+            color: #555;
+            line-height: 1.6;
+        }
+        
+        .weekly-content p {
+            margin-bottom: 15px;
+        }
+        
+        .cover-image {
+            width: 100%;
+            max-width: 600px;
+            height: auto;
+            border-radius: 8px;
+            margin: 20px 0;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        }
+        
+        footer {
+            text-align: center;
+            margin-top: 50px;
+            padding-top: 20px;
+            border-top: 1px solid #eee;
+            color: #95a5a6;
+            font-size: 0.9rem;
+        }
+        
+        @media (max-width: 600px) {
+            body {
+                padding: 15px;
+            }
+            
+            h1 {
+                font-size: 2rem;
+            }
+            
+            nav {
+                flex-direction: column;
+                gap: 15px;
+            }
+            
+            .content {
+                padding: 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>潮流周刊</h1>
+        <div class="subtitle">每周分享有趣的内容和思考</div>
+    </header>
+    
+    <nav>
+        <a href="index.html">首页</a>
+        <a href="blog.html">博客</a>
+        <a href="weekly.html">周刊</a>
+        <a href="about.html">关于</a>
+    </nav>
+    
+    <div class="content">
+        <ul class="weekly-list">
+            <li class="weekly-item">
+                <div class="weekly-header">
+                    <h2 class="weekly-title">第236期 - 蓝色天空</h2>
+                    <div class="weekly-meta">2025年9月1日</div>
+                </div>
+                <div class="weekly-content">
+                    <p>封面图拍摄于吃完晚饭散步的路上拍的，蓝色的天空上面还有一条深蓝色的云带，挺好看，发给小伙伴看看。</p>
+                    <p>这周主要在学习新的AI编程工具，发现Claude Code确实很强大，对于工程师来说真的是一个很好的辅助工具。同时也在准备新的留学申请材料，希望一切顺利。</p>
+                </div>
+            </li>
+            
+            <li class="weekly-item">
+                <div class="weekly-header">
+                    <h2 class="weekly-title">第235期 - 拍美术馆</h2>
+                    <div class="weekly-meta">2025年8月25日</div>
+                </div>
+                <div class="weekly-content">
+                    <p>封面图拍摄于周末带着富士去拍肖峰艺术馆，前中国美院馆长肖峰、宋韧夫妇艺术生涯80年间的503件代表作，非常喜欢建筑设计以及窗户和外面景色的搭配，值得去看看。</p>
+                    <p>最近在思考AI对创意行业的影响，艺术创作和技术的结合确实很有意思。也开始整理一些海外生活的实用技巧，准备在博客中分享。</p>
+                </div>
+            </li>
+            
+            <li class="weekly-item">
+                <div class="weekly-header">
+                    <h2 class="weekly-title">第234期 - 有富士咯</h2>
+                    <div class="weekly-meta">2025年8月18日</div>
+                </div>
+                <div class="weekly-content">
+                    <p>封面图拍摄于周末拿着新到的富士XE5出门拍照的场景，哈哈，主要是给潮流周刊拍封面图，质感非常喜欢，照片直出拍出来也很讨喜，总之非常喜欢这个小玩具。</p>
+                    <p>这周开始尝试用Markdown来写周刊内容，发现确实很方便，特别是对于技术内容来说。也在研究如何更好地将图片托管到GitHub上，为后续的Pages部署做准备。</p>
+                </div>
+            </li>
+        </ul>
+    </div>
+    
+    <footer>
+        <p>© 2024 我的博客 · 使用 Markdown 写作 · 部署于 GitHub Pages</p>
+    </footer>
+</body>
+</html>
