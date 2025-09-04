@@ -33,6 +33,7 @@
     <!-- Stylesheets -->
     <link rel="stylesheet" href="styles/main.css">
     <link rel="stylesheet" href="fonts/wenkai.css">
+    <script src="data/posts-data.js"></script>
     
     <!-- Favicon -->
     <link rel="icon" type="image/x-icon" href="favicon.ico">
@@ -183,33 +184,8 @@
 // 获取baseurl
 const baseUrl = '';
 
-// 日语学习记录数据
-let japaneseData = [];
-
-// 初始化日语学习记录数据
-function initJapaneseData() {
-    if (typeof generateJapaneseData === 'function') {
-        const generatedData = generateJapaneseData();
-        japaneseData = generatedData.map(item => ({
-            title: item.title,
-            date: item.date,
-            excerpt: item.content,
-            url: baseUrl + "/japanese-learning/" + item.id + "/",
-            cover: item.cover || baseUrl + "/assets/images/japanese/" + item.id + "-cover.jpg"
-        }));
-    } else {
-        // 降级方案
-        japaneseData = [
-            {
-                title: "日语助词「は」与「が」的区别详解",
-                date: "2025-01-25",
-                excerpt: "深入解析日语中最容易混淆的两个助词「は」和「が」的用法区别，通过实例帮助理解其在不同语境下的正确使用方法。",
-                url: "posts/JpnLearning/japanese-grammar-particles.html",
-                cover: "images/JpnLearning/day1/weekly-002-cover.jpeg"
-            }
-        ];
-    }
-}
+// 使用共享数据文件中的日语学习数据
+let japaneseData = getPostsByCategory('japanese-learning');
 
 // 分页配置
 const itemsPerPage = 6;

@@ -33,6 +33,7 @@
     <!-- Stylesheets -->
     <link rel="stylesheet" href="styles/main.css">
     <link rel="stylesheet" href="fonts/wenkai.css">
+    <script src="data/posts-data.js"></script>
     
     <!-- Favicon -->
     <link rel="icon" type="image/x-icon" href="favicon.ico">
@@ -183,33 +184,8 @@
 // 获取baseurl
 const baseUrl = '';
 
-// 工作杂记数据
-let workNotesData = [];
-
-// 初始化工作杂记数据
-function initWorkNotesData() {
-    if (typeof generateWorkNotesData === 'function') {
-        const generatedData = generateWorkNotesData();
-        workNotesData = generatedData.map(note => ({
-            title: note.title,
-            date: note.date,
-            excerpt: note.content,
-            url: baseUrl + "/work-notes/" + note.id + "/",
-            cover: note.cover || baseUrl + "/assets/images/work-notes/" + note.id + "-cover.jpg"
-        }));
-    } else {
-        // 降级方案
-        workNotesData = [
-            {
-                title: "远程工作效率提升指南：工具、方法与心得",
-                date: "2025-01-26",
-                excerpt: "分享远程工作中提升效率的实用工具、工作方法和个人心得，帮助远程工作者建立高效的工作流程和良好的工作习惯。",
-                url: "posts/WorkNotes/remote-work-productivity-tips.html",
-                cover: "images/WorkNotes/202509_01/weekly-002-cover.jpeg"
-            }
-        ];
-    }
-}
+// 使用共享数据文件中的工作杂记数据
+let workNotesData = getPostsByCategory('work-notes');
 
 // 分页配置
 const itemsPerPage = 6;
@@ -270,20 +246,9 @@ function changePage(page) {
 
 // 初始化
 document.addEventListener('DOMContentLoaded', function() {
-    initWorkNotesData();
     renderWorkNotesGrid(1);
     renderPagination();
 });
-
-// 加载自动加载器脚本
-const autoLoaderScript = document.createElement('script');
-autoLoaderScript.src = baseUrl + '/scripts/auto-loader.js';
-autoLoaderScript.onload = function() {
-    initWorkNotesData();
-    renderWorkNotesGrid(1);
-    renderPagination();
-};
-document.head.appendChild(autoLoaderScript);
 </script>
 
 

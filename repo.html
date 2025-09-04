@@ -33,6 +33,7 @@
     <!-- Stylesheets -->
     <link rel="stylesheet" href="styles/main.css">
     <link rel="stylesheet" href="fonts/wenkai.css">
+    <script src="data/posts-data.js"></script>
     
     <!-- Favicon -->
     <link rel="icon" type="image/x-icon" href="favicon.ico">
@@ -183,33 +184,8 @@
 // 获取baseurl
 const baseUrl = '';
 
-// 仓库数据
-let repoData = [];
-
-// 初始化仓库数据
-function initRepoData() {
-    if (typeof generateRepoData === 'function') {
-        const generatedData = generateRepoData();
-        repoData = generatedData.map(repo => ({
-            title: repo.title,
-            date: repo.date,
-            excerpt: repo.content,
-            url: baseUrl + "/repo/" + repo.id + "/",
-            cover: repo.cover || baseUrl + "/assets/images/repo/" + repo.id + "-cover.jpg"
-        }));
-    } else {
-        // 降级方案
-        repoData = [
-            {
-                title: "Git 工作流最佳实践：从个人项目到团队协作",
-                date: "2025-01-24",
-                excerpt: "深入探讨Git工作流的最佳实践，包括分支管理策略、提交规范、代码审查流程等，帮助开发者建立高效的版本控制工作流。",
-                url: "posts/repo/git-workflow-best-practices.html",
-                cover: "images/repo/nei/weekly-002-cover.jpeg"
-            }
-        ];
-    }
-}
+// 使用共享数据文件中的技术文章数据
+let repoData = getPostsByCategory('repo');
 
 // 分页配置
 const itemsPerPage = 6;

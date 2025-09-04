@@ -29,6 +29,7 @@
     <link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
     
     <link rel="stylesheet" href="styles/main.css">
+    <script src="data/posts-data.js"></script>
 </head>
 <body>
     <header class="header">
@@ -114,89 +115,8 @@
     </main>
 
     <script>
-        // 所有文章数据
-        const allPosts = [
-            {
-                title: "远程工作效率提升指南：工具、方法与心得",
-                date: "2025-01-26",
-                excerpt: "分享远程工作中提升效率的实用工具、工作方法和个人心得，帮助远程工作者建立高效的工作流程和良好的工作习惯。",
-                url: "posts/WorkNotes/remote-work-productivity-tips.html",
-                tags: ["远程工作", "效率提升", "工作"],
-                cover: "images/WorkNotes/202509_01/weekly-002-cover.jpeg"
-            },
-            {
-                title: "日语助词「は」与「が」的区别详解",
-                date: "2025-01-25",
-                excerpt: "深入解析日语中最容易混淆的两个助词「は」和「が」的用法区别，通过实例帮助理解其在不同语境下的正确使用方法。",
-                url: "posts/JpnLearning/japanese-grammar-particles.html",
-                tags: ["日语学习", "语法", "学习"],
-                cover: "images/JpnLearning/day1/weekly-002-cover.jpeg"
-            },
-            {
-                title: "Git 工作流最佳实践：从个人项目到团队协作",
-                date: "2025-01-24",
-                excerpt: "深入探讨Git工作流的最佳实践，包括分支管理策略、提交规范、代码审查流程等，帮助开发者建立高效的版本控制工作流。",
-                url: "posts/repo/git-workflow-best-practices.html",
-                tags: ["Git", "工作流", "技术", "团队协作"],
-                cover: "images/repo/nei/weekly-002-cover.jpeg"
-            },
-            {
-                title: "React Hooks 深入理解与实践",
-                date: "2025-01-23",
-                excerpt: "从基础到进阶，全面解析React Hooks的使用方法和最佳实践，包括useState、useEffect、自定义Hooks等。",
-                url: "posts/repo/react-hooks-guide.html",
-                tags: ["React", "前端", "技术", "JavaScript"],
-                cover: ""
-            },
-            {
-                title: "TypeScript 类型系统完全指南",
-                date: "2025-01-22",
-                excerpt: "深入探讨TypeScript的类型系统，包括基础类型、高级类型、泛型、条件类型等，帮助开发者写出更安全的代码。",
-                url: "posts/repo/typescript-type-system.html",
-                tags: ["TypeScript", "前端", "技术", "类型系统"],
-                cover: ""
-            },
-            {
-                title: "日语敬语系统详解",
-                date: "2025-01-21",
-                excerpt: "全面解析日语敬语系统，包括尊敬语、谦让语、丁宁语的使用场景和表达方式，帮助学习者掌握日语的礼貌表达。",
-                url: "posts/JpnLearning/japanese-keigo-system.html",
-                tags: ["日语学习", "敬语", "语法", "学习"],
-                cover: ""
-            },
-            {
-                title: "远程团队管理的挑战与解决方案",
-                date: "2025-01-20",
-                excerpt: "分享远程团队管理中遇到的挑战和解决方案，包括沟通协作、项目管理、团队文化建设等方面的经验。",
-                url: "posts/WorkNotes/remote-team-management.html",
-                tags: ["远程工作", "团队管理", "工作", "管理"],
-                cover: ""
-            },
-            {
-                title: "Vue 3 Composition API 实战指南",
-                date: "2025-01-19",
-                excerpt: "深入学习Vue 3的Composition API，通过实际项目案例展示如何使用新的API来构建更灵活、可维护的Vue应用。",
-                url: "posts/repo/vue3-composition-api.html",
-                tags: ["Vue", "前端", "技术", "JavaScript"],
-                cover: ""
-            },
-            {
-                title: "日语动词变位完全攻略",
-                date: "2025-01-18",
-                excerpt: "系统梳理日语动词变位规则，包括五段动词、一段动词、不规则动词的各种变位形式和使用方法。",
-                url: "posts/JpnLearning/japanese-verb-conjugation.html",
-                tags: ["日语学习", "动词", "语法", "学习"],
-                cover: ""
-            },
-            {
-                title: "工作效率工具推荐与使用心得",
-                date: "2025-01-17",
-                excerpt: "推荐一些提升工作效率的实用工具，包括时间管理、任务规划、文档协作等方面的工具和使用技巧。",
-                url: "posts/WorkNotes/productivity-tools-review.html",
-                tags: ["效率提升", "工具", "工作", "生产力"],
-                cover: ""
-            }
-        ];
+        // 自动获取最新的10篇文章
+        let allPosts = getLatestPosts(10);
 
         let filteredPosts = [...allPosts];
         let currentSearchTerm = '';
