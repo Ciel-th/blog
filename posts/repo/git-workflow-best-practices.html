@@ -1,0 +1,359 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Git 工作流最佳实践：从个人项目到团队协作 - 電波圏外</title>
+    
+    <!-- SEO Meta Tags -->
+    <meta name="description" content="详细介绍Git工作流的最佳实践，包括分支管理策略、提交规范、代码审查流程等，帮助开发者建立高效的版本控制工作流。">
+    <meta name="author" content="Pingfan">
+    
+    <!-- Open Graph Meta Tags -->
+    <meta property="og:title" content="Git 工作流最佳实践：从个人项目到团队协作">
+    <meta property="og:description" content="详细介绍Git工作流的最佳实践，包括分支管理策略、提交规范、代码审查流程等，帮助开发者建立高效的版本控制工作流。">
+    <meta property="og:type" content="article">
+    <meta property="og:url" content="https://pingfan-website-ftqc.vercel.app/posts/repo/git-workflow-best-practices/">
+    
+    <!-- Twitter Card Meta Tags -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Git 工作流最佳实践：从个人项目到团队协作">
+    <meta name="twitter:description" content="详细介绍Git工作流的最佳实践，包括分支管理策略、提交规范、代码审查流程等，帮助开发者建立高效的版本控制工作流。">
+    
+    <!-- Performance Optimizations -->
+    <link rel="dns-prefetch" href="//polyfill.io">
+    <link rel="dns-prefetch" href="//cdn.jsdelivr.net">
+    <link rel="preconnect" href="https://polyfill.io" crossorigin>
+    <link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
+    <link rel="preload" href="../../fonts/LXGWWenKai-Regular.ttf" as="font" type="font/ttf" crossorigin>
+    <link rel="preload" href="../../styles/main.css" as="style">
+    
+    <!-- Stylesheets -->
+    <link rel="stylesheet" href="../../styles/main.css">
+    <link rel="stylesheet" href="../../fonts/wenkai.css">
+    
+    <!-- Favicon -->
+    <link rel="icon" type="image/x-icon" href="/favicon.ico">
+    
+    <!-- Vercel Analytics -->
+    <script defer src="https://va.vercel-scripts.com/v1/script.js"></script>
+    
+    <!-- 只在需要时加载外部资源 -->
+    
+        <!-- MathJax for LaTeX Support -->
+        <script>
+            MathJax = {
+                tex: {
+                    inlineMath: [['$', '$'], ['\\(', '\\)']],
+                    displayMath: [['$$', '$$'], ['\\[', '\\]']],
+                    processEscapes: true,
+                    processEnvironments: true
+                },
+                options: {
+                    skipHtmlTags: ['script', 'noscript', 'style', 'textarea', 'pre']
+                }
+            };
+        </script>
+        <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+        
+        <!-- Mermaid for Diagrams -->
+        <script src="https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.min.js"></script>
+        <script>
+            mermaid.initialize({
+                startOnLoad: true,
+                theme: 'default',
+                securityLevel: 'loose',
+                fontFamily: 'LXGW WenKai, -apple-system, BlinkMacSystemFont, sans-serif'
+            });
+        </script>
+    
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <div class="container">
+            <div class="logo">
+                <a href="/">電波圏外</a>
+            </div>
+            <nav class="nav">
+                <a href="../../index.html" class="nav-link">首页</a>
+                <a href="../../work-notes.html" class="nav-link">周刊</a>
+                <a href="../../about.html" class="nav-link">关于</a>
+                <a href="../../about.html" class="nav-link">找到我</a>
+            </nav>
+        </div>
+    </header>
+    
+    <!-- Main Content -->
+    <main class="main">
+        <div class="container">
+            <article class="post">
+    <header class="post-header">
+        <h1 class="post-title">Git 工作流最佳实践：从个人项目到团队协作</h1>
+        <div class="post-meta">
+            <time class="post-date" datetime="2025-01-24T00:00:00+08:00">2025年01月24日</time>
+            
+            <span class="post-tags">
+                
+                <span class="tag">#Git</span>
+                
+                <span class="tag">#版本控制</span>
+                
+                <span class="tag">#开发流程</span>
+                
+            </span>
+            
+        </div>
+        
+        <div class="post-excerpt">
+            详细介绍Git工作流的最佳实践，包括分支管理策略、提交规范、代码审查流程等，帮助开发者建立高效的版本控制工作流。
+        </div>
+        
+    </header>
+    
+    <div class="post-content">
+        <p>在现代软件开发中，Git 已经成为了事实上的版本控制标准。然而，仅仅会使用 Git 的基本命令是远远不够的，建立一套规范的工作流程对于提高开发效率和代码质量至关重要。</p>
+
+        <h2>为什么需要规范的 Git 工作流？</h2>
+        
+        <p>一个好的 Git 工作流能够带来以下好处：</p>
+        
+        <ul>
+            <li><strong>提高代码质量</strong>：通过代码审查和分支保护机制</li>
+            <li><strong>降低风险</strong>：避免直接在主分支上进行危险操作</li>
+            <li><strong>提升协作效率</strong>：团队成员遵循统一的工作流程</li>
+            <li><strong>便于追踪和回滚</strong>：清晰的提交历史和分支结构</li>
+        </ul>
+
+        <h2>分支管理策略</h2>
+        
+        <h3>Git Flow 模型</h3>
+        <p>Git Flow 是最经典的分支管理模型，适合有明确发布周期的项目：</p>
+        
+        <div style="background-color: #f8f9fa; padding: 15px; border-left: 4px solid #007bff; margin: 20px 0;">
+            <p><strong>主要分支：</strong></p>
+            <ul>
+                <li><code>main/master</code>：生产环境代码</li>
+                <li><code>develop</code>：开发环境代码</li>
+            </ul>
+            <p><strong>辅助分支：</strong></p>
+            <ul>
+                <li><code>feature/*</code>：功能开发分支</li>
+                <li><code>release/*</code>：发布准备分支</li>
+                <li><code>hotfix/*</code>：紧急修复分支</li>
+            </ul>
+        </div>
+        
+        <h3>GitHub Flow 模型</h3>
+        <p>GitHub Flow 更加简化，适合持续部署的项目：</p>
+        
+        <div style="background-color: #f8f9fa; padding: 15px; border-left: 4px solid #28a745; margin: 20px 0;">
+            <ol>
+                <li>从 <code>main</code> 分支创建功能分支</li>
+                <li>在功能分支上开发和提交</li>
+                <li>创建 Pull Request</li>
+                <li>代码审查和讨论</li>
+                <li>合并到 <code>main</code> 分支</li>
+                <li>部署到生产环境</li>
+            </ol>
+        </div>
+
+        <h2>提交信息规范</h2>
+        
+        <h3>Conventional Commits 规范</h3>
+        <p>采用统一的提交信息格式能够提高项目的可维护性：</p>
+        
+        <div style="background-color: #fff3cd; padding: 15px; border-left: 4px solid #ffc107; margin: 20px 0;">
+            <p><strong>格式：</strong></p>
+            <pre style="background-color: #f8f9fa; padding: 10px; border-radius: 4px; overflow-x: auto;"><code>&lt;type&gt;[optional scope]: &lt;description&gt;
+
+[optional body]
+
+[optional footer(s)]</code></pre>
+        </div>
+        
+        <h3>常用的提交类型</h3>
+        
+        <div style="text-align: center; margin: 20px 0;">
+            <table style="margin: 0 auto; border-collapse: collapse; width: 100%; max-width: 600px;">
+                <tr style="background-color: #e9ecef;">
+                    <th style="border: 1px solid #dee2e6; padding: 10px;">类型</th>
+                    <th style="border: 1px solid #dee2e6; padding: 10px;">说明</th>
+                    <th style="border: 1px solid #dee2e6; padding: 10px;">示例</th>
+                </tr>
+                <tr>
+                    <td style="border: 1px solid #dee2e6; padding: 10px;">feat</td>
+                    <td style="border: 1px solid #dee2e6; padding: 10px;">新功能</td>
+                    <td style="border: 1px solid #dee2e6; padding: 10px;">feat: 添加用户登录功能</td>
+                </tr>
+                <tr>
+                    <td style="border: 1px solid #dee2e6; padding: 10px;">fix</td>
+                    <td style="border: 1px solid #dee2e6; padding: 10px;">修复bug</td>
+                    <td style="border: 1px solid #dee2e6; padding: 10px;">fix: 修复登录页面样式问题</td>
+                </tr>
+                <tr>
+                    <td style="border: 1px solid #dee2e6; padding: 10px;">docs</td>
+                    <td style="border: 1px solid #dee2e6; padding: 10px;">文档更新</td>
+                    <td style="border: 1px solid #dee2e6; padding: 10px;">docs: 更新API文档</td>
+                </tr>
+                <tr>
+                    <td style="border: 1px solid #dee2e6; padding: 10px;">style</td>
+                    <td style="border: 1px solid #dee2e6; padding: 10px;">代码格式</td>
+                    <td style="border: 1px solid #dee2e6; padding: 10px;">style: 格式化代码</td>
+                </tr>
+                <tr>
+                    <td style="border: 1px solid #dee2e6; padding: 10px;">refactor</td>
+                    <td style="border: 1px solid #dee2e6; padding: 10px;">重构</td>
+                    <td style="border: 1px solid #dee2e6; padding: 10px;">refactor: 重构用户服务</td>
+                </tr>
+            </table>
+        </div>
+
+        <h2>代码审查流程</h2>
+        
+        <h3>Pull Request 最佳实践</h3>
+        
+        <div style="background-color: #f8f9fa; padding: 15px; border-left: 4px solid #6f42c1; margin: 20px 0;">
+            <p><strong>创建 PR 时应该包含：</strong></p>
+            <ul>
+                <li>清晰的标题和描述</li>
+                <li>相关的 Issue 链接</li>
+                <li>测试说明</li>
+                <li>截图或演示（如果适用）</li>
+                <li>破坏性变更说明</li>
+            </ul>
+        </div>
+        
+        <h3>审查者指南</h3>
+        
+        <p>作为代码审查者，应该关注以下方面：</p>
+        
+        <ul>
+            <li><strong>功能正确性</strong>：代码是否实现了预期功能</li>
+            <li><strong>代码质量</strong>：是否遵循编码规范和最佳实践</li>
+            <li><strong>性能影响</strong>：是否存在性能问题</li>
+            <li><strong>安全性</strong>：是否存在安全漏洞</li>
+            <li><strong>测试覆盖</strong>：是否有足够的测试</li>
+        </ul>
+
+        <h2>实用工具和配置</h2>
+        
+        <h3>Git Hooks</h3>
+        <p>使用 Git Hooks 可以在特定的 Git 事件发生时自动执行脚本：</p>
+        
+        <div style="background-color: #f8f9fa; padding: 15px; border-radius: 4px; margin: 20px 0;">
+            <pre style="margin: 0; overflow-x: auto;"><code># pre-commit hook 示例
+#!/bin/sh
+# 运行代码格式检查
+npm run lint
+if [ $? -ne 0 ]; then
+  echo "代码格式检查失败，请修复后再提交"
+  exit 1
+fi
+
+# 运行测试
+npm test
+if [ $? -ne 0 ]; then
+  echo "测试失败，请修复后再提交"
+  exit 1
+fi</code></pre>
+        </div>
+        
+        <h3>有用的 Git 配置</h3>
+        
+        <div style="background-color: #f8f9fa; padding: 15px; border-radius: 4px; margin: 20px 0;">
+            <pre style="margin: 0; overflow-x: auto;"><code># 设置默认编辑器
+git config --global core.editor "code --wait"
+
+# 设置默认分支名
+git config --global init.defaultBranch main
+
+# 启用自动换行转换
+git config --global core.autocrlf true  # Windows
+git config --global core.autocrlf input # macOS/Linux
+
+# 设置别名
+git config --global alias.co checkout
+git config --global alias.br branch
+git config --global alias.ci commit
+git config --global alias.st status</code></pre>
+        </div>
+
+        <h2>团队协作建议</h2>
+        
+        <h3>分支命名规范</h3>
+        
+        <div style="background-color: #e7f3ff; padding: 15px; border-left: 4px solid #0066cc; margin: 20px 0;">
+            <ul>
+                <li><code>feature/user-authentication</code> - 功能分支</li>
+                <li><code>bugfix/login-error</code> - 错误修复分支</li>
+                <li><code>hotfix/security-patch</code> - 紧急修复分支</li>
+                <li><code>release/v1.2.0</code> - 发布分支</li>
+            </ul>
+        </div>
+        
+        <h3>冲突解决策略</h3>
+        
+        <p>当遇到合并冲突时：</p>
+        
+        <ol>
+            <li>保持冷静，仔细分析冲突的原因</li>
+            <li>与相关开发者沟通，了解代码变更的意图</li>
+            <li>选择合适的解决方案（保留、合并或重写）</li>
+            <li>测试解决后的代码</li>
+            <li>提交解决冲突的记录</li>
+        </ol>
+
+        <h2>常见问题和解决方案</h2>
+        
+        <h3>问题1：提交历史混乱</h3>
+        <p><strong>解决方案：</strong>使用 <code>git rebase</code> 整理提交历史，或者使用 squash merge。</p>
+        
+        <h3>问题2：误提交敏感信息</h3>
+        <p><strong>解决方案：</strong>使用 <code>git filter-branch</code> 或 BFG Repo-Cleaner 清理历史记录。</p>
+        
+        <h3>问题3：分支管理混乱</h3>
+        <p><strong>解决方案：</strong>建立明确的分支管理规范，定期清理无用分支。</p>
+
+        <h2>总结</h2>
+        
+        <p>建立良好的 Git 工作流需要团队的共同努力和持续改进。关键要点包括：</p>
+        
+        <ul>
+            <li>选择适合团队的分支管理策略</li>
+            <li>制定并遵循提交信息规范</li>
+            <li>建立有效的代码审查流程</li>
+            <li>使用工具自动化重复性工作</li>
+            <li>持续学习和改进工作流程</li>
+        </ul>
+        
+        <p>记住，最好的工作流是团队能够持续执行的工作流。从简单开始，逐步完善，才能真正提高开发效率和代码质量。</p>
+
+    </div>
+    
+    <footer class="post-footer">
+        <div class="post-navigation">
+            
+            
+            
+        </div>
+        
+
+    </footer>
+</article>
+
+<!-- Related Posts -->
+
+
+        </div>
+    </main>
+    
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <p>&copy; 2025 Pingfan. All rights reserved.</p>
+            <p>Powered by <a href="https://jekyllrb.com/" target="_blank">Jekyll</a> & <a href="https://pages.github.com/" target="_blank">GitHub Pages</a></p>
+        </div>
+    </footer>
+</body>
+</html>

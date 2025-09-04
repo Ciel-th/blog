@@ -3,160 +3,308 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>我的博客</title>
-    <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-        
-        body {
-            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-            line-height: 1.6;
-            color: #333;
-            max-width: 800px;
-            margin: 0 auto;
-            padding: 20px;
-            background-color: #fafafa;
-        }
-        
-        header {
-            text-align: center;
-            margin-bottom: 40px;
-            padding-bottom: 20px;
-            border-bottom: 1px solid #eee;
-        }
-        
-        h1 {
-            font-size: 2.5rem;
-            font-weight: 300;
-            margin-bottom: 10px;
-            color: #2c3e50;
-        }
-        
-        .subtitle {
-            font-size: 1.1rem;
-            color: #7f8c8d;
-            margin-bottom: 20px;
-        }
-        
-        nav {
-            display: flex;
-            justify-content: center;
-            gap: 30px;
-            margin-bottom: 30px;
-        }
-        
-        nav a {
-            color: #3498db;
-            text-decoration: none;
-            font-weight: 500;
-        }
-        
-        nav a:hover {
-            color: #2980b9;
-        }
-        
-        .social-links {
-            display: flex;
-            justify-content: center;
-            gap: 20px;
-            margin: 30px 0;
-        }
-        
-        .social-links a {
-            color: #95a5a6;
-            text-decoration: none;
-            font-size: 0.9rem;
-        }
-        
-        .social-links a:hover {
-            color: #7f8c8d;
-        }
-        
-        .content {
-            background: white;
-            padding: 30px;
-            border-radius: 8px;
-            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
-        }
-        
-        .welcome {
-            text-align: center;
-            margin-bottom: 40px;
-        }
-        
-        .welcome h2 {
-            font-size: 1.8rem;
-            margin-bottom: 15px;
-            color: #34495e;
-        }
-        
-        .welcome p {
-            font-size: 1.1rem;
-            color: #7f8c8d;
-            line-height: 1.8;
-        }
-        
-        footer {
-            text-align: center;
-            margin-top: 50px;
-            padding-top: 20px;
-            border-top: 1px solid #eee;
-            color: #95a5a6;
-            font-size: 0.9rem;
-        }
-        
-        @media (max-width: 600px) {
-            body {
-                padding: 15px;
-            }
-            
-            h1 {
-                font-size: 2rem;
-            }
-            
-            nav {
-                flex-direction: column;
-                gap: 15px;
-            }
-            
-            .content {
-                padding: 20px;
-            }
-        }
-    </style>
+    <title>首页 - 電波圏外</title>
+    
+    <!-- SEO Meta Tags -->
+    <meta name="description" content="分享留学、语言、AI、工作和海外生活的点滴思考">
+    <meta name="author" content="花月">
+    
+    <!-- Open Graph Meta Tags -->
+    <meta property="og:title" content="電波圏外">
+    <meta property="og:description" content="不定期更新">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://ciel-th.github.io/blog/">
+    
+    
+    <!-- Twitter Card Meta Tags -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="首页">
+    <meta name="twitter:description" content="不定期更新">
+    
+    
+    <!-- Performance Optimizations -->
+    <link rel="dns-prefetch" href="//polyfill.io">
+    <link rel="dns-prefetch" href="//cdn.jsdelivr.net">
+    <link rel="preconnect" href="https://polyfill.io" crossorigin>
+    <link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
+    
+    <link rel="stylesheet" href="styles/main.css">
 </head>
 <body>
-    <header>
-        <h1>我的博客</h1>
-        <div class="subtitle">分享留学、AI、工作和海外生活的点滴</div>
-    </header>
-    
-    <nav>
-        <a href="index.html">首页</a>
-        <a href="blog.html">博客</a>
-        <a href="weekly.html">周刊</a>
-        <a href="about.html">关于</a>
-    </nav>
-    
-    <div class="content">
-        <div class="welcome">
-            <h2>欢迎来到我的博客</h2>
-            <p>这里将分享我在留学、语言学习、人工智能、工作经验和海外生活方面的思考和见解。内容会不定期更新，希望这些分享能为你带来一些启发和帮助。</p>
+    <header class="header">
+        <div class="container">
+            <div class="logo">
+                <a href="index.html">電波圏外</a>
+            </div>
+            <nav class="nav">
+                <a href="index.html" class="nav-link active">首页</a>
+                <a href="work-notes.html" class="nav-link">工作杂记</a>
+                <a href="repo.html" class="nav-link">repo</a>
+                <a href="japanese-learning.html" class="nav-link">日语学习记录</a>
+                <a href="about.html" class="nav-link">关于我</a>
+            </nav>
         </div>
-    </div>
-    
-    <div class="social-links">
-        <a href="#">GitHub</a>
-        <a href="#">Twitter</a>
-        <a href="#">LinkedIn</a>
-        <a href="#">Email</a>
-    </div>
-    
-    <footer>
-        <p>© 2024 我的博客 · 使用 Markdown 写作 · 部署于 GitHub Pages</p>
-    </footer>
+    </header>
+
+    <main class="main">
+        <div class="container">
+            <div class="blog-layout">
+                <div class="blog-content">
+                    <section class="intro">
+                    </section>
+
+                    <section class="posts" id="posts">
+                        <article class="post-item">
+                            <h2 class="post-title">
+                                <a href="posts/WorkNotes/remote-work-productivity-tips.html">远程工作效率提升指南：工具、方法与心得</a>
+                            </h2>
+                            <div class="post-meta">
+                                <span>2025-01-26</span>
+                                <div class="post-tags">
+                                    <span class="tag">远程工作</span>
+                                    <span class="tag">效率提升</span>
+                                </div>
+                            </div>
+                            <div class="post-excerpt">
+                                分享远程工作中提升效率的实用工具、工作方法和个人心得，帮助远程工作者建立高效的工作流程和良好的工作习惯。
+                            </div>
+                        </article>
+
+                        <article class="post-item">
+                            <h2 class="post-title">
+                                <a href="posts/JpnLearning/japanese-grammar-particles.html">日语助词「は」与「が」的区别详解</a>
+                            </h2>
+                            <div class="post-meta">
+                                <span>2025-01-25</span>
+                                <div class="post-tags">
+                                    <span class="tag">日语学习</span>
+                                    <span class="tag">语法</span>
+                                </div>
+                            </div>
+                            <div class="post-excerpt">
+                                深入解析日语中最容易混淆的两个助词「は」和「が」的用法区别，通过实例帮助理解其在不同语境下的正确使用方法。
+                            </div>
+                        </article>
+                    </section>
+                </div>
+
+                <aside class="blog-sidebar">
+                    <div class="sidebar-section">
+                        <h3 class="sidebar-title">搜索文章</h3>
+                        <div class="blog-search">
+                            <input type="text" class="search-input" placeholder="搜索文章..." id="searchInput">
+                            <button class="search-btn" onclick="searchPosts()">🔍</button>
+                        </div>
+                    </div>
+
+                    <div class="sidebar-section">
+                        <h3 class="sidebar-title">标签筛选</h3>
+                        <div class="blog-tags-nav">
+                            <div class="nav-label">热门标签</div>
+                            <span class="tag" onclick="filterByTag('博客')">博客</span>
+                            <span class="tag" onclick="filterByTag('日语')">日语</span>
+                            <span class="tag" onclick="filterByTag('学习')">学习</span>
+                            <span class="tag" onclick="filterByTag('工作')">工作</span>
+                            <span class="tag" onclick="filterByTag('技术')">技术</span>
+                        </div>
+                    </div>
+                </aside>
+            </div>
+        </div>
+    </main>
+
+    <script>
+        // 所有文章数据
+        const allPosts = [
+            {
+                title: "远程工作效率提升指南：工具、方法与心得",
+                date: "2025-01-26",
+                excerpt: "分享远程工作中提升效率的实用工具、工作方法和个人心得，帮助远程工作者建立高效的工作流程和良好的工作习惯。",
+                url: "posts/WorkNotes/remote-work-productivity-tips.html",
+                tags: ["远程工作", "效率提升", "工作"],
+                cover: "images/WorkNotes/202509_01/weekly-002-cover.jpeg"
+            },
+            {
+                title: "日语助词「は」与「が」的区别详解",
+                date: "2025-01-25",
+                excerpt: "深入解析日语中最容易混淆的两个助词「は」和「が」的用法区别，通过实例帮助理解其在不同语境下的正确使用方法。",
+                url: "posts/JpnLearning/japanese-grammar-particles.html",
+                tags: ["日语学习", "语法", "学习"],
+                cover: "images/JpnLearning/day1/weekly-002-cover.jpeg"
+            },
+            {
+                title: "Git 工作流最佳实践：从个人项目到团队协作",
+                date: "2025-01-24",
+                excerpt: "深入探讨Git工作流的最佳实践，包括分支管理策略、提交规范、代码审查流程等，帮助开发者建立高效的版本控制工作流。",
+                url: "posts/repo/git-workflow-best-practices.html",
+                tags: ["Git", "工作流", "技术", "团队协作"],
+                cover: "images/repo/nei/weekly-002-cover.jpeg"
+            },
+            {
+                title: "React Hooks 深入理解与实践",
+                date: "2025-01-23",
+                excerpt: "从基础到进阶，全面解析React Hooks的使用方法和最佳实践，包括useState、useEffect、自定义Hooks等。",
+                url: "posts/repo/react-hooks-guide.html",
+                tags: ["React", "前端", "技术", "JavaScript"],
+                cover: ""
+            },
+            {
+                title: "TypeScript 类型系统完全指南",
+                date: "2025-01-22",
+                excerpt: "深入探讨TypeScript的类型系统，包括基础类型、高级类型、泛型、条件类型等，帮助开发者写出更安全的代码。",
+                url: "posts/repo/typescript-type-system.html",
+                tags: ["TypeScript", "前端", "技术", "类型系统"],
+                cover: ""
+            },
+            {
+                title: "日语敬语系统详解",
+                date: "2025-01-21",
+                excerpt: "全面解析日语敬语系统，包括尊敬语、谦让语、丁宁语的使用场景和表达方式，帮助学习者掌握日语的礼貌表达。",
+                url: "posts/JpnLearning/japanese-keigo-system.html",
+                tags: ["日语学习", "敬语", "语法", "学习"],
+                cover: ""
+            },
+            {
+                title: "远程团队管理的挑战与解决方案",
+                date: "2025-01-20",
+                excerpt: "分享远程团队管理中遇到的挑战和解决方案，包括沟通协作、项目管理、团队文化建设等方面的经验。",
+                url: "posts/WorkNotes/remote-team-management.html",
+                tags: ["远程工作", "团队管理", "工作", "管理"],
+                cover: ""
+            },
+            {
+                title: "Vue 3 Composition API 实战指南",
+                date: "2025-01-19",
+                excerpt: "深入学习Vue 3的Composition API，通过实际项目案例展示如何使用新的API来构建更灵活、可维护的Vue应用。",
+                url: "posts/repo/vue3-composition-api.html",
+                tags: ["Vue", "前端", "技术", "JavaScript"],
+                cover: ""
+            },
+            {
+                title: "日语动词变位完全攻略",
+                date: "2025-01-18",
+                excerpt: "系统梳理日语动词变位规则，包括五段动词、一段动词、不规则动词的各种变位形式和使用方法。",
+                url: "posts/JpnLearning/japanese-verb-conjugation.html",
+                tags: ["日语学习", "动词", "语法", "学习"],
+                cover: ""
+            },
+            {
+                title: "工作效率工具推荐与使用心得",
+                date: "2025-01-17",
+                excerpt: "推荐一些提升工作效率的实用工具，包括时间管理、任务规划、文档协作等方面的工具和使用技巧。",
+                url: "posts/WorkNotes/productivity-tools-review.html",
+                tags: ["效率提升", "工具", "工作", "生产力"],
+                cover: ""
+            }
+        ];
+
+        let filteredPosts = [...allPosts];
+        let currentSearchTerm = '';
+        let currentTag = '';
+
+        // 获取所有标签及其文章数量
+        function getAllTags() {
+            const tagCount = {};
+            allPosts.forEach(post => {
+                post.tags.forEach(tag => {
+                    tagCount[tag] = (tagCount[tag] || 0) + 1;
+                });
+            });
+            return tagCount;
+        }
+
+        // 渲染文章列表
+        function renderPosts(posts) {
+            const postsContainer = document.getElementById('posts');
+            const displayPosts = posts.slice(0, 10); // 只显示前10篇
+            
+            postsContainer.innerHTML = displayPosts.map(post => `
+                <article class="post-item">
+                    ${post.cover ? `<div class="post-thumbnail"><img src="${post.cover}" alt="${post.title}" class="thumbnail-image"></div>` : ''}
+                    <div class="post-content">
+                        <h2 class="post-title">
+                            <a href="${post.url}">${post.title}</a>
+                        </h2>
+                        <div class="post-meta">
+                            <span>${post.date}</span>
+                            <div class="post-tags">
+                                ${post.tags.map(tag => `<span class="tag" onclick="filterByTag('${tag}')">${tag}</span>`).join('')}
+                            </div>
+                        </div>
+                        <div class="post-excerpt">
+                            ${post.excerpt}
+                        </div>
+                    </div>
+                </article>
+            `).join('');
+        }
+
+        // 渲染标签列表
+        function renderTags() {
+            const tagCount = getAllTags();
+            const tagsContainer = document.querySelector('.blog-tags-nav');
+            
+            tagsContainer.innerHTML = `
+                <div class="nav-label">热门标签</div>
+                <span class="tag ${currentTag === '' ? 'active' : ''}" onclick="filterByTag('')">全部 (${allPosts.length})</span>
+                ${Object.entries(tagCount)
+                    .sort((a, b) => b[1] - a[1])
+                    .slice(0, 10)
+                    .map(([tag, count]) => 
+                        `<span class="tag ${currentTag === tag ? 'active' : ''}" onclick="filterByTag('${tag}')">${tag} (${count})</span>`
+                    ).join('')}
+            `;
+        }
+
+        // 搜索功能
+        function searchPosts() {
+            currentSearchTerm = document.getElementById('searchInput').value.toLowerCase();
+            filterPosts();
+        }
+
+        // 标签筛选功能
+        function filterByTag(tag) {
+            currentTag = tag;
+            filterPosts();
+            renderTags(); // 重新渲染标签以更新active状态
+        }
+
+        // 综合筛选
+        function filterPosts() {
+            filteredPosts = allPosts.filter(post => {
+                const matchesSearch = currentSearchTerm === '' || 
+                    post.title.toLowerCase().includes(currentSearchTerm) ||
+                    post.excerpt.toLowerCase().includes(currentSearchTerm) ||
+                    post.tags.some(tag => tag.toLowerCase().includes(currentSearchTerm));
+                
+                const matchesTag = currentTag === '' || post.tags.includes(currentTag);
+                
+                return matchesSearch && matchesTag;
+            });
+            
+            renderPosts(filteredPosts);
+        }
+
+        // 实时搜索
+        document.addEventListener('DOMContentLoaded', function() {
+            const searchInput = document.getElementById('searchInput');
+            
+            // 实时搜索
+            searchInput.addEventListener('input', function() {
+                searchPosts();
+            });
+            
+            // 回车键搜索
+            searchInput.addEventListener('keypress', function(e) {
+                if (e.key === 'Enter') {
+                    searchPosts();
+                }
+            });
+            
+            // 初始化页面
+            renderPosts(allPosts);
+            renderTags();
+        });
+    </script>
 </body>
 </html>

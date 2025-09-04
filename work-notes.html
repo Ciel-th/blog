@@ -1,0 +1,301 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>工作杂记 - 電波圏外</title>
+    
+    <!-- SEO Meta Tags -->
+    <meta name="description" content="分享留学、语言、AI、工作和海外生活的点滴思考">
+    <meta name="author" content="Pingfan">
+    
+    <!-- Open Graph Meta Tags -->
+    <meta property="og:title" content="工作杂记">
+    <meta property="og:description" content="分享留学、语言、AI、工作和海外生活的点滴思考">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://pingfan-website-ftqc.vercel.app/work-notes/">
+    
+    
+    <!-- Twitter Card Meta Tags -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="工作杂记">
+    <meta name="twitter:description" content="分享留学、语言、AI、工作和海外生活的点滴思考">
+    
+    
+    <!-- Performance Optimizations -->
+    <link rel="dns-prefetch" href="//polyfill.io">
+    <link rel="dns-prefetch" href="//cdn.jsdelivr.net">
+    <link rel="preconnect" href="https://polyfill.io" crossorigin>
+    <link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
+    <link rel="preload" href="fonts/LXGWWenKai-Regular.ttf" as="font" type="font/ttf" crossorigin>
+    <link rel="preload" href="styles/main.css" as="style">
+    
+    <!-- Stylesheets -->
+    <link rel="stylesheet" href="styles/main.css">
+    <link rel="stylesheet" href="fonts/wenkai.css">
+    
+    <!-- Favicon -->
+    <link rel="icon" type="image/x-icon" href="favicon.ico">
+    
+    <!-- Vercel Analytics -->
+    <script defer src="https://va.vercel-scripts.com/v1/script.js"></script>
+    
+    <!-- 只在需要时加载外部资源 -->
+    
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <div class="container">
+            <div class="logo">
+                <a href="index.html">電波圏外</a>
+            </div>
+            <nav class="nav">
+                <a href="index.html" class="nav-link">首页</a>
+                <a href="work-notes.html" class="nav-link active">工作杂记</a>
+                <a href="repo.html" class="nav-link">repo</a>
+                <a href="japanese-learning.html" class="nav-link">日语学习记录</a>
+                <a href="about.html" class="nav-link">关于我</a>
+            </nav>
+        </div>
+    </header>
+    
+    <!-- Main Content -->
+    <main class="main">
+        <div class="container">
+            <div id="work-notes-grid" class="weekly-grid">
+    <!-- 工作杂记网格将通过 JavaScript 动态加载 -->
+</div>
+
+<div class="pagination" id="pagination">
+    <!-- 分页将通过 JavaScript 动态生成 -->
+</div>
+
+<style>
+.weekly-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 2rem;
+    margin-bottom: 3rem;
+}
+
+.weekly-card {
+    background: var(--bg-secondary);
+    border-radius: 12px;
+    border: 1px solid var(--border-color);
+    transition: all 0.3s ease;
+    text-decoration: none;
+    color: var(--text-primary);
+    display: block;
+    overflow: hidden;
+}
+
+.weekly-card:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
+    text-decoration: none;
+    color: var(--text-primary);
+}
+
+.weekly-cover {
+    width: 100%;
+    height: 250px;
+    overflow: hidden;
+}
+
+.weekly-cover .cover-image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.3s ease;
+}
+
+.weekly-card:hover .cover-image {
+    transform: scale(1.05);
+}
+
+.weekly-info {
+    padding: 0.5rem;
+}
+
+.weekly-info h3 {
+    margin: 0 0 0.3rem 0;
+    font-size: 1.25rem;
+    font-weight: 600;
+    color: var(--text-primary);
+}
+
+.weekly-info .date {
+    color: var(--text-secondary);
+    font-size: 0.9rem;
+    margin-bottom: 0.6rem;
+}
+
+.weekly-info .excerpt {
+    color: var(--text-muted);
+    line-height: 1.6;
+    margin: 0;
+}
+
+.pagination {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 1rem;
+    margin-top: 2rem;
+}
+
+.pagination button {
+    padding: 0.5rem 1rem;
+    border: 1px solid var(--border-color);
+    background: var(--bg-secondary);
+    color: var(--text-primary);
+    border-radius: 6px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.pagination button:hover:not(:disabled) {
+    background: var(--accent-color);
+    color: white;
+    border-color: var(--accent-color);
+}
+
+.pagination button:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+}
+
+.pagination .page-info {
+    color: var(--text-secondary);
+    font-size: 0.9rem;
+}
+
+@media (max-width: 768px) {
+    .weekly-grid {
+        grid-template-columns: 1fr;
+        gap: 1.5rem;
+    }
+}
+</style>
+
+<script>
+// 获取baseurl
+const baseUrl = '';
+
+// 工作杂记数据
+let workNotesData = [];
+
+// 初始化工作杂记数据
+function initWorkNotesData() {
+    if (typeof generateWorkNotesData === 'function') {
+        const generatedData = generateWorkNotesData();
+        workNotesData = generatedData.map(note => ({
+            title: note.title,
+            date: note.date,
+            excerpt: note.content,
+            url: baseUrl + "/work-notes/" + note.id + "/",
+            cover: note.cover || baseUrl + "/assets/images/work-notes/" + note.id + "-cover.jpg"
+        }));
+    } else {
+        // 降级方案
+        workNotesData = [
+            {
+                title: "远程工作效率提升指南：工具、方法与心得",
+                date: "2025-01-26",
+                excerpt: "分享远程工作中提升效率的实用工具、工作方法和个人心得，帮助远程工作者建立高效的工作流程和良好的工作习惯。",
+                url: "posts/WorkNotes/remote-work-productivity-tips.html",
+                cover: "images/WorkNotes/202509_01/weekly-002-cover.jpeg"
+            }
+        ];
+    }
+}
+
+// 分页配置
+const itemsPerPage = 6;
+let currentPage = 1;
+
+// 渲染工作杂记网格
+function renderWorkNotesGrid(page = 1) {
+    const startIndex = (page - 1) * itemsPerPage;
+    const endIndex = startIndex + itemsPerPage;
+    const pageData = workNotesData.slice(startIndex, endIndex);
+    
+    const grid = document.getElementById('work-notes-grid');
+    grid.innerHTML = pageData.map(item => `
+        <a href="${item.url}" class="weekly-card">
+            ${item.cover ? `<div class="weekly-cover"><img src="${item.cover}" alt="${item.title}" class="cover-image"></div>` : ''}
+            <div class="weekly-info">
+                <h3>${item.title}</h3>
+                <div class="date">${item.date}</div>
+                <p class="excerpt">${item.excerpt}</p>
+            </div>
+        </a>
+    `).join('');
+}
+
+// 渲染分页
+function renderPagination() {
+    const totalPages = Math.ceil(workNotesData.length / itemsPerPage);
+    const pagination = document.getElementById('pagination');
+    
+    if (totalPages <= 1) {
+        pagination.style.display = 'none';
+        return;
+    }
+    
+    pagination.innerHTML = `
+        <button onclick="changePage(${currentPage - 1})" ${currentPage === 1 ? 'disabled' : ''}>
+            上一页
+        </button>
+        <span class="page-info">第 ${currentPage} 页，共 ${totalPages} 页</span>
+        <button onclick="changePage(${currentPage + 1})" ${currentPage === totalPages ? 'disabled' : ''}>
+            下一页
+        </button>
+    `;
+}
+
+// 切换页面
+function changePage(page) {
+    const totalPages = Math.ceil(workNotesData.length / itemsPerPage);
+    if (page < 1 || page > totalPages) return;
+    
+    currentPage = page;
+    renderWorkNotesGrid(currentPage);
+    renderPagination();
+    
+    // 滚动到顶部
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+
+// 初始化
+document.addEventListener('DOMContentLoaded', function() {
+    initWorkNotesData();
+    renderWorkNotesGrid(1);
+    renderPagination();
+});
+
+// 加载自动加载器脚本
+const autoLoaderScript = document.createElement('script');
+autoLoaderScript.src = baseUrl + '/scripts/auto-loader.js';
+autoLoaderScript.onload = function() {
+    initWorkNotesData();
+    renderWorkNotesGrid(1);
+    renderPagination();
+};
+document.head.appendChild(autoLoaderScript);
+</script>
+
+
+        </div>
+    </main>
+    
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <p>&copy; 2025 Pingfan. All rights reserved.</p>
+            <p>Powered by <a href="https://jekyllrb.com/" target="_blank">Jekyll</a> & <a href="https://pages.github.com/" target="_blank">GitHub Pages</a></p>
+        </div>
+    </footer>
+</body>
+</html>

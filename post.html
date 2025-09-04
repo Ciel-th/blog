@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>文章详情 - 我的博客</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <header class="header">
+        <nav class="nav">
+            <div class="nav-container">
+                <a href="index.html" class="nav-brand">我的博客</a>
+                <ul class="nav-menu">
+                    <li><a href="index.html" class="nav-link">首页</a></li>
+                    <li><a href="work-notes.html" class="nav-link">工作杂记</a></li>
+                    <li><a href="repo.html" class="nav-link">repo</a></li>
+                    <li><a href="japanese-learning.html" class="nav-link">日语学习记录</a></li>
+                    <li><a href="about.html" class="nav-link">关于我</a></li>
+                </ul>
+            </div>
+        </nav>
+    </header>
+
+    <main class="main">
+        <article class="article">
+            <header class="article-header">
+                <!-- 文章标题和元信息将通过JavaScript动态加载 -->
+            </header>
+            
+            <div id="article-content" class="article-content">
+                <!-- 文章内容将通过JavaScript从Markdown文件加载 -->
+                <div class="loading">正在加载文章内容...</div>
+            </div>
+            
+            <footer class="article-footer">
+                <div class="article-nav">
+                    <a href="javascript:history.back()" class="back-link">← 返回</a>
+                </div>
+            </footer>
+        </article>
+    </main>
+
+    <footer class="footer">
+        <div class="container">
+            <p>&copy; 2024 我的博客. 专注于内容分享.</p>
+        </div>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+    <script src="script.js"></script>
+</body>
+</html>
