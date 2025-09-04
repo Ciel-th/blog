@@ -107,7 +107,6 @@
             
             postsContainer.innerHTML = displayPosts.map(post => `
                 <article class="post-item">
-                    ${post.cover ? `<div class="post-thumbnail"><img src="${post.cover}" alt="${post.title}" class="thumbnail-image"></div>` : ''}
                     <div class="post-content">
                         <h2 class="post-title">
                             <a href="${post.url}">${post.title}</a>
