@@ -135,26 +135,25 @@ a:hover {
 .posts {
     display: flex;
     flex-direction: column;
-    gap: 16px;
+    gap: 6px;
     margin-bottom: 40px;
 }
 
 .post-item {
     background: rgba(255, 255, 255, 0.85);
     border-radius: 12px;
-    padding: 16px;
+    padding: 12px;
     border: 1px solid rgba(255, 255, 255, 0.4);
     backdrop-filter: blur(12px);
     box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
     transition: all 0.3s ease;
     cursor: pointer;
+    transform: scale(0.75);
+    transform-origin: left top;
+    margin-bottom: 15px;
 }
 
-.post-item:hover {
-    transform: translateY(-3px);
-    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.15);
-    background: rgba(255, 255, 255, 0.95);
-}
+
 
 .post-title {
     margin: 0 0 8px 0;
@@ -215,12 +214,12 @@ a:hover {
 }
 
 .blog-content {
-    flex: 1;
+    width: 950px;
     min-width: 0;
 }
 
 .blog-sidebar {
-    width: 220px;
+    width: 350px;
     flex-shrink: 0;
 }
 
@@ -299,38 +298,49 @@ a:hover {
 /* 文章缩略图样式 */
 .post-item {
     display: flex;
-    gap: 20px;
+    gap: 15px;
     align-items: flex-start;
-    margin-bottom: 30px;
+    margin-bottom: 8px;
+    transition: transform 0.3s ease;
+}
+
+.post-item:hover {
+    transform: scale(1.01);
 }
 
 .post-thumbnail {
-    width: 54px !important;
-    height: 36px !important;
+    width: 120px;
+    height: 67.5px;
     flex-shrink: 0;
     border-radius: 8px;
     overflow: hidden;
     background: #f8f9fa;
+    position: relative;
 }
 
 .post-thumbnail .thumbnail-image {
+    position: absolute;
+    top: 0;
+    left: 0;
     width: 100%;
     height: 100%;
     object-fit: cover;
-    transition: transform 0.3s ease;
+    border-radius: 8px;
 }
 
-.post-thumbnail:hover .thumbnail-image {
-    transform: scale(1.05);
-}
+
 
 .post-content {
     flex: 1;
     min-width: 0;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
 }
 
 /* 文章列表滚动条 */
 .posts {
+    max-width: 2000px;
     max-height: 800px;
     overflow-y: auto;
     padding-right: 10px;
