@@ -7,28 +7,18 @@ cover: "images/WorkNotes/202509_02/1st_blog_title.jpg"
 ---
 
 # 欢迎使用Markdown写博客
-
 先介绍技术栈。
-
 ## 技术栈
-
 - `HTML5` - 页面结构
 - `CSS3` - 样式和布局（支持响应式设计）
 - `JavaScript (ES6+)` - 交互功能、搜索、筛选
 - `GitHub Pages` - 静态网站托管
-
 然而以上基本不需要了解，我们的最终目的就是“端到端”，即把一个md格式的文本放进对应文件夹中并推送至Github，就能自动生成格式正确的文章，不需要掌握HTML,CSS,JS等前端知识。
-
 下面简单介绍一下文章页面的生成流程及中间涉及到的关键文件。
-
 ## 文章页面生成流程
-
 ### 本地构建阶段
-
 核心文件 : `build-posts.js`
-
 构建过程 :
-
 1. 扫描`Markdown`文件 : 脚本遍历`posts`目录，找到所有`.md`文件
 2. 解析文章元数据 : 提取文章标题、日期、分类等信息
 3. `Markdown`转`HTML` : 使用自定义的 `markdownToHtml` 函数转换内容
@@ -36,43 +26,30 @@ cover: "images/WorkNotes/202509_02/1st_blog_title.jpg"
    - 转换标题、粗体、链接等格式
 4. 生成`HTML`文件 : 为每篇文章生成对应的`.html`文件
 5. 更新数据文件 : 更新 `posts-data.js` 中的文章索引
-
 ### 样式系统
-
 主样式文件 : `main.css`
-
 样式结构 :
-
 - 基础样式 : 重置样式、字体定义、布局
 - 导航样式 : 顶部导航栏、侧边栏
 - 内容样式 : 文章内容区域、代码块、图片等
 - 代码高亮 : 支持20+种编程语言的GitHub风格语法高亮
 - 响应式设计 : 适配不同屏幕尺寸
-
 ### 自动化部署
-
 GitHub Actions流程 :
-
 1. 触发条件 : 推送到`main`分支时自动触发
 2. 环境准备 : 设置`Node.js`环境
 3. 依赖安装 : 安装项目依赖
 4. 构建执行 : 运行 `npm run build` 命令
 5. 部署到`GitHub Pages` : 将构建结果部署到`gh-pages`分支
-
 ### 主要特性
-
 - 静态站点生成 : 无需服务器，纯静态HTML
 - 自定义Markdown解析 : 支持代码块语言标签
 - 响应式设计 : 适配移动端和桌面端
 - 语法高亮 : GitHub风格的代码高亮
 - 自动化部署 : 零配置的CI/CD流程
-
 ## 文章内容的编写
-
 ### 文章title的编写
-
 title部分的示例如下：
-
 ```
    ---
    title: "文章标题"
@@ -82,36 +59,24 @@ title部分的示例如下：
    cover: "images/WorkNotes/my-article/cover.jpg"
    ---
 ```
-
 `index.html`会对`posts`标签下的所有文章进行遍历，在首页生成正确的标签检索，因此标签只需要在文章内设置即可。
- 
 ### 主体构成
-
 本博客主要使用`Markdown`进行文档编写，`Markdown`是一种轻量级标记语言，它允许人们使用易读易写的纯文本格式编写文档。
-
-关于Markdown语法的具体教程可参考[菜鸟教程](https://www.runoob.com/markdown/md-tutorial.html)
-
+关于Markdown语法的具体教程可参考[菜鸟教程](https://www.runoob.com/markdown/md-tutorial.html)。
 ### 代码块支持
-
 在文章构建脚本中，本博客已添加Markdown中所没有的代码块语言标签支持功能，仅需按照正常Markdown语法构建代码块即可。例如：
-
 ```javascript
 function hello() {
     console.log("Hello, World!");
 }
 ```
-
 ### 图片使用和控制
-
 博客提供了灵活的图片控制方案：
-
 #### 1. 基本图片插入
 ```markdown
 ![图片描述](images/分类/文章目录/图片名.jpg)
 ```
-
 #### 2. 图片大小控制
-
 **方法一：使用HTML标签（推荐）**
 ```html
 <div style="text-align: center; margin: 20px 0;">
@@ -120,48 +85,32 @@ function hello() {
      style="max-width: 100%; height: auto; width: 600px; border-radius: 8px; box-shadow: 0 4px 8px rgba(0,0,0,0.1);" />
 </div>
 ```
-
 **方法二：依赖CSS自动控制**
 - 所有图片默认设置 `max-width: 100%`，不会超出文章区域
 - 自动添加圆角和阴影效果
 - 响应式适配，移动端自动缩放
-
 #### 3. 图片超出文章区域的处理
-
 当图片原始尺寸超过文章区域宽度（800px）时：
-
 1. **自动缩放**：CSS会自动将图片缩放到容器宽度
 2. **保持比例**：`height: auto` 确保图片比例不变形
 3. **居中显示**：使用 `text-align: center` 实现图片居中
 4. **移动端适配**：在小屏幕上进一步缩放以适应屏幕
-
 #### 4. 推荐的图片尺寸
-
 - **文章封面**：建议 1200x630px（适合社交媒体分享）
 - **文章内图片**：建议宽度不超过 800px
 - **小图标/示意图**：建议 400-600px 宽度
-
 ## 博客新增文章的流程
-
 -将md文件放入posts目录下的对应子文件夹中
 -提交到Github仓库
 -等待Github Actions自动构建和部署
-
 ## 浏览器支持
-
 - Chrome (推荐)
 - Firefox
 - Safari
 - Edge
-
 ## 许可证
-
 MIT License
-
 ## 贡献
-
 欢迎提交 Issue 和 Pull Request！
-
 ---
-
 **享受写作的乐趣！** ✨

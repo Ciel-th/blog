@@ -4,16 +4,16 @@
 // 工作杂记数据
 const workNotesData = [
     {
-        "title": "示例文章：如何使用Markdown写博客",
-        "date": "2025-01-27",
-        "excerpt": "这是一个示例文章，展示如何使用Markdown格式来创建博客文章。只需要创建.md文件并push到GitHub即可自动生成HTML页面。",
+        "title": "关于这个博客",
+        "date": "2025-09-08",
+        "excerpt": "这篇文章简单介绍了本博客所用到的技术栈，以及展示如何使用Markdown格式来创建博客文章。只需要创建.md文件并push到GitHub即可自动生成HTML页面。",
         "url": "posts/WorkNotes/example-post.html",
         "tags": [
-            "示例",
             "Markdown",
-            "博客"
+            "博客",
+            "Git"
         ],
-        "cover": "images/WorkNotes/202509_01/example-cover.jpeg"
+        "cover": "images/WorkNotes/202509_02/1st_blog_title.jpg"
     }
 ];
 

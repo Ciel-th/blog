@@ -58,7 +58,14 @@ class MarkdownParser {
             const placeholder = `__CODE_BLOCK_${codeBlocks.length}__`;
             const langClass = lang ? ` class="language-${lang}"` : '';
             const langLabel = lang ? `<div class="code-lang">${lang}</div>` : '';
-            codeBlocks.push(`<div class="code-block-container">${langLabel}<pre><code${langClass}>${code.trim()}</code></pre></div>`);
+            // 对代码内容进行HTML转义
+            const escapedCode = code.trim()
+                .replace(/&/g, '&amp;')
+                .replace(/</g, '&lt;')
+                .replace(/>/g, '&gt;')
+                .replace(/"/g, '&quot;')
+                .replace(/'/g, '&#39;');
+            codeBlocks.push(`<div class="code-block-container">${langLabel}<pre><code${langClass}>${escapedCode}</code></pre></div>`);
             return placeholder;
         });
         

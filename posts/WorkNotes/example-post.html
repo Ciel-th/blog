@@ -3,22 +3,22 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>示例文章：如何使用Markdown写博客 - 電波圏外</title>
+    <title>关于这个博客 - 電波圏外</title>
     
     <!-- SEO Meta Tags -->
-    <meta name="description" content="这是一个示例文章，展示如何使用Markdown格式来创建博客文章。只需要创建.md文件并push到GitHub即可自动生成HTML页面。">
+    <meta name="description" content="这篇文章简单介绍了本博客所用到的技术栈，以及展示如何使用Markdown格式来创建博客文章。只需要创建.md文件并push到GitHub即可自动生成HTML页面。">
     <meta name="author" content="C_Ciel">
     
     <!-- Open Graph Meta Tags -->
-    <meta property="og:title" content="示例文章：如何使用Markdown写博客">
-    <meta property="og:description" content="这是一个示例文章，展示如何使用Markdown格式来创建博客文章。只需要创建.md文件并push到GitHub即可自动生成HTML页面。">
+    <meta property="og:title" content="关于这个博客">
+    <meta property="og:description" content="这篇文章简单介绍了本博客所用到的技术栈，以及展示如何使用Markdown格式来创建博客文章。只需要创建.md文件并push到GitHub即可自动生成HTML页面。">
     <meta property="og:type" content="article">
     <meta property="og:url" content="https://ciel-th.github.io/blog/posts/WorkNotes/example-post.html">
     
     <!-- Twitter Card Meta Tags -->
     <meta name="twitter:card" content="summary_large_image">
-    <meta name="twitter:title" content="示例文章：如何使用Markdown写博客">
-    <meta name="twitter:description" content="这是一个示例文章，展示如何使用Markdown格式来创建博客文章。只需要创建.md文件并push到GitHub即可自动生成HTML页面。">
+    <meta name="twitter:title" content="关于这个博客">
+    <meta name="twitter:description" content="这篇文章简单介绍了本博客所用到的技术栈，以及展示如何使用Markdown格式来创建博客文章。只需要创建.md文件并push到GitHub即可自动生成HTML页面。">
     
     <!-- Performance Optimizations -->
     <link rel="dns-prefetch" href="//polyfill.io">
@@ -87,28 +87,38 @@
         <div class="container">
             <article class="post">
     <header class="post-header">
-        <h1 class="post-title">示例文章：如何使用Markdown写博客</h1>
+        <h1 class="post-title">关于这个博客</h1>
         <div class="post-meta">
-            <time class="post-date" datetime="2025-01-27T00:00:00+08:00">2025年01月27日</time>
+            <time class="post-date" datetime="2025-09-08T00:00:00+08:00">2025年09月08日</time>
             
             <span class="post-tags">
-                <span class="tag">#示例</span>
                 <span class="tag">#Markdown</span>
                 <span class="tag">#博客</span>
+                <span class="tag">#Git</span>
             </span>
             
         </div>
         
         <div class="post-excerpt">
-            这是一个示例文章，展示如何使用Markdown格式来创建博客文章。只需要创建.md文件并push到GitHub即可自动生成HTML页面。
+            这篇文章简单介绍了本博客所用到的技术栈，以及展示如何使用Markdown格式来创建博客文章。只需要创建.md文件并push到GitHub即可自动生成HTML页面。
         </div>
         
     </header>
     
     <div class="post-content">
-        <h1>欢迎使用Markdown写博客</h1><br><br><p>这是一个示例文章，展示了如何使用简单的Markdown格式来创建博客文章。</p><br><br><h2>主要特性</h2><br><br><h3>1. 简单的语法</h3><br><br><p>Markdown使用简单的语法来格式化文本：</p><br><br><p>- <strong>粗体文本</strong>使用 <code><strong>文本</strong></code><br>- *斜体文本*使用 <code>*文本*</code><br>- <code>代码</code>使用反引号</p><br><br><h3>2. 代码块支持</h3><br><br><div class="code-block-container"><div class="code-lang">javascript</div><pre><code class="language-javascript">function hello() {
-    console.log("Hello, World!");
-}</code></pre></div><br><br><h3>3. 链接和引用</h3><br><br><p>你可以轻松添加<a href="https://example.com">链接</a>到你的文章中。</p><br><br><h2>工作流程</h2><br><br><p>1. 在对应的分类文件夹中创建 <code>.md</code> 文件<br>2. 添加front matter（文章元数据）<br>3. 使用Markdown语法编写内容<br>4. Push到GitHub<br>5. 自动构建和部署</p><br><br><h2>结论</h2><br><br><p>使用这个新的工作流程，你可以专注于内容创作，而不用担心HTML格式和页面结构。系统会自动处理所有技术细节。</p><br><br><p>---</p><br><br><p>*这篇文章展示了新的博客创建流程的强大功能。*</p>
+        <h1>欢迎使用Markdown写博客</h1><br>先介绍技术栈。<br><h2>技术栈</h2><br>- <code>HTML5</code> - 页面结构<br>- <code>CSS3</code> - 样式和布局（支持响应式设计）<br>- <code>JavaScript (ES6+)</code> - 交互功能、搜索、筛选<br>- <code>GitHub Pages</code> - 静态网站托管<br>然而以上基本不需要了解，我们的最终目的就是“端到端”，即把一个md格式的文本放进对应文件夹中并推送至Github，就能自动生成格式正确的文章，不需要掌握HTML,CSS,JS等前端知识。<br>下面简单介绍一下文章页面的生成流程及中间涉及到的关键文件。<br><h2>文章页面生成流程</h2><br><h3>本地构建阶段</h3><br>核心文件 : <code>build-posts.js</code><br>构建过程 :<br>1. 扫描<code>Markdown</code>文件 : 脚本遍历<code>posts</code>目录，找到所有<code>.md</code>文件<br>2. 解析文章元数据 : 提取文章标题、日期、分类等信息<br>3. <code>Markdown</code>转<code>HTML</code> : 使用自定义的 <code>markdownToHtml</code> 函数转换内容<br>   - 处理代码块（添加语言标签和容器）<br>   - 转换标题、粗体、链接等格式<br>4. 生成<code>HTML</code>文件 : 为每篇文章生成对应的<code>.html</code>文件<br>5. 更新数据文件 : 更新 <code>posts-data.js</code> 中的文章索引<br><h3>样式系统</h3><br>主样式文件 : <code>main.css</code><br>样式结构 :<br>- 基础样式 : 重置样式、字体定义、布局<br>- 导航样式 : 顶部导航栏、侧边栏<br>- 内容样式 : 文章内容区域、代码块、图片等<br>- 代码高亮 : 支持20+种编程语言的GitHub风格语法高亮<br>- 响应式设计 : 适配不同屏幕尺寸<br><h3>自动化部署</h3><br>GitHub Actions流程 :<br>1. 触发条件 : 推送到<code>main</code>分支时自动触发<br>2. 环境准备 : 设置<code>Node.js</code>环境<br>3. 依赖安装 : 安装项目依赖<br>4. 构建执行 : 运行 <code>npm run build</code> 命令<br>5. 部署到<code>GitHub Pages</code> : 将构建结果部署到<code>gh-pages</code>分支<br><h3>主要特性</h3><br>- 静态站点生成 : 无需服务器，纯静态HTML<br>- 自定义Markdown解析 : 支持代码块语言标签<br>- 响应式设计 : 适配移动端和桌面端<br>- 语法高亮 : GitHub风格的代码高亮<br>- 自动化部署 : 零配置的CI/CD流程<br><h2>文章内容的编写</h2><br><h3>文章title的编写</h3><br>title部分的示例如下：<br><div class="code-block-container"><pre><code>---
+   title: &quot;文章标题&quot;
+   date: &quot;2025-09-08&quot;
+   excerpt: &quot;文章摘要，简要描述文章内容&quot;
+   tags: [&quot;标签1&quot;, &quot;标签2&quot;, &quot;标签3&quot;]
+   cover: &quot;images/WorkNotes/my-article/cover.jpg&quot;
+   ---</code></pre></div><br><code>index.html</code>会对<code>posts</code>标签下的所有文章进行遍历，在首页生成正确的标签检索，因此标签只需要在文章内设置即可。<br><h3>主体构成</h3><br>本博客主要使用<code>Markdown</code>进行文档编写，<code>Markdown</code>是一种轻量级标记语言，它允许人们使用易读易写的纯文本格式编写文档。<br>关于Markdown语法的具体教程可参考<a href="https://www.runoob.com/markdown/md-tutorial.html">菜鸟教程</a>。<br><h3>代码块支持</h3><br>在文章构建脚本中，本博客已添加Markdown中所没有的代码块语言标签支持功能，仅需按照正常Markdown语法构建代码块即可。例如：<br><div class="code-block-container"><div class="code-lang">javascript</div><pre><code class="language-javascript">function hello() {
+    console.log(&quot;Hello, World!&quot;);
+}</code></pre></div><br><h3>图片使用和控制</h3><br>博客提供了灵活的图片控制方案：<br>#### 1. 基本图片插入<br><div class="code-block-container"><div class="code-lang">markdown</div><pre><code class="language-markdown">![图片描述](images/分类/文章目录/图片名.jpg)</code></pre></div><br>#### 2. 图片大小控制<br><strong>方法一：使用HTML标签（推荐）</strong><br><div class="code-block-container"><div class="code-lang">html</div><pre><code class="language-html">&lt;div style=&quot;text-align: center; margin: 20px 0;&quot;&gt;
+&lt;img src=&quot;images/WorkNotes/my-article/image.jpg&quot; 
+     alt=&quot;图片描述&quot; 
+     style=&quot;max-width: 100%; height: auto; width: 600px; border-radius: 8px; box-shadow: 0 4px 8px rgba(0,0,0,0.1);&quot; /&gt;
+&lt;/div&gt;</code></pre></div><br><strong>方法二：依赖CSS自动控制</strong><br>- 所有图片默认设置 <code>max-width: 100%</code>，不会超出文章区域<br>- 自动添加圆角和阴影效果<br>- 响应式适配，移动端自动缩放<br>#### 3. 图片超出文章区域的处理<br>当图片原始尺寸超过文章区域宽度（800px）时：<br>1. <strong>自动缩放</strong>：CSS会自动将图片缩放到容器宽度<br>2. <strong>保持比例</strong>：<code>height: auto</code> 确保图片比例不变形<br>3. <strong>居中显示</strong>：使用 <code>text-align: center</code> 实现图片居中<br>4. <strong>移动端适配</strong>：在小屏幕上进一步缩放以适应屏幕<br>#### 4. 推荐的图片尺寸<br>- <strong>文章封面</strong>：建议 1200x630px（适合社交媒体分享）<br>- <strong>文章内图片</strong>：建议宽度不超过 800px<br>- <strong>小图标/示意图</strong>：建议 400-600px 宽度<br><h2>博客新增文章的流程</h2><br>-将md文件放入posts目录下的对应子文件夹中<br>-提交到Github仓库<br>-等待Github Actions自动构建和部署<br><h2>浏览器支持</h2><br>- Chrome (推荐)<br>- Firefox<br>- Safari<br>- Edge<br><h2>许可证</h2><br>MIT License<br><h2>贡献</h2><br>欢迎提交 Issue 和 Pull Request！<br>---<br><strong>享受写作的乐趣！</strong> ✨
     </div>
                 
                 <footer class="post-footer">
