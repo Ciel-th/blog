@@ -16,12 +16,14 @@ const workNotesData = [
         "cover": "images/WorkNotes/202509_02/1st_blog_title.jpg"
     },
     {
-        "title": "memorizeblog\\mmzblog",
+        "title": "纪念博客初步完成",
         "date": "2025-09-08",
-        "excerpt": "",
+        "excerpt": "纪念博客初步完成",
         "url": "posts/WorkNotes/memorizeblog/mmzblog.html",
-        "tags": [],
-        "cover": ""
+        "tags": [
+            "博客"
+        ],
+        "cover": "images/WorkNotes/202509_02/1st_blog_title.jpg"
     }
 ];
 
