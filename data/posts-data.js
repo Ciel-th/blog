@@ -14,18 +14,6 @@ const workNotesData = [
             "Git"
         ],
         "cover": "images/WorkNotes/202509_02/1st_blog_title.jpg"
-    },
-    {
-        "title": "标题解析测试",
-        "date": "2025-01-20",
-        "excerpt": "测试所有级别的Markdown标题是否能正确解析和显示",
-        "url": "posts/WorkNotes/test-toc/heading-test.html",
-        "tags": [
-            "测试",
-            "标题",
-            "Markdown"
-        ],
-        "cover": ""
     }
 ];
 
