@@ -259,11 +259,11 @@
    cover: &quot;images/WorkNotes/my-article/cover.jpg&quot;
    ---</code></pre></div><br><code>index.html</code>会对<code>posts</code>标签下的所有文章进行遍历，在首页生成正确的标签检索，因此标签只需要在文章内设置即可。<br><h3 id="heading-10">主体构成</h3><br>本博客主要使用<code>Markdown</code>进行文档编写，<code>Markdown</code>是一种轻量级标记语言，它允许人们使用易读易写的纯文本格式编写文档。<br>关于Markdown语法的具体教程可参考<a href="https://www.runoob.com/markdown/md-tutorial.html">菜鸟教程</a>。<br><h3 id="heading-11">代码块支持</h3><br>在文章构建脚本中，本博客已添加Markdown中所没有的代码块语言标签支持功能，仅需按照正常Markdown语法构建代码块即可。例如：<br><div class="code-block-container"><div class="code-lang">javascript</div><pre><code class="language-javascript">function hello() {
     console.log(&quot;Hello, World!&quot;);
-}</code></pre></div><br><h3 id="heading-12">图片使用和控制</h3><br>博客提供了灵活的图片控制方案：<br>#### 基本图片插入<br><div class="code-block-container"><div class="code-lang">markdown</div><pre><code class="language-markdown">![图片描述](images/分类/文章目录/图片名.jpg)</code></pre></div><br>#### 图片大小控制<br><strong>方法一：使用HTML标签（推荐）</strong><br><div class="code-block-container"><div class="code-lang">html</div><pre><code class="language-html">&lt;div style=&quot;text-align: center; margin: 20px 0;&quot;&gt;
+}</code></pre></div><br><h3 id="heading-12">图片使用和控制</h3><br>博客提供了灵活的图片控制方案：<br><br><h4 id="heading-13">基本图片插入</h4><br><div class="code-block-container"><div class="code-lang">markdown</div><pre><code class="language-markdown">![图片描述](images/分类/文章目录/图片名.jpg)</code></pre></div><br><h4 id="heading-14">图片大小控制</h4><br><strong>方法一：使用HTML标签（推荐）</strong><br><div class="code-block-container"><div class="code-lang">html</div><pre><code class="language-html">&lt;div style=&quot;text-align: center; margin: 20px 0;&quot;&gt;
 &lt;img src=&quot;images/WorkNotes/my-article/image.jpg&quot; 
      alt=&quot;图片描述&quot; 
      style=&quot;max-width: 100%; height: auto; width: 600px; border-radius: 8px; box-shadow: 0 4px 8px rgba(0,0,0,0.1);&quot; /&gt;
-&lt;/div&gt;</code></pre></div><br><strong>方法二：依赖CSS自动控制</strong><br>- 所有图片默认设置 <code>max-width: 100%</code>，不会超出文章区域<br>- 自动添加圆角和阴影效果<br>- 响应式适配，移动端自动缩放<br>#### 图片超出文章区域的处理<br>当图片原始尺寸超过文章区域宽度（800px）时：<br>1. <strong>自动缩放</strong>：CSS会自动将图片缩放到容器宽度<br>2. <strong>保持比例</strong>：<code>height: auto</code> 确保图片比例不变形<br>3. <strong>居中显示</strong>：使用 <code>text-align: center</code> 实现图片居中<br>4. <strong>移动端适配</strong>：在小屏幕上进一步缩放以适应屏幕<br>#### 推荐的图片尺寸<br>- <strong>文章封面</strong>：建议 1200x630px（适合社交媒体分享）<br>- <strong>文章内图片</strong>：建议宽度不超过 800px<br>- <strong>小图标/示意图</strong>：建议 400-600px 宽度<br><h2 id="heading-13">博客新增文章的流程</h2><br>-将md文件放入posts目录下的对应子文件夹中<br>-提交到Github仓库<br>-等待Github Actions自动构建和部署<br><h2 id="heading-14">浏览器支持</h2><br>- Chrome (推荐)<br>- Firefox<br>- Safari<br>- Edge<br><h2 id="heading-15">许可证</h2><br>MIT License<br><h2 id="heading-16">贡献</h2><br>欢迎提交 Issue 和 Pull Request！<br>---<br><strong>享受写作的乐趣！</strong> ✨
+&lt;/div&gt;</code></pre></div><br><strong>方法二：依赖CSS自动控制</strong><br>- 所有图片默认设置 <code>max-width: 100%</code>，不会超出文章区域<br>- 自动添加圆角和阴影效果<br>- 响应式适配，移动端自动缩放<br><br><h4 id="heading-15">图片超出文章区域的处理</h4><br>当图片原始尺寸超过文章区域宽度（800px）时：<br>1. <strong>自动缩放</strong>：CSS会自动将图片缩放到容器宽度<br>2. <strong>保持比例</strong>：<code>height: auto</code> 确保图片比例不变形<br>3. <strong>居中显示</strong>：使用 <code>text-align: center</code> 实现图片居中<br>4. <strong>移动端适配</strong>：在小屏幕上进一步缩放以适应屏幕<br><br><h4 id="heading-16">推荐的图片尺寸</h4><br>- <strong>文章封面</strong>：建议 1200x630px（适合社交媒体分享）<br>- <strong>文章内图片</strong>：建议宽度不超过 800px<br>- <strong>小图标/示意图</strong>：建议 400-600px 宽度<br><br><h2 id="heading-17">博客新增文章的流程</h2><br>-将md文件放入posts目录下的对应子文件夹中<br>-在posts目录下运行<code>npm run build</code><br>-提交到Github仓库<br>-等待Github Actions自动构建和部署<br><h2 id="heading-18">浏览器支持</h2><br>- Chrome (推荐)<br>- Firefox<br>- Safari<br>- Edge<br><h2 id="heading-19">许可证</h2><br>MIT License<br><h2 id="heading-20">贡献</h2><br>欢迎提交 Issue 和 Pull Request！<br>---<br><strong>享受写作的乐趣！</strong> ✨
                         </div>
                 
                         <footer class="post-footer">
@@ -319,17 +319,29 @@
       <li class="toc-item toc-h3">
         <a href="#heading-12" class="toc-link">图片使用和控制</a>
       </li>
-      <li class="toc-item toc-h2">
-        <a href="#heading-13" class="toc-link">博客新增文章的流程</a>
+      <li class="toc-item toc-h4">
+        <a href="#heading-13" class="toc-link">基本图片插入</a>
+      </li>
+      <li class="toc-item toc-h4">
+        <a href="#heading-14" class="toc-link">图片大小控制</a>
+      </li>
+      <li class="toc-item toc-h4">
+        <a href="#heading-15" class="toc-link">图片超出文章区域的处理</a>
+      </li>
+      <li class="toc-item toc-h4">
+        <a href="#heading-16" class="toc-link">推荐的图片尺寸</a>
       </li>
       <li class="toc-item toc-h2">
-        <a href="#heading-14" class="toc-link">浏览器支持</a>
+        <a href="#heading-17" class="toc-link">博客新增文章的流程</a>
       </li>
       <li class="toc-item toc-h2">
-        <a href="#heading-15" class="toc-link">许可证</a>
+        <a href="#heading-18" class="toc-link">浏览器支持</a>
       </li>
       <li class="toc-item toc-h2">
-        <a href="#heading-16" class="toc-link">贡献</a>
+        <a href="#heading-19" class="toc-link">许可证</a>
+      </li>
+      <li class="toc-item toc-h2">
+        <a href="#heading-20" class="toc-link">贡献</a>
       </li>
     </ul>
   </nav>

@@ -16,16 +16,16 @@ const workNotesData = [
         "cover": "images/WorkNotes/202509_02/1st_blog_title.jpg"
     },
     {
-        "title": "目录功能测试文章",
+        "title": "标题解析测试",
         "date": "2025-01-20",
-        "excerpt": "这是一篇用于测试博客目录功能的文章，包含了多级标题结构。",
-        "url": "posts/WorkNotes/test-toc/toc-test.html",
+        "excerpt": "测试所有级别的Markdown标题是否能正确解析和显示",
+        "url": "posts/WorkNotes/test-toc/heading-test.html",
         "tags": [
             "测试",
-            "目录",
-            "功能"
+            "标题",
+            "Markdown"
         ],
-        "cover": "/images/WorkNotes/test.jpg"
+        "cover": ""
     }
 ];
 

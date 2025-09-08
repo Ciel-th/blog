@@ -69,7 +69,10 @@ class MarkdownParser {
             return placeholder;
         });
         
-        // 标题
+        // 标题（从六级到一级，避免匹配冲突）
+        html = html.replace(/^###### (.*$)/gim, '<h6>$1</h6>');
+        html = html.replace(/^##### (.*$)/gim, '<h5>$1</h5>');
+        html = html.replace(/^#### (.*$)/gim, '<h4>$1</h4>');
         html = html.replace(/^### (.*$)/gim, '<h3>$1</h3>');
         html = html.replace(/^## (.*$)/gim, '<h2>$1</h2>');
         html = html.replace(/^# (.*$)/gim, '<h1>$1</h1>');
