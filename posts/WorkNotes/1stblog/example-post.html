@@ -263,7 +263,11 @@
 &lt;img src=&quot;images/WorkNotes/my-article/image.jpg&quot; 
      alt=&quot;图片描述&quot; 
      style=&quot;max-width: 100%; height: auto; width: 600px; border-radius: 8px; box-shadow: 0 4px 8px rgba(0,0,0,0.1);&quot; /&gt;
-&lt;/div&gt;</code></pre></div><br><strong>方法二：依赖CSS自动控制</strong><br><li>所有图片默认设置 <code>max-width: 100%</code>，不会超出文章区域</li><br><li>自动添加圆角和阴影效果</li><br><li>响应式适配，移动端自动缩放</li><br><br><h4 id="heading-15">图片超出文章区域的处理</h4><br>当图片原始尺寸超过文章区域宽度（800px）时：<br><li><strong>自动缩放</strong>：CSS会自动将图片缩放到容器宽度</li><br><li><strong>保持比例</strong>：<code>height: auto</code> 确保图片比例不变形</li><br><li><strong>居中显示</strong>：使用 <code>text-align: center</code> 实现图片居中</li><br><li><strong>移动端适配</strong>：在小屏幕上进一步缩放以适应屏幕</li><br><br><h4 id="heading-16">推荐的图片尺寸</h4><br><li><strong>文章封面</strong>：建议 1200x630px（适合社交媒体分享）</li><br><li><strong>文章内图片</strong>：建议宽度不超过 800px</li><br><li><strong>小图标/示意图</strong>：建议 400-600px 宽度</li><br><br><h2 id="heading-17">博客新增文章的流程</h2><br>-将md文件放入posts目录下的对应子文件夹中<br>-在posts目录下运行<code>npm run build</code><br>-提交到Github仓库<br>-等待Github Actions自动构建和部署<br><h2 id="heading-18">浏览器支持</h2><br><li>Chrome (推荐)</li><br><li>Firefox</li><br><li>Safari</li><br><li>Edge</li></ol></ul><br><h2 id="heading-19">许可证</h2><br>MIT License<br><h2 id="heading-20">贡献</h2><br>欢迎提交 Issue 和 Pull Request！<br><hr><br><strong>享受写作的乐趣！</strong> ✨
+&lt;/div&gt;</code></pre></div><br><strong>方法二：依赖CSS自动控制</strong><br><li>所有图片默认设置 <code>max-width: 100%</code>，不会超出文章区域</li><br><li>自动添加圆角和阴影效果</li><br><li>响应式适配，移动端自动缩放</li><br><br><h4 id="heading-15">图片超出文章区域的处理</h4><br>当图片原始尺寸超过文章区域宽度（800px）时：<br><li><strong>自动缩放</strong>：CSS会自动将图片缩放到容器宽度</li><br><li><strong>保持比例</strong>：<code>height: auto</code> 确保图片比例不变形</li><br><li><strong>居中显示</strong>：使用 <code>text-align: center</code> 实现图片居中</li><br><li><strong>移动端适配</strong>：在小屏幕上进一步缩放以适应屏幕</li><br><br><h4 id="heading-16">推荐的图片尺寸</h4><br><li><strong>文章封面</strong>：建议 1200x630px（适合社交媒体分享）</li><br><li><strong>文章内图片</strong>：建议宽度不超过 800px</li><br><li><strong>小图标/示意图</strong>：建议 400-600px 宽度</li><br><br><h4 id="heading-17">图片标题和注释功能</h4><br><br><p>博客现在支持为图片添加标题和注释，有两种语法格式：</p><br><br><strong>方法一：使用星号标记（推荐）</strong><br><div class="code-block-container"><div class="code-lang">markdown</div><pre><code class="language-markdown">![图片描述](images/分类/文章目录/图片名.jpg) *这是图片标题*</code></pre></div><br><br><p><strong>效果</strong>：<br><li>图片标题会显示在图片正下方</li><br><li>居中对齐</li><br><li>字体略小于正文，颜色为灰色</li><br><li>斜体样式</li></p><br><br><h4 id="heading-18">表格标题功能</h4><br><br><p>博客现在支持为表格添加标题，语法格式：</p><br><br><div class="code-block-container"><div class="code-lang">markdown</div><pre><code class="language-markdown">**表格标题**
+| 列1 | 列2 | 列3 |
+|-----|-----|-----|
+| 数据1 | 数据2 | 数据3 |
+| 数据4 | 数据5 | 数据6 |</code></pre></div><br><br><p><strong>效果</strong>：<br><li>表格标题会显示在表格正上方</li><br><li>居中对齐</li><br><li>字体大小与正文相同，颜色为灰色</li><br><li>中等字重</li></p><br><br><p><strong>注意事项</strong>：<br><li>表格标题必须紧邻表格上方，中间不能有空行</li><br><li>表格标题使用双星号（<em></em>）包围</li><br><li>支持标准的Markdown表格语法</li></p><br><br><h2 id="heading-19">博客新增文章的流程</h2><br>-将md文件放入posts目录下的对应子文件夹中<br>-在posts目录下运行<code>npm run build</code><br>-提交到Github仓库<br>-等待Github Actions自动构建和部署<br><h2 id="heading-20">浏览器支持</h2><br><li>Chrome (推荐)</li><br><li>Firefox</li><br><li>Safari</li><br><li>Edge</li></ol></ul><br><h2 id="heading-21">许可证</h2><br>MIT License<br><h2 id="heading-22">贡献</h2><br>欢迎提交 Issue 和 Pull Request！<br><hr><br><strong>享受写作的乐趣！</strong> ✨
                         </div>
                 
                         <footer class="post-footer">
@@ -331,17 +335,23 @@
       <li class="toc-item toc-h4">
         <a href="#heading-16" class="toc-link">推荐的图片尺寸</a>
       </li>
-      <li class="toc-item toc-h2">
-        <a href="#heading-17" class="toc-link">博客新增文章的流程</a>
+      <li class="toc-item toc-h4">
+        <a href="#heading-17" class="toc-link">图片标题和注释功能</a>
+      </li>
+      <li class="toc-item toc-h4">
+        <a href="#heading-18" class="toc-link">表格标题功能</a>
       </li>
       <li class="toc-item toc-h2">
-        <a href="#heading-18" class="toc-link">浏览器支持</a>
+        <a href="#heading-19" class="toc-link">博客新增文章的流程</a>
       </li>
       <li class="toc-item toc-h2">
-        <a href="#heading-19" class="toc-link">许可证</a>
+        <a href="#heading-20" class="toc-link">浏览器支持</a>
       </li>
       <li class="toc-item toc-h2">
-        <a href="#heading-20" class="toc-link">贡献</a>
+        <a href="#heading-21" class="toc-link">许可证</a>
+      </li>
+      <li class="toc-item toc-h2">
+        <a href="#heading-22" class="toc-link">贡献</a>
       </li>
     </ul>
   </nav>
