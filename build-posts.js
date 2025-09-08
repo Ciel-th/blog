@@ -768,7 +768,7 @@ class HtmlGenerator {
                         </header>
                         
                         <div class="post-content">
-                            ${content}
+                            ${contentWithToc}
                         </div>
                 
                         <footer class="post-footer">
