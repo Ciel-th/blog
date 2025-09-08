@@ -69,6 +69,21 @@ class MarkdownParser {
             return placeholder;
         });
         
+        // 处理带标题的图片 - 语法: ![alt](src "title")
+        // 或者 ![alt](src) 后面跟 *图片标题*
+        html = html.replace(/!\[([^\]]*)\]\(([^\)]+)\)\s*\*([^\*]+)\*/g, (match, alt, src, caption) => {
+            return `<figure class="image-figure">
+                <img src="${src}" alt="${alt}" />
+                <figcaption class="image-caption">${caption}</figcaption>
+            </figure>`;
+        });
+        
+        // 处理普通图片
+        html = html.replace(/!\[([^\]]*)\]\(([^\)]+)\)/g, '<img src="$2" alt="$1" />');
+        
+        // 处理表格（简单的表格支持）
+        html = this.processMarkdownTables(html);
+        
         // 标题（从六级到一级，避免匹配冲突）
         html = html.replace(/^###### (.*$)/gim, '<h6>$1</h6>');
         html = html.replace(/^##### (.*$)/gim, '<h5>$1</h5>');
@@ -80,11 +95,28 @@ class MarkdownParser {
         // 粗体
         html = html.replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>');
         
+        // 斜体
+        html = html.replace(/\*(.*?)\*/g, '<em>$1</em>');
+        
         // 行内代码
         html = html.replace(/`(.*?)`/g, '<code>$1</code>');
         
         // 链接
         html = html.replace(/\[([^\]]+)\]\(([^\)]+)\)/g, '<a href="$2">$1</a>');
+        
+        // 无序列表
+        html = html.replace(/^\s*[-\*\+]\s+(.+)$/gm, '<li>$1</li>');
+        html = html.replace(/(<li>.*<\/li>)/s, '<ul>$1</ul>');
+        
+        // 有序列表
+        html = html.replace(/^\s*\d+\.\s+(.+)$/gm, '<li>$1</li>');
+        html = html.replace(/(<li>.*<\/li>)/s, '<ol>$1</ol>');
+        
+        // 引用
+        html = html.replace(/^>\s+(.+)$/gm, '<blockquote>$1</blockquote>');
+        
+        // 水平分割线
+        html = html.replace(/^---$/gm, '<hr>');
         
         // 段落
         html = html.split('\n\n').map(paragraph => {
@@ -93,6 +125,10 @@ class MarkdownParser {
                 !paragraph.startsWith('<pre') && 
                 !paragraph.startsWith('<ul') && 
                 !paragraph.startsWith('<ol') &&
+                !paragraph.startsWith('<figure') &&
+                !paragraph.startsWith('<table') &&
+                !paragraph.startsWith('<blockquote') &&
+                !paragraph.startsWith('<hr') &&
                 !paragraph.includes('__CODE_BLOCK_')) {
                 return `<p>${paragraph.trim()}</p>`;
             }
@@ -108,6 +144,56 @@ class MarkdownParser {
         });
         
         return html;
+    }
+    
+    // 处理Markdown表格
+    processMarkdownTables(html) {
+        // 匹配表格模式：表格标题（可选） + 表格内容
+        const tablePattern = /(?:^\*\*([^\*]+)\*\*\s*\n)?((?:^\|.+\|\s*\n)+(?:^\|[-\s\|:]+\|\s*\n)(?:^\|.+\|\s*\n)*)/gm;
+        
+        return html.replace(tablePattern, (match, tableTitle, tableContent) => {
+            // 解析表格内容
+            const lines = tableContent.trim().split('\n');
+            const headerLine = lines[0];
+            const separatorLine = lines[1];
+            const dataLines = lines.slice(2);
+            
+            // 解析表头
+            const headers = headerLine.split('|').slice(1, -1).map(h => h.trim());
+            
+            // 解析数据行
+            const rows = dataLines.map(line => {
+                return line.split('|').slice(1, -1).map(cell => cell.trim());
+            });
+            
+            // 生成HTML表格
+            let tableHtml = '<table class="markdown-table">\n';
+            
+            // 表头
+            tableHtml += '  <thead>\n    <tr>\n';
+            headers.forEach(header => {
+                tableHtml += `      <th>${header}</th>\n`;
+            });
+            tableHtml += '    </tr>\n  </thead>\n';
+            
+            // 表体
+            tableHtml += '  <tbody>\n';
+            rows.forEach(row => {
+                tableHtml += '    <tr>\n';
+                row.forEach(cell => {
+                    tableHtml += `      <td>${cell}</td>\n`;
+                });
+                tableHtml += '    </tr>\n';
+            });
+            tableHtml += '  </tbody>\n</table>';
+            
+            // 如果有表格标题，包装在figure中
+            if (tableTitle) {
+                return `<figure class="table-figure">\n  <figcaption class="table-caption">${tableTitle}</figcaption>\n  ${tableHtml}\n</figure>`;
+            }
+            
+            return tableHtml;
+        });
     }
 }
 
