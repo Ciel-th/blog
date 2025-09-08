@@ -189,6 +189,100 @@ class HtmlGenerator {
             fontFamily: 'LXGW WenKai, -apple-system, BlinkMacSystemFont, sans-serif'
         });
     </script>
+    
+    <!-- 目录功能脚本 -->
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const toc = document.querySelector('.table-of-contents');
+            const tocNav = document.querySelector('.toc-nav');
+            const tocToggle = document.querySelector('.toc-toggle');
+            const tocLinks = document.querySelectorAll('.toc-link');
+            const headings = document.querySelectorAll('h1[id], h2[id], h3[id], h4[id], h5[id], h6[id]');
+            
+            if (!toc || !tocNav || !tocToggle || tocLinks.length === 0) {
+                return;
+            }
+            
+            let isCollapsed = false;
+            
+            // 折叠/展开功能
+            tocToggle.addEventListener('click', function() {
+                isCollapsed = !isCollapsed;
+                if (isCollapsed) {
+                    tocNav.style.display = 'none';
+                    tocToggle.textContent = '+';
+                    tocToggle.setAttribute('aria-label', '展开目录');
+                } else {
+                    tocNav.style.display = 'block';
+                    tocToggle.textContent = '−';
+                    tocToggle.setAttribute('aria-label', '折叠目录');
+                }
+            });
+            
+            // 平滑滚动
+            tocLinks.forEach(link => {
+                link.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    const targetId = this.getAttribute('href').substring(1);
+                    const targetElement = document.getElementById(targetId);
+                    
+                    if (targetElement) {
+                        const headerHeight = document.querySelector('.header').offsetHeight || 60;
+                        const targetPosition = targetElement.offsetTop - headerHeight - 20;
+                        
+                        window.scrollTo({
+                            top: targetPosition,
+                            behavior: 'smooth'
+                        });
+                    }
+                });
+            });
+            
+            // 当前位置高亮
+            function updateActiveLink() {
+                const scrollPosition = window.scrollY + window.innerHeight * 0.3;
+                let activeHeading = null;
+                
+                headings.forEach(heading => {
+                    if (heading.offsetTop <= scrollPosition) {
+                        activeHeading = heading;
+                    }
+                });
+                
+                // 移除所有活动状态
+                tocLinks.forEach(link => link.classList.remove('active'));
+                
+                // 添加当前活动状态
+                if (activeHeading) {
+                    const activeLink = document.querySelector('a[href="#' + activeHeading.id + '"]');
+                    if (activeLink) {
+                        activeLink.classList.add('active');
+                    }
+                }
+            }
+            
+            // 监听滚动事件
+            let scrollTimeout;
+            window.addEventListener('scroll', function() {
+                clearTimeout(scrollTimeout);
+                scrollTimeout = setTimeout(updateActiveLink, 10);
+            });
+            
+            // 初始化当前位置
+            updateActiveLink();
+            
+            // 键盘导航支持
+            document.addEventListener('keydown', function(e) {
+                if (e.ctrlKey && e.key === 'k') {
+                    e.preventDefault();
+                    const firstLink = tocLinks[0];
+                    if (firstLink) {
+                        firstLink.focus();
+                    }
+                }
+            });
+        });
+    </script>
 </head>
 <body>
     <!-- Header -->
@@ -249,9 +343,65 @@ class HtmlGenerator {
 </html>`;
     }
 
+    generateTableOfContents(content) {
+        // 提取所有标题
+        const headingRegex = /<h([1-6])([^>]*)>([^<]+)<\/h[1-6]>/g;
+        const headings = [];
+        let match;
+        let headingCounter = 0;
+        
+        // 为每个标题生成唯一ID并收集信息
+        const contentWithIds = content.replace(headingRegex, (fullMatch, level, attributes, text) => {
+            headingCounter++;
+            const id = `heading-${headingCounter}`;
+            const cleanText = text.trim();
+            
+            headings.push({
+                level: parseInt(level),
+                text: cleanText,
+                id: id
+            });
+            
+            // 如果已有id属性，保留；否则添加新的id
+            if (attributes.includes('id=')) {
+                return fullMatch;
+            } else {
+                return `<h${level}${attributes} id="${id}">${text}</h${level}>`;
+            }
+        });
+        
+        if (headings.length === 0) {
+            return { content: contentWithIds, tocHtml: '' };
+        }
+        
+        // 生成目录HTML
+        let tocHtml = '<div class="table-of-contents">\n';
+        tocHtml += '  <div class="toc-header">\n';
+        tocHtml += '    <h3 class="toc-title">目录</h3>\n';
+        tocHtml += '    <button class="toc-toggle" aria-label="折叠目录">−</button>\n';
+        tocHtml += '  </div>\n';
+        tocHtml += '  <nav class="toc-nav">\n';
+        tocHtml += '    <ul class="toc-list">\n';
+        
+        headings.forEach(heading => {
+            tocHtml += `      <li class="toc-item toc-h${heading.level}">\n`;
+            tocHtml += `        <a href="#${heading.id}" class="toc-link">${heading.text}</a>\n`;
+            tocHtml += '      </li>\n';
+        });
+        
+        tocHtml += '    </ul>\n';
+        tocHtml += '  </nav>\n';
+        tocHtml += '</div>\n';
+        
+        return { content: contentWithIds, tocHtml: tocHtml };
+    }
+
     generateHtml(metadata, content, relativePath) {
         const depth = (relativePath.match(/\//g) || []).length;
         const prefix = '../'.repeat(depth);
+        
+        // 生成目录
+        const { content: contentWithToc, tocHtml } = this.generateTableOfContents(content);
         
         return `<!DOCTYPE html>
 <html lang="zh-CN">
@@ -286,6 +436,149 @@ class HtmlGenerator {
     <!-- Stylesheets -->
     <link rel="stylesheet" href="${prefix}styles/main.css">
     <link rel="stylesheet" href="${prefix}fonts/wenkai.css">
+    <style>
+        /* 目录样式 */
+        .article-container {
+            display: flex;
+            max-width: 1200px;
+            margin: 0 auto;
+            position: relative;
+        }
+        
+        .article-wrapper {
+            flex: 1;
+            max-width: 800px;
+            margin-right: 20px;
+        }
+        
+        .table-of-contents {
+            position: fixed;
+            right: 20px;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 280px;
+            max-height: 70vh;
+            background: rgba(255, 255, 255, 0.98);
+            border: 1px solid #e1e5e9;
+            border-radius: 8px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+            z-index: 1000;
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            backdrop-filter: blur(10px);
+        }
+        
+        .toc-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 16px 20px 12px;
+            border-bottom: 1px solid #f0f0f0;
+        }
+        
+        .toc-title {
+            font-size: 16px;
+            font-weight: 600;
+            color: #333;
+            margin: 0;
+        }
+        
+        .toc-toggle {
+            background: none;
+            border: none;
+            font-size: 18px;
+            color: #666;
+            cursor: pointer;
+            padding: 4px;
+            border-radius: 4px;
+            transition: all 0.2s ease;
+        }
+        
+        .toc-toggle:hover {
+            background-color: #f5f5f5;
+            color: #333;
+        }
+        
+        .toc-nav {
+            padding: 12px 0;
+            max-height: calc(70vh - 60px);
+            overflow-y: auto;
+        }
+        
+        .toc-nav::-webkit-scrollbar {
+            width: 4px;
+        }
+        
+        .toc-nav::-webkit-scrollbar-track {
+            background: transparent;
+        }
+        
+        .toc-nav::-webkit-scrollbar-thumb {
+            background: #ddd;
+            border-radius: 2px;
+        }
+        
+        .toc-nav::-webkit-scrollbar-thumb:hover {
+            background: #bbb;
+        }
+        
+        .toc-list {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+        
+        .toc-item {
+            margin: 0;
+        }
+        
+        .toc-link {
+            display: block;
+            padding: 6px 20px;
+            color: #666;
+            text-decoration: none;
+            font-size: 14px;
+            line-height: 1.4;
+            transition: all 0.2s ease;
+            border-left: 3px solid transparent;
+        }
+        
+        .toc-link:hover {
+            color: #333;
+            background-color: #f8f9fa;
+        }
+        
+        .toc-link.active {
+            color: #0066cc;
+            background-color: #f0f7ff;
+            border-left-color: #0066cc;
+            font-weight: 500;
+        }
+        
+        /* 不同级别标题的缩进 */
+        .toc-h1 .toc-link { padding-left: 20px; font-weight: 500; }
+        .toc-h2 .toc-link { padding-left: 32px; }
+        .toc-h3 .toc-link { padding-left: 44px; }
+        .toc-h4 .toc-link { padding-left: 56px; }
+        .toc-h5 .toc-link { padding-left: 68px; }
+        .toc-h6 .toc-link { padding-left: 80px; }
+        
+        /* 响应式设计 */
+        @media (max-width: 1400px) {
+            .table-of-contents {
+                display: none;
+            }
+            
+            .article-wrapper {
+                margin-right: 0;
+            }
+        }
+        
+        @media (max-width: 768px) {
+            .article-container {
+                max-width: 100%;
+            }
+        }
+    </style>
     
     <!-- Favicon -->
     <link rel="icon" type="image/x-icon" href="/favicon.ico">
@@ -339,35 +632,42 @@ class HtmlGenerator {
     
     <!-- Main Content -->
     <main class="main">
-        <div class="container">
-            <article class="post">
-    <header class="post-header">
-        <h1 class="post-title">${metadata.title || 'Untitled'}</h1>
-        <div class="post-meta">
-            <time class="post-date" datetime="${metadata.date || new Date().toISOString().split('T')[0]}T00:00:00+08:00">${this.formatDate(metadata.date || new Date().toISOString().split('T')[0])}</time>
-            ${metadata.tags && metadata.tags.length > 0 ? `
-            <span class="post-tags">
-                ${metadata.tags.map(tag => `<span class="tag">#${tag}</span>`).join('\n                ')}
-            </span>` : ''}
-            
-        </div>
-        
-        <div class="post-excerpt">
-            ${metadata.excerpt || metadata.description || ''}
-        </div>
-        
-    </header>
-    
-    <div class="post-content">
-        ${content}
-    </div>
+        <div class="article-container">
+            <div class="article-wrapper">
+                <div class="container">
+                    <article class="post">
+                        <header class="post-header">
+                            <h1 class="post-title">${metadata.title || 'Untitled'}</h1>
+                            <div class="post-meta">
+                                <time class="post-date" datetime="${metadata.date || new Date().toISOString().split('T')[0]}T00:00:00+08:00">${this.formatDate(metadata.date || new Date().toISOString().split('T')[0])}</time>
+                                ${metadata.tags && metadata.tags.length > 0 ? `
+                                <span class="post-tags">
+                                    ${metadata.tags.map(tag => `<span class="tag">#${tag}</span>`).join('\n                                    ')}
+                                </span>` : ''}
+                                
+                            </div>
+                            
+                            <div class="post-excerpt">
+                                ${metadata.excerpt || metadata.description || ''}
+                            </div>
+                            
+                        </header>
+                        
+                        <div class="post-content">
+                            ${contentWithToc}
+                        </div>
                 
-                <footer class="post-footer">
-                    <div class="post-navigation">
-                        <!-- 文章导航将在这里添加 -->
-                    </div>
-                </footer>
-            </article>
+                        <footer class="post-footer">
+                            <div class="post-navigation">
+                                <!-- 文章导航将在这里添加 -->
+                            </div>
+                        </footer>
+                    </article>
+                </div>
+            </div>
+            
+            <!-- 目录 -->
+            ${tocHtml}
         </div>
     </main>
     
