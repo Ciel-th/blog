@@ -404,12 +404,25 @@ class PostBuilder {
 
         categories.forEach(category => {
             const categoryDir = path.join(postsDir, category);
-            const files = fs.readdirSync(categoryDir)
-                .filter(file => file.endsWith('.md'));
+            this.scanCategoryDirectory(category, categoryDir);
+        });
+    }
 
-            files.forEach(file => {
-                this.processMarkdownFile(category, file);
-            });
+    // 递归扫描分类目录中的所有Markdown文件
+    scanCategoryDirectory(category, dirPath, relativePath = '') {
+        const items = fs.readdirSync(dirPath, { withFileTypes: true });
+        
+        items.forEach(item => {
+            const itemPath = path.join(dirPath, item.name);
+            const currentRelativePath = relativePath ? path.join(relativePath, item.name) : item.name;
+            
+            if (item.isDirectory()) {
+                // 递归扫描子目录
+                this.scanCategoryDirectory(category, itemPath, currentRelativePath);
+            } else if (item.name.endsWith('.md')) {
+                // 处理Markdown文件
+                this.processMarkdownFile(category, currentRelativePath);
+            }
         });
     }
 
@@ -421,10 +434,16 @@ class PostBuilder {
         const { metadata, content: markdownContent } = this.parser.parseFrontMatter(content);
         const htmlContent = this.parser.markdownToHtml(markdownContent);
         
-        // 生成HTML文件名
+        // 生成HTML文件名（保持目录结构）
         const htmlFilename = filename.replace('.md', '.html');
         const htmlPath = path.join(__dirname, 'posts', category, htmlFilename);
-        const relativePath = `posts/${category}/${htmlFilename}`;
+        const relativePath = `posts/${category}/${htmlFilename.replace(/\\/g, '/')}`;
+        
+        // 确保目录存在
+        const htmlDir = path.dirname(htmlPath);
+        if (!fs.existsSync(htmlDir)) {
+            fs.mkdirSync(htmlDir, { recursive: true });
+        }
         
         // 生成HTML文件
         const html = this.htmlGenerator.generateHtml(metadata, htmlContent, relativePath);
@@ -497,6 +516,7 @@ function getPostsByCategory(category) {
         case 'repo':
             return repoData;
         case 'japanese':
+        case 'japanese-learning':
             return japaneseData;
         default:
             return getAllPostsData();

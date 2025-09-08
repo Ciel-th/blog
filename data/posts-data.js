@@ -7,7 +7,7 @@ const workNotesData = [
         "title": "关于这个博客",
         "date": "2025-09-08",
         "excerpt": "这篇文章简单介绍了本博客所用到的技术栈，以及展示如何使用Markdown格式来创建博客文章。只需要创建.md文件并push到GitHub即可自动生成HTML页面。",
-        "url": "posts/WorkNotes/example-post.html",
+        "url": "posts/WorkNotes/1stblog/example-post.html",
         "tags": [
             "Markdown",
             "博客",
@@ -49,6 +49,7 @@ function getPostsByCategory(category) {
         case 'repo':
             return repoData;
         case 'japanese':
+        case 'japanese-learning':
             return japaneseData;
         default:
             return getAllPostsData();
