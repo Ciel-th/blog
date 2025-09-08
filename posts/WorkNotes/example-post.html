@@ -42,8 +42,8 @@
     <script>
         MathJax = {
             tex: {
-                inlineMath: [['$', '$'], ['\\(', '\\)']],
-                displayMath: [['$$', '$$'], ['\\[', '\\]']],
+                inlineMath: [['$', '$'], ['\(', '\)']],
+                displayMath: [['$$', '$$'], ['\[', '\]']],
                 processEscapes: true,
                 processEnvironments: true
             },
@@ -85,70 +85,36 @@
     <!-- Main Content -->
     <main class="main">
         <div class="container">
-            <article class="weekly">
-                <header class="weekly-header">
-                    <h1 class="weekly-title">示例文章：如何使用Markdown写博客</h1>
-                    <div class="weekly-meta">
-                        <time class="weekly-date" datetime="2025-01-27T00:00:00+08:00">2025-01-27</time>
-                    </div>
-                    
-                    <div class="weekly-excerpt">
-                        这是一个示例文章，展示如何使用Markdown格式来创建博客文章。只需要创建.md文件并push到GitHub即可自动生成HTML页面。
-                    </div>
-                </header>
+            <article class="post">
+    <header class="post-header">
+        <h1 class="post-title">示例文章：如何使用Markdown写博客</h1>
+        <div class="post-meta">
+            <time class="post-date" datetime="2025-01-27T00:00:00+08:00">2025年01月27日</time>
+            
+            <span class="post-tags">
+                <span class="tag">#示例</span>
+                <span class="tag">#Markdown</span>
+                <span class="tag">#博客</span>
+            </span>
+            
+        </div>
+        
+        <div class="post-excerpt">
+            这是一个示例文章，展示如何使用Markdown格式来创建博客文章。只需要创建.md文件并push到GitHub即可自动生成HTML页面。
+        </div>
+        
+    </header>
+    
+    <div class="post-content">
+        <h1>欢迎使用Markdown写博客</h1><br><br><p>这是一个示例文章，展示了如何使用简单的Markdown格式来创建博客文章。</p><br><br><h2>主要特性</h2><br><br><h3>1. 简单的语法</h3><br><br><p>Markdown使用简单的语法来格式化文本：</p><br><br><p>- <strong>粗体文本</strong>使用 <code><strong>文本</strong></code><br>- *斜体文本*使用 <code>*文本*</code><br>- <code>代码</code>使用反引号</p><br><br><h3>2. 代码块支持</h3><br><br><pre><code>javascript<br>function hello() {<br>    console.log("Hello, World!");<br>}<br></code></pre><br><br><h3>3. 链接和引用</h3><br><br><p>你可以轻松添加<a href="https://example.com">链接</a>到你的文章中。</p><br><br><h2>工作流程</h2><br><br><p>1. 在对应的分类文件夹中创建 <code>.md</code> 文件<br>2. 添加front matter（文章元数据）<br>3. 使用Markdown语法编写内容<br>4. Push到GitHub<br>5. 自动构建和部署</p><br><br><h2>结论</h2><br><br><p>使用这个新的工作流程，你可以专注于内容创作，而不用担心HTML格式和页面结构。系统会自动处理所有技术细节。</p><br><br><p>---</p><br><br><p>*这篇文章展示了新的博客创建流程的强大功能。*</p>
+    </div>
                 
-                <div class="weekly-content">
-                    <h1>欢迎使用Markdown写博客</h1>
-
-                    <p>这是一个示例文章，展示了如何使用简单的Markdown格式来创建博客文章。</p>
-
-                    <h2>主要特性</h2>
-
-                    <h3>1. 简单的语法</h3>
-
-                    <p>Markdown使用简单的语法来格式化文本：</p>
-
-                    <ul>
-                        <li><strong>粗体文本</strong>使用 <code>**文本**</code></li>
-                        <li><em>斜体文本</em>使用 <code>*文本*</code></li>
-                        <li><code>代码</code>使用反引号</li>
-                    </ul>
-
-                    <h3>2. 代码块支持</h3>
-
-                    <pre><code>function hello() {
-    console.log("Hello, World!");
-}</code></pre>
-
-                    <h3>3. 链接和引用</h3>
-
-                    <p>你可以轻松添加<a href="https://example.com">链接</a>到你的文章中。</p>
-
-                    <h2>工作流程</h2>
-
-                    <ol>
-                        <li>在对应的分类文件夹中创建 <code>.md</code> 文件</li>
-                        <li>添加front matter（文章元数据）</li>
-                        <li>使用Markdown语法编写内容</li>
-                        <li>Push到GitHub</li>
-                        <li>自动构建和部署</li>
-                    </ol>
-
-                    <h2>结论</h2>
-
-                    <p>使用这个新的工作流程，你可以专注于内容创作，而不用担心HTML格式和页面结构。系统会自动处理所有技术细节。</p>
-
-                    <hr>
-
-                    <p><em>这篇文章展示了新的博客创建流程的强大功能。</em></p>
-                </div>
-                
-                <footer class="weekly-footer">
-                    <div class="weekly-navigation">
+                <footer class="post-footer">
+                    <div class="post-navigation">
                         <!-- 文章导航将在这里添加 -->
                     </div>
                     
-                    <div class="weekly-archive">
+                    <div class="post-archive">
                         <a href="../../index.html" class="archive-link">📚 返回首页</a>
                     </div>
                 </footer>

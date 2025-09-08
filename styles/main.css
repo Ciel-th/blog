@@ -162,13 +162,18 @@ a:hover {
 
 .post-title {
     margin: 0 0 8px 0;
-    font-size: 3em;
+    font-size: 3em !important;
     font-weight: 700;
     line-height: 1.3;
     letter-spacing: -0.02em;
     color: #2c3e50;
     transition: all 0.3s ease;
     text-align: left;
+}
+
+/* 首页文章列表的标题样式 - Updated 2025-01-09 */
+h2.post-title {
+    font-size: 3em !important;
 }
 
 .post-title:hover {
@@ -188,7 +193,7 @@ a:hover {
 .post-meta {
     margin-bottom: 8px;
     color: #7f8c8d;
-    font-size: 1.4em;
+    font-size: 1.4em !important;
     font-weight: 500;
     display: flex;
     align-items: center;
@@ -206,7 +211,7 @@ a:hover {
 .post-excerpt {
     color: #4a5568;
     line-height: 1.4;
-    font-size: 1.5em;
+    font-size: 1.5em !important;
     margin-bottom: 6px;
     text-align: left;
 }
@@ -300,13 +305,171 @@ a:hover {
     margin-bottom: 8px;
 }
 
-/* 文章内容样式 */
+/* 文章页面样式 */
+.post {
+    max-width: 800px;
+    margin: 0 auto;
+    background: #ffffff;
+    border-radius: 12px;
+    padding: 40px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+}
+
+.post-header {
+    margin-bottom: 30px;
+    text-align: center;
+    border-bottom: 1px solid #e9ecef;
+    padding-bottom: 30px;
+}
+
+.post-title {
+    font-size: 2.5em;
+    font-weight: 700;
+    color: #2c3e50;
+    margin: 0 0 20px 0;
+}
+
+.post-meta {
+    font-size: 0.9em;
+    color: #6c757d;
+    margin-bottom: 20px;
+}
+
+.post-date {
+    margin-right: 15px;
+}
+
+.post-excerpt {
+    font-size: 1.1em;
+    color: #6c757d;
+    font-style: italic;
+    margin-top: 15px;
+}
+
 .post-content {
-    flex: 1;
-    min-width: 0;
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
+    font-size: 1.1em;
+    line-height: 1.8;
+    color: #333;
+}
+
+.post-content h1 {
+    font-size: 2.2em;
+    font-weight: 700;
+    color: #2c3e50;
+    margin: 40px 0 20px 0;
+    line-height: 1.3;
+}
+
+.post-content h2 {
+    font-size: 1.8em;
+    font-weight: 600;
+    color: #2c3e50;
+    margin: 35px 0 15px 0;
+    line-height: 1.4;
+}
+
+.post-content h3 {
+    font-size: 1.4em;
+    font-weight: 600;
+    color: #34495e;
+    margin: 25px 0 12px 0;
+    line-height: 1.4;
+}
+
+.post-content p {
+    margin-bottom: 16px;
+}
+
+.post-content ul, .post-content ol {
+    margin: 16px 0 16px 24px;
+}
+
+.post-content li {
+    margin-bottom: 8px;
+}
+
+.post-content blockquote {
+    border-left: 4px solid #3498db;
+    padding: 16px 20px;
+    margin: 20px 0;
+    background: #f8f9fa;
+    border-radius: 0 8px 8px 0;
+}
+
+.post-content blockquote p {
+    margin: 0;
+    font-style: italic;
+}
+
+.post-content code {
+    background: #f1f3f4;
+    padding: 2px 6px;
+    border-radius: 4px;
+    font-family: 'Courier New', monospace;
+    font-size: 0.9em;
+}
+
+.post-content pre {
+    background: #f8f9fa;
+    padding: 20px;
+    border-radius: 8px;
+    overflow-x: auto;
+    margin: 20px 0;
+}
+
+.post-content pre code {
+    background: none;
+    padding: 0;
+    font-size: 0.9em;
+}
+
+.post-content img {
+    max-width: 100%;
+    height: auto;
+    border-radius: 8px;
+    margin: 20px 0;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+}
+
+.post-content a {
+    color: #3498db;
+    border-bottom: 1px solid transparent;
+    transition: border-bottom-color 0.3s ease;
+}
+
+.post-content a:hover {
+    border-bottom-color: #3498db;
+}
+
+.post-footer {
+    margin-top: 40px;
+    padding-top: 30px;
+    border-top: 1px solid #e9ecef;
+    text-align: center;
+}
+
+.post-navigation {
+    margin-bottom: 20px;
+}
+
+.post-archive {
+    font-size: 1.1em;
+}
+
+.post-archive .archive-link {
+    color: #3498db;
+    padding: 12px 24px;
+    border: 2px solid #3498db;
+    border-radius: 25px;
+    transition: all 0.3s ease;
+    display: inline-block;
+}
+
+.post-archive .archive-link:hover {
+    background: #3498db;
+    color: white;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(52, 152, 219, 0.3);
 }
 
 /* 文章列表滚动条 */
@@ -469,4 +632,237 @@ a:hover {
 
 .footer a:hover {
     text-decoration: underline;
+}
+
+/* Weekly Article Styles */
+.weekly {
+    max-width: 800px;
+    margin: 0 auto;
+    background: #ffffff;
+    border-radius: 12px;
+    padding: 40px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+}
+
+.weekly-header {
+    margin-bottom: 30px;
+    text-align: center;
+    border-bottom: 1px solid #e9ecef;
+    padding-bottom: 30px;
+}
+
+.weekly-title {
+    font-size: 2.5em;
+    font-weight: 700;
+    color: #2c3e50;
+    margin: 0 0 20px 0;
+    line-height: 1.2;
+}
+
+.weekly-meta {
+    margin-bottom: 20px;
+    color: #666;
+    font-size: 1.1em;
+}
+
+.weekly-date {
+    color: #666;
+    font-weight: 500;
+}
+
+.weekly-tag {
+    display: inline-block;
+    padding: 4px 12px;
+    background: rgba(52, 152, 219, 0.1);
+    color: #3498db;
+    font-size: 0.9em;
+    font-weight: 500;
+    border-radius: 12px;
+    margin: 0 4px;
+    border: 1px solid rgba(52, 152, 219, 0.2);
+}
+
+.weekly-excerpt {
+    font-size: 1.2em;
+    color: #666;
+    line-height: 1.6;
+    font-style: italic;
+}
+
+.weekly-cover {
+    margin: 30px 0;
+    text-align: center;
+}
+
+.weekly-cover .cover-image {
+    max-width: 100%;
+    height: auto;
+    border-radius: 8px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+}
+
+.weekly-content {
+    font-size: 1.1em;
+    line-height: 1.8;
+    color: #333;
+}
+
+.weekly-content h1 {
+    font-size: 2.2em;
+    font-weight: 700;
+    color: #2c3e50;
+    margin: 40px 0 20px 0;
+    line-height: 1.3;
+}
+
+.weekly-content h2 {
+    font-size: 1.8em;
+    font-weight: 600;
+    color: #2c3e50;
+    margin: 35px 0 15px 0;
+    line-height: 1.4;
+}
+
+.weekly-content h3 {
+    font-size: 1.4em;
+    font-weight: 600;
+    color: #34495e;
+    margin: 25px 0 12px 0;
+    line-height: 1.4;
+}
+
+.weekly-content p {
+    margin: 0 0 18px 0;
+    line-height: 1.8;
+}
+
+.weekly-content ul, .weekly-content ol {
+    margin: 18px 0;
+    padding-left: 30px;
+}
+
+.weekly-content li {
+    margin: 8px 0;
+    line-height: 1.7;
+}
+
+.weekly-content blockquote {
+    margin: 25px 0;
+    padding: 20px 25px;
+    background: #f8f9fa;
+    border-left: 4px solid #3498db;
+    border-radius: 0 8px 8px 0;
+    font-style: italic;
+}
+
+.weekly-content blockquote p {
+    margin: 0;
+    color: #555;
+}
+
+.weekly-content code {
+    background: #f1f3f4;
+    padding: 2px 6px;
+    border-radius: 4px;
+    font-family: 'Courier New', monospace;
+    font-size: 0.9em;
+    color: #e74c3c;
+}
+
+.weekly-content pre {
+    background: #f8f9fa;
+    padding: 20px;
+    border-radius: 8px;
+    overflow-x: auto;
+    margin: 20px 0;
+    border: 1px solid #e9ecef;
+}
+
+.weekly-content pre code {
+    background: none;
+    padding: 0;
+    color: #333;
+    font-size: 0.95em;
+}
+
+.weekly-content img {
+    max-width: 100%;
+    height: auto;
+    border-radius: 8px;
+    margin: 20px 0;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+.weekly-content a {
+    color: #3498db;
+    text-decoration: none;
+    border-bottom: 1px solid transparent;
+    transition: all 0.3s ease;
+}
+
+.weekly-content a:hover {
+    color: #2980b9;
+    border-bottom-color: #2980b9;
+}
+
+.weekly-footer {
+    margin-top: 50px;
+    padding-top: 30px;
+    border-top: 1px solid #e9ecef;
+    text-align: center;
+}
+
+.weekly-navigation {
+    margin-bottom: 20px;
+}
+
+.weekly-archive {
+    margin-bottom: 20px;
+}
+
+.archive-link {
+    display: inline-block;
+    padding: 12px 24px;
+    background: #3498db;
+    color: white;
+    text-decoration: none;
+    border-radius: 8px;
+    font-weight: 500;
+    transition: all 0.3s ease;
+}
+
+.archive-link:hover {
+    background: #2980b9;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(52, 152, 219, 0.3);
+}
+
+.weekly-subscribe {
+    font-size: 0.9em;
+    color: #666;
+}
+
+/* Responsive Design for Weekly Articles */
+@media (max-width: 768px) {
+    .weekly {
+        margin: 0 10px;
+        padding: 20px;
+        border-radius: 8px;
+    }
+    
+    .weekly-title {
+        font-size: 2em;
+    }
+    
+    .weekly-content h1 {
+        font-size: 1.8em;
+    }
+    
+    .weekly-content h2 {
+        font-size: 1.5em;
+    }
+    
+    .weekly-content h3 {
+        font-size: 1.3em;
+    }
 }

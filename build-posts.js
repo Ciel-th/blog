@@ -57,9 +57,8 @@ class MarkdownParser {
         html = html.replace(/^## (.*$)/gim, '<h2>$1</h2>');
         html = html.replace(/^# (.*$)/gim, '<h1>$1</h1>');
         
-        // 粗体和斜体
+        // 粗体
         html = html.replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>');
-        html = html.replace(/\*(.*?)\*/g, '<em>$1</em>');
         
         // 代码块
         html = html.replace(/```([\s\S]*?)```/g, '<pre><code>$1</code></pre>');
@@ -91,6 +90,14 @@ class MarkdownParser {
 class HtmlGenerator {
     constructor() {
         this.template = this.getTemplate();
+    }
+
+    formatDate(dateStr) {
+        const date = new Date(dateStr);
+        const year = date.getFullYear();
+        const month = String(date.getMonth() + 1).padStart(2, '0');
+        const day = String(date.getDate()).padStart(2, '0');
+        return `${year}年${month}月${day}日`;
     }
 
     getTemplate() {
@@ -200,13 +207,9 @@ class HtmlGenerator {
                     {{content}}
                 </div>
                 
-                <footer class="weekly-footer">
+                <footer class="post-footer">
                     <div class="weekly-navigation">
                         <!-- 文章导航将在这里添加 -->
-                    </div>
-                    
-                    <div class="weekly-archive">
-                        <a href="{{homeLink}}" class="archive-link">📚 返回首页</a>
                     </div>
                 </footer>
             </article>
@@ -216,7 +219,7 @@ class HtmlGenerator {
     <!-- Footer -->
     <footer class="footer">
         <div class="container">
-            <p>&copy; 2025 電波圏外. All rights reserved.</p>
+            <p>&copy; 2025 C_Ciel. All rights reserved.</p>
             <p>Powered by <a href="https://github.com/" target="_blank">GitHub</a> & <a href="https://pages.github.com/" target="_blank">GitHub Pages</a></p>
         </div>
     </footer>
@@ -315,32 +318,34 @@ class HtmlGenerator {
     <!-- Main Content -->
     <main class="main">
         <div class="container">
-            <article class="weekly">
-                <header class="weekly-header">
-                    <h1 class="weekly-title">${metadata.title || 'Untitled'}</h1>
-                    <div class="weekly-meta">
-                        <time class="weekly-date" datetime="${metadata.date || new Date().toISOString().split('T')[0]}T00:00:00+08:00">${metadata.date || new Date().toISOString().split('T')[0]}</time>
-                    </div>
-                    
-                    <div class="weekly-excerpt">
-                        ${metadata.excerpt || metadata.description || ''}
-                    </div>
-                </header>
+            <article class="post">
+    <header class="post-header">
+        <h1 class="post-title">${metadata.title || 'Untitled'}</h1>
+        <div class="post-meta">
+            <time class="post-date" datetime="${metadata.date || new Date().toISOString().split('T')[0]}T00:00:00+08:00">${this.formatDate(metadata.date || new Date().toISOString().split('T')[0])}</time>
+            ${metadata.tags && metadata.tags.length > 0 ? `
+            <span class="post-tags">
+                ${metadata.tags.map(tag => `<span class="tag">#${tag}</span>`).join('\n                ')}
+            </span>` : ''}
+            
+        </div>
+        
+        <div class="post-excerpt">
+            ${metadata.excerpt || metadata.description || ''}
+        </div>
+        
+    </header>
+    
+    <div class="post-content">
+        ${content}
+    </div>
                 
-                ${metadata.cover ? `<div class="weekly-cover">
-                    <img src="${prefix}${metadata.cover}" alt="${metadata.title || 'Untitled'} 封面" class="cover-image">
-                </div>` : ''}
-                
-                <div class="weekly-content">
-                    ${content}
-                </div>
-                
-                <footer class="weekly-footer">
-                    <div class="weekly-navigation">
+                <footer class="post-footer">
+                    <div class="post-navigation">
                         <!-- 文章导航将在这里添加 -->
                     </div>
                     
-                    <div class="weekly-archive">
+                    <div class="post-archive">
                         <a href="${prefix}index.html" class="archive-link">📚 返回首页</a>
                     </div>
                 </footer>
