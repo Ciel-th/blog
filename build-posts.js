@@ -72,6 +72,10 @@ class MarkdownParser {
         // 处理带标题的图片 - 语法: ![alt](src "title")
         // 或者 ![alt](src) 后面跟 *图片标题*
         html = html.replace(/!\[([^\]]*)\]\(([^\)]+)\)\s*\*([^\*]+)\*/g, (match, alt, src, caption) => {
+            // 修复图片路径 - 添加相对路径前缀
+            if (!src.startsWith('http') && !src.startsWith('/')) {
+                src = '../../../' + src;
+            }
             return `<figure class="image-figure">
                 <img src="${src}" alt="${alt}" />
                 <figcaption class="image-caption">${caption}</figcaption>
@@ -79,7 +83,13 @@ class MarkdownParser {
         });
         
         // 处理普通图片
-        html = html.replace(/!\[([^\]]*)\]\(([^\)]+)\)/g, '<img src="$2" alt="$1" />');
+        html = html.replace(/!\[([^\]]*)\]\(([^\)]+)\)/g, (match, alt, src) => {
+            // 修复图片路径 - 添加相对路径前缀
+            if (!src.startsWith('http') && !src.startsWith('/')) {
+                src = '../../../' + src;
+            }
+            return `<img src="${src}" alt="${alt}" />`;
+        });
         
         // 处理表格（简单的表格支持）
         html = this.processMarkdownTables(html);
@@ -489,6 +499,21 @@ class HtmlGenerator {
         const depth = (relativePath.match(/\//g) || []).length;
         const prefix = '../'.repeat(depth);
         
+        // 修复内容中的图片路径
+        content = content.replace(/<img([^>]+)src="([^"]+)"/g, (match, attrs, src) => {
+            if (!src.startsWith('http') && !src.startsWith('/') && !src.startsWith('../')) {
+                src = prefix + src;
+            }
+            return `<img${attrs}src="${src}"`;
+        });
+        
+        content = content.replace(/<figure[^>]*>\s*<img([^>]+)src="([^"]+)"/g, (match, attrs, src) => {
+            if (!src.startsWith('http') && !src.startsWith('/') && !src.startsWith('../')) {
+                src = prefix + src;
+            }
+            return match.replace(src, src);
+        });
+        
         // 生成目录
         const { content: contentWithToc, tocHtml } = this.generateTableOfContents(content);
         
@@ -743,7 +768,7 @@ class HtmlGenerator {
                         </header>
                         
                         <div class="post-content">
-                            ${contentWithToc}
+                            ${content}
                         </div>
                 
                         <footer class="post-footer">

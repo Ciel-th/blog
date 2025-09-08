@@ -37,7 +37,7 @@ const repoData = [
             "765プロ",
             "repo"
         ],
-        "cover": "images/WorkNotes/202509_02/1st_blog_title.jpg"
+        "cover": "images/repo/nei/NEI_title.jpg"
     }
 ];
 
