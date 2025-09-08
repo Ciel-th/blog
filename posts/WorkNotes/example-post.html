@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>示例文章：如何使用Markdown写博客 - 電波圏外</title>
+    
+    <!-- SEO Meta Tags -->
+    <meta name="description" content="这是一个示例文章，展示如何使用Markdown格式来创建博客文章。只需要创建.md文件并push到GitHub即可自动生成HTML页面。">
+    <meta name="author" content="C_Ciel">
+    
+    <!-- Open Graph Meta Tags -->
+    <meta property="og:title" content="示例文章：如何使用Markdown写博客">
+    <meta property="og:description" content="这是一个示例文章，展示如何使用Markdown格式来创建博客文章。只需要创建.md文件并push到GitHub即可自动生成HTML页面。">
+    <meta property="og:type" content="article">
+    <meta property="og:url" content="https://your-domain.com/posts/WorkNotes/example-post.html">
+    
+    <!-- Twitter Card Meta Tags -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="示例文章：如何使用Markdown写博客">
+    <meta name="twitter:description" content="这是一个示例文章，展示如何使用Markdown格式来创建博客文章。只需要创建.md文件并push到GitHub即可自动生成HTML页面。">
+    
+    <!-- Performance Optimizations -->
+    <link rel="dns-prefetch" href="//polyfill.io">
+    <link rel="dns-prefetch" href="//cdn.jsdelivr.net">
+    <link rel="preconnect" href="https://polyfill.io" crossorigin>
+    <link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
+    <link rel="preload" href="../../fonts/LXGWWenKai-Regular.ttf" as="font" type="font/ttf" crossorigin>
+    <link rel="preload" href="../../styles/main.css" as="style">
+    
+    <!-- Stylesheets -->
+    <link rel="stylesheet" href="../../styles/main.css">
+    <link rel="stylesheet" href="../../fonts/wenkai.css">
+    
+    <!-- Favicon -->
+    <link rel="icon" type="image/x-icon" href="/favicon.ico">
+    
+    <!-- Vercel Analytics -->
+    <script defer src="https://va.vercel-scripts.com/v1/script.js"></script>
+</head>
+<body>
+    <div class="blog-layout">
+        <!-- 导航栏 -->
+        <nav class="blog-nav">
+            <div class="nav-container">
+                <a href="../../index.html" class="nav-logo">電波圏外</a>
+                <div class="nav-links">
+                    <a href="../../index.html">首页</a>
+                    <a href="../../work-notes.html">工作杂记</a>
+                    <a href="../../repo.html">技术文章</a>
+                    <a href="../../japanese-learning.html">日语学习</a>
+                    <a href="../../about.html">关于</a>
+                </div>
+            </div>
+        </nav>
+
+        <!-- 主要内容 -->
+        <main class="blog-content">
+            <article class="post-article">
+                <header class="post-header">
+                    <h1 class="post-title">示例文章：如何使用Markdown写博客</h1>
+                    <div class="post-meta">
+                        <time class="post-date">2025-01-27</time>
+                        <div class="post-tags">
+                            <span class="tag">示例</span>
+                            <span class="tag">Markdown</span>
+                            <span class="tag">博客</span>
+                        </div>
+                    </div>
+                </header>
+                
+                <div class="post-content">
+                    <h1>欢迎使用Markdown写博客</h1>
+
+                    <p>这是一个示例文章，展示了如何使用简单的Markdown格式来创建博客文章。</p>
+
+                    <h2>主要特性</h2>
+
+                    <h3>1. 简单的语法</h3>
+
+                    <p>Markdown使用简单的语法来格式化文本：</p>
+
+                    <p>- <strong>粗体文本</strong>使用 <code>**文本**</code><br>
+                    - <em>斜体文本</em>使用 <code>*文本*</code><br>
+                    - <code>代码</code>使用反引号</p>
+
+                    <h3>2. 代码块支持</h3>
+
+                    <pre><code>function hello() {
+    console.log("Hello, World!");
+}</code></pre>
+
+                    <h3>3. 链接和引用</h3>
+
+                    <p>你可以轻松添加<a href="https://example.com">链接</a>到你的文章中。</p>
+
+                    <h2>工作流程</h2>
+
+                    <p>1. 在对应的分类文件夹中创建 <code>.md</code> 文件<br>
+                    2. 添加front matter（文章元数据）<br>
+                    3. 使用Markdown语法编写内容<br>
+                    4. Push到GitHub<br>
+                    5. 自动构建和部署</p>
+
+                    <h2>结论</h2>
+
+                    <p>使用这个新的工作流程，你可以专注于内容创作，而不用担心HTML格式和页面结构。系统会自动处理所有技术细节。</p>
+
+                    <hr>
+
+                    <p><em>这篇文章展示了新的博客创建流程的强大功能。</em></p>
+                </div>
+            </article>
+        </main>
+
+        <!-- 页脚 -->
+        <footer class="blog-footer">
+            <p>&copy; 2025 C_Ciel. All rights reserved. | Powered by Jekyll & GitHub Pages</p>
+        </footer>
+    </div>
+
+    <!-- 返回顶部按钮 -->
+    <button id="back-to-top" class="back-to-top" onclick="scrollToTop()">
+        ↑
+    </button>
+
+    <script>
+        // 返回顶部功能
+        function scrollToTop() {
+            window.scrollTo({
+                top: 0,
+                behavior: 'smooth'
+            });
+        }
+
+        // 显示/隐藏返回顶部按钮
+        window.addEventListener('scroll', function() {
+            const backToTop = document.getElementById('back-to-top');
+            if (window.pageYOffset > 300) {
+                backToTop.style.display = 'block';
+            } else {
+                backToTop.style.display = 'none';
+            }
+        });
+    </script>
+</body>
+</html>

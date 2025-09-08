@@ -1,5 +1,6 @@
 // 博客文章数据管理
-// 这个文件包含所有文章的数据，各个页面都会引用这里的数据
+// 这个文件由build-posts.js自动生成，也可以手动维护
+// 新的工作流程：在posts目录中创建.md文件，然后运行构建脚本自动生成
 
 // 工作杂记数据
 const workNotesData = [
@@ -10,8 +11,16 @@ const workNotesData = [
         url: "posts/WorkNotes/remote-work-productivity-tips.html",
         tags: ["远程工作", "效率提升", "工作"],
         cover: "images/WorkNotes/202509_01/weekly-002-cover.jpeg"
+    },
+    {
+        title: "示例文章：如何使用Markdown写博客",
+        date: "2025-01-27",
+        excerpt: "这是一个示例文章，展示如何使用Markdown格式来创建博客文章。只需要创建.md文件并push到GitHub即可自动生成HTML页面。",
+        url: "posts/WorkNotes/example-post.html",
+        tags: ["示例", "Markdown", "博客"],
+        cover: "images/WorkNotes/202509_01/example-cover.jpeg"
     }
-    // 在这里添加新的工作杂记文章
+    // 新文章会通过构建脚本自动添加到这里
 ];
 
 // 技术文章数据

@@ -78,78 +78,122 @@ php -S localhost:8000
 - 在对应的分类页面显示该分类的所有文章
 - 更新搜索和标签筛选功能
 
-**您不再需要手动维护多个页面的文章数据！**
+**现在您只需要创建Markdown文件即可自动生成博客文章！**
 
-### 步骤1：新增文章文件
+### 🚀 新的简化流程：Markdown自动构建
+
+#### 步骤1：创建Markdown文件
 
 1. **确定文章分类**：
    - `WorkNotes` - 工作杂记
    - `repo` - 技术文章
    - `JpnLearning` - 日语学习记录
 
-2. **创建HTML文件**：
-   在对应的 `posts/分类目录/` 下创建新的 `.html` 文件，例如：
+2. **创建Markdown文件**：
+   在对应的 `posts/分类目录/` 下创建新的 `.md` 文件，例如：
    ```
-   posts/WorkNotes/my-new-article.html
-   ```
-
-3. **文章HTML结构**：
-   ```html
-   <!DOCTYPE html>
-   <html lang="zh-CN">
-   <head>
-       <meta charset="UTF-8">
-       <meta name="viewport" content="width=device-width, initial-scale=1.0">
-       <title>文章标题 - 我的博客</title>
-       <link rel="stylesheet" href="../../styles/main.css">
-   </head>
-   <body>
-       <!-- 导航栏 -->
-       <nav class="nav">
-           <div class="nav-container">
-               <a href="../../index.html" class="nav-brand">我的博客</a>
-               <ul class="nav-menu">
-                   <li><a href="../../index.html">首页</a></li>
-                   <li><a href="../../work-notes.html">工作杂记</a></li>
-                   <li><a href="../../repo.html">技术文章</a></li>
-                   <li><a href="../../japanese-learning.html">日语学习</a></li>
-                   <li><a href="../../about.html">关于我</a></li>
-               </ul>
-           </div>
-       </nav>
-
-       <!-- 文章内容 -->
-       <main class="container">
-           <article class="post">
-               <header class="post-header">
-                   <h1 class="post-title">文章标题</h1>
-                   <div class="post-meta">
-                       <time>2025-01-26</time>
-                       <span class="post-tags">
-                           <span class="tag">标签1</span>
-                           <span class="tag">标签2</span>
-                       </span>
-                   </div>
-               </header>
-               
-               <div class="post-content">
-                   <!-- 文章正文内容 -->
-                   <p>文章内容...</p>
-               </div>
-           </article>
-       </main>
-   </body>
-   </html>
+   posts/WorkNotes/my-new-article.md
    ```
 
-### 步骤2：更新相关文件以实现导航互通
+3. **Markdown文件格式**：
+   ```markdown
+   ---
+   title: "文章标题"
+   date: "2025-01-27"
+   excerpt: "文章摘要，简要描述文章内容"
+   tags: ["标签1", "标签2", "标签3"]
+   cover: "images/WorkNotes/my-article/cover.jpg"
+   ---
 
-#### 2.1 更新共享数据文件 (data/posts-data.js)
+   # 文章标题
 
-**这是唯一需要更新的地方！** 在 `data/posts-data.js` 文件中，根据文章分类添加到对应的数组：
+   这里是文章的正文内容，使用Markdown语法编写。
+
+   ## 二级标题
+
+   - 列表项1
+   - 列表项2
+
+   **粗体文本** 和 *斜体文本*
+
+   ```javascript
+   // 代码块
+   function hello() {
+       console.log("Hello, World!");
+   }
+   ```
+
+   [链接文本](https://example.com)
+   ```
+
+#### 步骤2：自动构建和部署
+
+1. **提交到GitHub**：
+   ```bash
+   git add .
+   git commit -m "添加新文章：文章标题"
+   git push origin main
+   ```
+
+2. **自动构建**：
+   - GitHub Actions会自动检测到新的.md文件
+   - 运行构建脚本将Markdown转换为HTML
+   - 自动更新文章数据和导航
+   - 部署到GitHub Pages
+
+3. **本地预览**（可选）：
+   ```bash
+   npm run build
+   ```
+
+#### ✨ 自动化特性
+
+- **自动HTML生成**：Markdown文件会自动转换为完整的HTML页面
+- **自动数据更新**：文章信息会自动添加到posts-data.js
+- **自动导航同步**：所有页面的导航和链接自动更新
+- **自动SEO优化**：根据front matter自动生成meta标签
+- **自动标签管理**：标签系统自动更新
+
+### 🔧 构建脚本说明
+
+项目包含以下构建相关文件：
+
+- **`build-posts.js`**：主要构建脚本，负责：
+  - 扫描posts目录中的所有.md文件
+  - 解析Markdown front matter和内容
+  - 将Markdown转换为HTML
+  - 生成完整的文章页面
+  - 自动更新posts-data.js文件
+
+- **`package.json`**：Node.js项目配置文件，包含：
+  - 构建脚本命令
+  - 项目元数据
+  - 依赖管理
+
+- **`.github/workflows/deploy.yml`**：GitHub Actions工作流，自动：
+  - 在每次push时触发构建
+  - 运行构建脚本处理Markdown文件
+  - 部署到GitHub Pages
+
+#### 本地构建命令
+
+```bash
+# 构建所有文章
+npm run build
+
+# 或直接运行构建脚本
+node build-posts.js
+```
+
+### 📋 传统流程（仍然支持）
+
+如果您更喜欢手动控制，仍然可以使用传统方式：
+
+#### 手动更新数据文件 (data/posts-data.js)
+
+在 `data/posts-data.js` 文件中，根据文章分类手动添加到对应的数组：
 
 **工作杂记文章**：
-在 `workNotesData` 数组中添加：
 ```javascript
 const workNotesData = [
     {
@@ -164,15 +208,12 @@ const workNotesData = [
 ];
 ```
 
-**技术文章**：
-在 `repoData` 数组中添加类似结构
+**技术文章**：在 `repoData` 数组中添加类似结构
+**日语学习文章**：在 `japaneseData` 数组中添加类似结构
 
-**日语学习文章**：
-在 `japaneseData` 数组中添加类似结构
+#### 自动同步说明
 
-#### 2.2 自动同步说明
-
-添加到 `data/posts-data.js` 后，系统会自动：
+无论使用哪种方式，系统都会自动：
 - 首页显示最新的10篇文章（跨所有分类，按时间排序）
 - 对应分类页面显示该分类的所有文章
 - 搜索和标签筛选功能自动包含新文章

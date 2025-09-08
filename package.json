@@ -1,0 +1,28 @@
+{
+  "name": "blog",
+  "version": "1.0.0",
+  "description": "Personal blog with automatic Markdown to HTML conversion",
+  "main": "build-posts.js",
+  "scripts": {
+    "build": "node build-posts.js",
+    "dev": "node build-posts.js && echo 'Build completed! Open index.html in your browser.'",
+    "clean": "echo 'Cleaning generated files...'"
+  },
+  "keywords": [
+    "blog",
+    "markdown",
+    "static-site",
+    "github-pages"
+  ],
+  "author": "C_Ciel",
+  "license": "MIT",
+  "engines": {
+    "node": ">=14.0.0"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/your-username/blog.git"
+  },
+  "devDependencies": {},
+  "dependencies": {}
+}
