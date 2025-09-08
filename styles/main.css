@@ -423,6 +423,255 @@ h2.post-title {
     font-size: 0.9em;
 }
 
+/* Code block container with language label */
+.post-content .code-block-container {
+    position: relative;
+    margin: 20px 0;
+}
+
+.post-content .code-block-container pre {
+    margin: 0;
+    padding-top: 40px;
+}
+
+.post-content .code-lang {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    background: #e9ecef;
+    color: #495057;
+    padding: 6px 12px;
+    font-size: 0.8em;
+    font-weight: 500;
+    border-radius: 8px 8px 0 0;
+    font-family: 'Courier New', monospace;
+    z-index: 1;
+    text-align: left;
+}
+
+/* Syntax highlighting for different languages - GitHub style */
+.post-content .language-javascript,
+.post-content .language-js {
+    color: #f1e05a;
+}
+
+.post-content .language-typescript,
+.post-content .language-ts {
+    color: #2b7489;
+}
+
+.post-content .language-python,
+.post-content .language-py {
+    color: #3572a5;
+}
+
+.post-content .language-java {
+    color: #b07219;
+}
+
+.post-content .language-c,
+.post-content .language-cpp,
+.post-content .language-cxx {
+    color: #f34b7d;
+}
+
+.post-content .language-csharp,
+.post-content .language-cs {
+    color: #239120;
+}
+
+.post-content .language-php {
+    color: #4f5d95;
+}
+
+.post-content .language-ruby,
+.post-content .language-rb {
+    color: #701516;
+}
+
+.post-content .language-go {
+    color: #00add8;
+}
+
+.post-content .language-rust,
+.post-content .language-rs {
+    color: #dea584;
+}
+
+.post-content .language-swift {
+    color: #ffac45;
+}
+
+.post-content .language-kotlin,
+.post-content .language-kt {
+    color: #f18e33;
+}
+
+.post-content .language-html,
+.post-content .language-xml {
+    color: #e34c26;
+}
+
+.post-content .language-css {
+    color: #563d7c;
+}
+
+.post-content .language-scss,
+.post-content .language-sass {
+    color: #c6538c;
+}
+
+.post-content .language-json {
+    color: #292929;
+}
+
+.post-content .language-yaml,
+.post-content .language-yml {
+    color: #cb171e;
+}
+
+.post-content .language-bash,
+.post-content .language-shell,
+.post-content .language-sh {
+    color: #89e051;
+}
+
+.post-content .language-powershell,
+.post-content .language-ps1 {
+    color: #012456;
+}
+
+.post-content .language-sql {
+    color: #e38c00;
+}
+
+.post-content .language-r {
+    color: #198ce7;
+}
+
+.post-content .language-matlab {
+    color: #e16737;
+}
+
+.post-content .language-dockerfile {
+    color: #384d54;
+}
+
+.post-content .language-markdown,
+.post-content .language-md {
+    color: #083fa1;
+}
+
+.post-content .language-vim {
+    color: #199f4b;
+}
+
+.post-content .language-lua {
+    color: #000080;
+}
+
+.post-content .language-perl {
+    color: #0298c3;
+}
+
+/* GitHub-style syntax highlighting within code blocks */
+.post-content pre code {
+    color: #24292e;
+    background: transparent;
+}
+
+/* Keywords */
+.post-content pre code .hljs-keyword,
+.post-content pre code .hljs-selector-tag,
+.post-content pre code .hljs-literal,
+.post-content pre code .hljs-doctag,
+.post-content pre code .hljs-title,
+.post-content pre code .hljs-section,
+.post-content pre code .hljs-type,
+.post-content pre code .hljs-name {
+    color: #d73a49;
+    font-weight: 600;
+}
+
+/* Strings */
+.post-content pre code .hljs-string,
+.post-content pre code .hljs-title.class_,
+.post-content pre code .hljs-title.class_.inherited__,
+.post-content pre code .hljs-title.function_ {
+    color: #032f62;
+}
+
+/* Comments */
+.post-content pre code .hljs-comment,
+.post-content pre code .hljs-quote {
+    color: #6a737d;
+    font-style: italic;
+}
+
+/* Numbers */
+.post-content pre code .hljs-number,
+.post-content pre code .hljs-regexp,
+.post-content pre code .hljs-literal {
+    color: #005cc5;
+}
+
+/* Functions */
+.post-content pre code .hljs-function,
+.post-content pre code .hljs-title.function_,
+.post-content pre code .hljs-params {
+    color: #6f42c1;
+}
+
+/* Variables */
+.post-content pre code .hljs-variable,
+.post-content pre code .hljs-template-variable,
+.post-content pre code .hljs-attr {
+    color: #e36209;
+}
+
+/* Attributes */
+.post-content pre code .hljs-attribute,
+.post-content pre code .hljs-attr {
+    color: #6f42c1;
+}
+
+/* Built-ins */
+.post-content pre code .hljs-built_in,
+.post-content pre code .hljs-builtin-name {
+    color: #005cc5;
+}
+
+/* Meta */
+.post-content pre code .hljs-meta,
+.post-content pre code .hljs-meta-keyword {
+    color: #6a737d;
+}
+
+/* Tags */
+.post-content pre code .hljs-tag {
+    color: #22863a;
+}
+
+/* Emphasis */
+.post-content pre code .hljs-emphasis {
+    font-style: italic;
+}
+
+.post-content pre code .hljs-strong {
+    font-weight: bold;
+}
+
+/* Deletion */
+.post-content pre code .hljs-deletion {
+    background: #ffeef0;
+}
+
+/* Addition */
+.post-content pre code .hljs-addition {
+    background: #f0fff4;
+}
+
 .post-content img {
     max-width: 100%;
     height: auto;

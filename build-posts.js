@@ -52,6 +52,16 @@ class MarkdownParser {
     markdownToHtml(markdown) {
         let html = markdown;
         
+        // 先处理代码块，保护其内容不被后续处理影响
+        const codeBlocks = [];
+        html = html.replace(/```(\w+)?\n([\s\S]*?)```/g, (match, lang, code) => {
+            const placeholder = `__CODE_BLOCK_${codeBlocks.length}__`;
+            const langClass = lang ? ` class="language-${lang}"` : '';
+            const langLabel = lang ? `<div class="code-lang">${lang}</div>` : '';
+            codeBlocks.push(`<div class="code-block-container">${langLabel}<pre><code${langClass}>${code.trim()}</code></pre></div>`);
+            return placeholder;
+        });
+        
         // 标题
         html = html.replace(/^### (.*$)/gim, '<h3>$1</h3>');
         html = html.replace(/^## (.*$)/gim, '<h2>$1</h2>');
@@ -60,8 +70,7 @@ class MarkdownParser {
         // 粗体
         html = html.replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>');
         
-        // 代码块
-        html = html.replace(/```([\s\S]*?)```/g, '<pre><code>$1</code></pre>');
+        // 行内代码
         html = html.replace(/`(.*?)`/g, '<code>$1</code>');
         
         // 链接
@@ -73,14 +82,20 @@ class MarkdownParser {
                 !paragraph.startsWith('<h') && 
                 !paragraph.startsWith('<pre') && 
                 !paragraph.startsWith('<ul') && 
-                !paragraph.startsWith('<ol')) {
+                !paragraph.startsWith('<ol') &&
+                !paragraph.includes('__CODE_BLOCK_')) {
                 return `<p>${paragraph.trim()}</p>`;
             }
             return paragraph;
         }).join('\n\n');
         
-        // 换行
+        // 换行（但不影响代码块占位符）
         html = html.replace(/\n/g, '<br>');
+        
+        // 恢复代码块
+        codeBlocks.forEach((block, index) => {
+            html = html.replace(`__CODE_BLOCK_${index}__`, block);
+        });
         
         return html;
     }
@@ -343,10 +358,6 @@ class HtmlGenerator {
                 <footer class="post-footer">
                     <div class="post-navigation">
                         <!-- 文章导航将在这里添加 -->
-                    </div>
-                    
-                    <div class="post-archive">
-                        <a href="${prefix}index.html" class="archive-link">📚 返回首页</a>
                     </div>
                 </footer>
             </article>
