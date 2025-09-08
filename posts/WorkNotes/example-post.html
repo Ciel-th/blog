@@ -13,7 +13,7 @@
     <meta property="og:title" content="示例文章：如何使用Markdown写博客">
     <meta property="og:description" content="这是一个示例文章，展示如何使用Markdown格式来创建博客文章。只需要创建.md文件并push到GitHub即可自动生成HTML页面。">
     <meta property="og:type" content="article">
-    <meta property="og:url" content="https://your-domain.com/posts/WorkNotes/example-post.html">
+    <meta property="og:url" content="https://ciel-th.github.io/blog/posts/WorkNotes/example-post.html">
     
     <!-- Twitter Card Meta Tags -->
     <meta name="twitter:card" content="summary_large_image">
@@ -37,39 +37,67 @@
     
     <!-- Vercel Analytics -->
     <script defer src="https://va.vercel-scripts.com/v1/script.js"></script>
+    
+    <!-- MathJax for LaTeX Support -->
+    <script>
+        MathJax = {
+            tex: {
+                inlineMath: [['$', '$'], ['\\(', '\\)']],
+                displayMath: [['$$', '$$'], ['\\[', '\\]']],
+                processEscapes: true,
+                processEnvironments: true
+            },
+            options: {
+                skipHtmlTags: ['script', 'noscript', 'style', 'textarea', 'pre']
+            }
+        };
+    </script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    
+    <!-- Mermaid for Diagrams -->
+    <script src="https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.min.js"></script>
+    <script>
+        mermaid.initialize({
+            startOnLoad: true,
+            theme: 'default',
+            securityLevel: 'loose',
+            fontFamily: 'LXGW WenKai, -apple-system, BlinkMacSystemFont, sans-serif'
+        });
+    </script>
 </head>
 <body>
-    <div class="blog-layout">
-        <!-- 导航栏 -->
-        <nav class="blog-nav">
-            <div class="nav-container">
-                <a href="../../index.html" class="nav-logo">電波圏外</a>
-                <div class="nav-links">
-                    <a href="../../index.html">首页</a>
-                    <a href="../../work-notes.html">工作杂记</a>
-                    <a href="../../repo.html">技术文章</a>
-                    <a href="../../japanese-learning.html">日语学习</a>
-                    <a href="../../about.html">关于</a>
-                </div>
+    <!-- Header -->
+    <header class="header">
+        <div class="container">
+            <div class="logo">
+                <a href="../../index.html">電波圏外</a>
             </div>
-        </nav>
-
-        <!-- 主要内容 -->
-        <main class="blog-content">
-            <article class="post-article">
-                <header class="post-header">
-                    <h1 class="post-title">示例文章：如何使用Markdown写博客</h1>
-                    <div class="post-meta">
-                        <time class="post-date">2025-01-27</time>
-                        <div class="post-tags">
-                            <span class="tag">示例</span>
-                            <span class="tag">Markdown</span>
-                            <span class="tag">博客</span>
-                        </div>
+            <nav class="nav">
+                <a href="../../index.html" class="nav-link">首页</a>
+                <a href="../../work-notes.html" class="nav-link">工作杂记</a>
+                <a href="../../repo.html" class="nav-link">repo</a>
+                <a href="../../japanese-learning.html" class="nav-link">日语学习记录</a>
+                <a href="../../about.html" class="nav-link">关于我</a>
+            </nav>
+        </div>
+    </header>
+    
+    <!-- Main Content -->
+    <main class="main">
+        <div class="container">
+            <article class="weekly">
+                <header class="weekly-header">
+                    <h1 class="weekly-title">示例文章：如何使用Markdown写博客</h1>
+                    <div class="weekly-meta">
+                        <time class="weekly-date" datetime="2025-01-27T00:00:00+08:00">2025-01-27</time>
+                    </div>
+                    
+                    <div class="weekly-excerpt">
+                        这是一个示例文章，展示如何使用Markdown格式来创建博客文章。只需要创建.md文件并push到GitHub即可自动生成HTML页面。
                     </div>
                 </header>
                 
-                <div class="post-content">
+                <div class="weekly-content">
                     <h1>欢迎使用Markdown写博客</h1>
 
                     <p>这是一个示例文章，展示了如何使用简单的Markdown格式来创建博客文章。</p>
@@ -80,9 +108,11 @@
 
                     <p>Markdown使用简单的语法来格式化文本：</p>
 
-                    <p>- <strong>粗体文本</strong>使用 <code>**文本**</code><br>
-                    - <em>斜体文本</em>使用 <code>*文本*</code><br>
-                    - <code>代码</code>使用反引号</p>
+                    <ul>
+                        <li><strong>粗体文本</strong>使用 <code>**文本**</code></li>
+                        <li><em>斜体文本</em>使用 <code>*文本*</code></li>
+                        <li><code>代码</code>使用反引号</li>
+                    </ul>
 
                     <h3>2. 代码块支持</h3>
 
@@ -96,11 +126,13 @@
 
                     <h2>工作流程</h2>
 
-                    <p>1. 在对应的分类文件夹中创建 <code>.md</code> 文件<br>
-                    2. 添加front matter（文章元数据）<br>
-                    3. 使用Markdown语法编写内容<br>
-                    4. Push到GitHub<br>
-                    5. 自动构建和部署</p>
+                    <ol>
+                        <li>在对应的分类文件夹中创建 <code>.md</code> 文件</li>
+                        <li>添加front matter（文章元数据）</li>
+                        <li>使用Markdown语法编写内容</li>
+                        <li>Push到GitHub</li>
+                        <li>自动构建和部署</li>
+                    </ol>
 
                     <h2>结论</h2>
 
@@ -110,38 +142,26 @@
 
                     <p><em>这篇文章展示了新的博客创建流程的强大功能。</em></p>
                 </div>
+                
+                <footer class="weekly-footer">
+                    <div class="weekly-navigation">
+                        <!-- 文章导航将在这里添加 -->
+                    </div>
+                    
+                    <div class="weekly-archive">
+                        <a href="../../index.html" class="archive-link">📚 返回首页</a>
+                    </div>
+                </footer>
             </article>
-        </main>
-
-        <!-- 页脚 -->
-        <footer class="blog-footer">
-            <p>&copy; 2025 C_Ciel. All rights reserved. | Powered by Jekyll & GitHub Pages</p>
-        </footer>
-    </div>
-
-    <!-- 返回顶部按钮 -->
-    <button id="back-to-top" class="back-to-top" onclick="scrollToTop()">
-        ↑
-    </button>
-
-    <script>
-        // 返回顶部功能
-        function scrollToTop() {
-            window.scrollTo({
-                top: 0,
-                behavior: 'smooth'
-            });
-        }
-
-        // 显示/隐藏返回顶部按钮
-        window.addEventListener('scroll', function() {
-            const backToTop = document.getElementById('back-to-top');
-            if (window.pageYOffset > 300) {
-                backToTop.style.display = 'block';
-            } else {
-                backToTop.style.display = 'none';
-            }
-        });
-    </script>
+        </div>
+    </main>
+    
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <p>&copy; 2025 電波圏外. All rights reserved.</p>
+            <p>Powered by <a href="https://github.com/" target="_blank">GitHub</a> & <a href="https://pages.github.com/" target="_blank">GitHub Pages</a></p>
+        </div>
+    </footer>
 </body>
 </html>

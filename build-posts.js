@@ -133,72 +133,93 @@ class HtmlGenerator {
     
     <!-- Vercel Analytics -->
     <script defer src="https://va.vercel-scripts.com/v1/script.js"></script>
+    
+    <!-- MathJax for LaTeX Support -->
+    <script>
+        MathJax = {
+            tex: {
+                inlineMath: [['$', '$'], ['\\(', '\\)']],
+                displayMath: [['$$', '$$'], ['\\[', '\\]']],
+                processEscapes: true,
+                processEnvironments: true
+            },
+            options: {
+                skipHtmlTags: ['script', 'noscript', 'style', 'textarea', 'pre']
+            }
+        };
+    </script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    
+    <!-- Mermaid for Diagrams -->
+    <script src="https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.min.js"></script>
+    <script>
+        mermaid.initialize({
+            startOnLoad: true,
+            theme: 'default',
+            securityLevel: 'loose',
+            fontFamily: 'LXGW WenKai, -apple-system, BlinkMacSystemFont, sans-serif'
+        });
+    </script>
 </head>
 <body>
-    <div class="blog-layout">
-        <!-- 导航栏 -->
-        <nav class="blog-nav">
-            <div class="nav-container">
-                <a href="{{homeLink}}" class="nav-logo">電波圏外</a>
-                <div class="nav-links">
-                    <a href="{{homeLink}}">首页</a>
-                    <a href="{{workNotesLink}}">工作杂记</a>
-                    <a href="{{repoLink}}">技术文章</a>
-                    <a href="{{japaneseLink}}">日语学习</a>
-                    <a href="{{aboutLink}}">关于</a>
-                </div>
+    <!-- Header -->
+    <header class="header">
+        <div class="container">
+            <div class="logo">
+                <a href="{{homeLink}}">電波圏外</a>
             </div>
-        </nav>
-
-        <!-- 主要内容 -->
-        <main class="blog-content">
-            <article class="post-article">
-                <header class="post-header">
-                    <h1 class="post-title">{{title}}</h1>
-                    <div class="post-meta">
-                        <time class="post-date">{{date}}</time>
-                        <div class="post-tags">
-                            {{tags}}
-                        </div>
+            <nav class="nav">
+                <a href="{{homeLink}}" class="nav-link">首页</a>
+                <a href="{{workNotesLink}}" class="nav-link">工作杂记</a>
+                <a href="{{repoLink}}" class="nav-link">repo</a>
+                <a href="{{japaneseLink}}" class="nav-link">日语学习记录</a>
+                <a href="{{aboutLink}}" class="nav-link">关于我</a>
+            </nav>
+        </div>
+    </header>
+    
+    <!-- Main Content -->
+    <main class="main">
+        <div class="container">
+            <article class="weekly">
+                <header class="weekly-header">
+                    <h1 class="weekly-title">{{title}}</h1>
+                    <div class="weekly-meta">
+                        <time class="weekly-date" datetime="{{date}}">{{displayDate}}</time>
+                        {{#tags}}
+                        <span class="weekly-tag">{{.}}</span>
+                        {{/tags}}
+                    </div>
+                    
+                    <div class="weekly-excerpt">
+                        {{excerpt}}
                     </div>
                 </header>
                 
-                <div class="post-content">
+                <div class="weekly-content">
                     {{content}}
                 </div>
+                
+                <footer class="weekly-footer">
+                    <div class="weekly-navigation">
+                        <!-- 文章导航将在这里添加 -->
+                    </div>
+                    
+                    <div class="weekly-archive">
+                        <a href="{{homeLink}}" class="archive-link">📚 返回首页</a>
+                    </div>
+                </footer>
             </article>
-        </main>
-
-        <!-- 页脚 -->
-        <footer class="blog-footer">
-            <p>&copy; 2025 C_Ciel. All rights reserved. | Powered by Jekyll & GitHub Pages</p>
-        </footer>
-    </div>
-
-    <!-- 返回顶部按钮 -->
-    <button id="back-to-top" class="back-to-top" onclick="scrollToTop()">
-        ↑
-    </button>
-
-    <script>
-        // 返回顶部功能
-        function scrollToTop() {
-            window.scrollTo({
-                top: 0,
-                behavior: 'smooth'
-            });
-        }
-
-        // 显示/隐藏返回顶部按钮
-        window.addEventListener('scroll', function() {
-            const backToTop = document.getElementById('back-to-top');
-            if (window.pageYOffset > 300) {
-                backToTop.style.display = 'block';
-            } else {
-                backToTop.style.display = 'none';
-            }
-        });
-    </script>
+        </div>
+    </main>
+    
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <p>&copy; 2025 電波圏外. All rights reserved.</p>
+            <p>Powered by <a href="https://github.com/" target="_blank">GitHub</a> & <a href="https://pages.github.com/" target="_blank">GitHub Pages</a></p>
+        </div>
+    </footer>
 </body>
 </html>`;
     }
@@ -207,31 +228,135 @@ class HtmlGenerator {
         const depth = (relativePath.match(/\//g) || []).length;
         const prefix = '../'.repeat(depth);
         
-        let html = this.template;
-        
-        // 替换模板变量
-        html = html.replace(/{{title}}/g, metadata.title || 'Untitled');
-        html = html.replace(/{{excerpt}}/g, metadata.excerpt || metadata.description || '');
-        html = html.replace(/{{date}}/g, metadata.date || new Date().toISOString().split('T')[0]);
-        html = html.replace(/{{content}}/g, content);
-        html = html.replace(/{{url}}/g, relativePath);
-        
-        // 生成标签HTML
-        const tags = metadata.tags || [];
-        const tagsHtml = tags.map(tag => `<span class="tag">${tag}</span>`).join('');
-        html = html.replace(/{{tags}}/g, tagsHtml);
-        
-        // 设置路径
-        html = html.replace(/{{fontPath}}/g, `${prefix}fonts/LXGWWenKai-Regular.ttf`);
-        html = html.replace(/{{cssPath}}/g, `${prefix}styles/main.css`);
-        html = html.replace(/{{fontCssPath}}/g, `${prefix}fonts/wenkai.css`);
-        html = html.replace(/{{homeLink}}/g, `${prefix}index.html`);
-        html = html.replace(/{{workNotesLink}}/g, `${prefix}work-notes.html`);
-        html = html.replace(/{{repoLink}}/g, `${prefix}repo.html`);
-        html = html.replace(/{{japaneseLink}}/g, `${prefix}japanese-learning.html`);
-        html = html.replace(/{{aboutLink}}/g, `${prefix}about.html`);
-        
-        return html;
+        return `<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>${metadata.title || 'Untitled'} - 電波圏外</title>
+    
+    <!-- SEO Meta Tags -->
+    <meta name="description" content="${metadata.excerpt || metadata.description || ''}">
+    <meta name="author" content="C_Ciel">
+    
+    <!-- Open Graph Meta Tags -->
+    <meta property="og:title" content="${metadata.title || 'Untitled'}">
+    <meta property="og:description" content="${metadata.excerpt || metadata.description || ''}">
+    <meta property="og:type" content="article">
+    <meta property="og:url" content="https://ciel-th.github.io/blog/${relativePath}">
+    
+    <!-- Twitter Card Meta Tags -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="${metadata.title || 'Untitled'}">
+    <meta name="twitter:description" content="${metadata.excerpt || metadata.description || ''}">
+    
+    <!-- Performance Optimizations -->
+    <link rel="dns-prefetch" href="//polyfill.io">
+    <link rel="dns-prefetch" href="//cdn.jsdelivr.net">
+    <link rel="preconnect" href="https://polyfill.io" crossorigin>
+    <link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
+    <link rel="preload" href="${prefix}fonts/LXGWWenKai-Regular.ttf" as="font" type="font/ttf" crossorigin>
+    <link rel="preload" href="${prefix}styles/main.css" as="style">
+    
+    <!-- Stylesheets -->
+    <link rel="stylesheet" href="${prefix}styles/main.css">
+    <link rel="stylesheet" href="${prefix}fonts/wenkai.css">
+    
+    <!-- Favicon -->
+    <link rel="icon" type="image/x-icon" href="/favicon.ico">
+    
+    <!-- Vercel Analytics -->
+    <script defer src="https://va.vercel-scripts.com/v1/script.js"></script>
+    
+    <!-- MathJax for LaTeX Support -->
+    <script>
+        MathJax = {
+            tex: {
+                inlineMath: [['$', '$'], ['\\(', '\\)']],
+                displayMath: [['$$', '$$'], ['\\[', '\\]']],
+                processEscapes: true,
+                processEnvironments: true
+            },
+            options: {
+                skipHtmlTags: ['script', 'noscript', 'style', 'textarea', 'pre']
+            }
+        };
+    </script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    
+    <!-- Mermaid for Diagrams -->
+    <script src="https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.min.js"></script>
+    <script>
+        mermaid.initialize({
+            startOnLoad: true,
+            theme: 'default',
+            securityLevel: 'loose',
+            fontFamily: 'LXGW WenKai, -apple-system, BlinkMacSystemFont, sans-serif'
+        });
+    </script>
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <div class="container">
+            <div class="logo">
+                <a href="${prefix}index.html">電波圏外</a>
+            </div>
+            <nav class="nav">
+                <a href="${prefix}index.html" class="nav-link">首页</a>
+                <a href="${prefix}work-notes.html" class="nav-link">工作杂记</a>
+                <a href="${prefix}repo.html" class="nav-link">repo</a>
+                <a href="${prefix}japanese-learning.html" class="nav-link">日语学习记录</a>
+                <a href="${prefix}about.html" class="nav-link">关于我</a>
+            </nav>
+        </div>
+    </header>
+    
+    <!-- Main Content -->
+    <main class="main">
+        <div class="container">
+            <article class="weekly">
+                <header class="weekly-header">
+                    <h1 class="weekly-title">${metadata.title || 'Untitled'}</h1>
+                    <div class="weekly-meta">
+                        <time class="weekly-date" datetime="${metadata.date || new Date().toISOString().split('T')[0]}T00:00:00+08:00">${metadata.date || new Date().toISOString().split('T')[0]}</time>
+                    </div>
+                    
+                    <div class="weekly-excerpt">
+                        ${metadata.excerpt || metadata.description || ''}
+                    </div>
+                </header>
+                
+                ${metadata.cover ? `<div class="weekly-cover">
+                    <img src="${prefix}${metadata.cover}" alt="${metadata.title || 'Untitled'} 封面" class="cover-image">
+                </div>` : ''}
+                
+                <div class="weekly-content">
+                    ${content}
+                </div>
+                
+                <footer class="weekly-footer">
+                    <div class="weekly-navigation">
+                        <!-- 文章导航将在这里添加 -->
+                    </div>
+                    
+                    <div class="weekly-archive">
+                        <a href="${prefix}index.html" class="archive-link">📚 返回首页</a>
+                    </div>
+                </footer>
+            </article>
+        </div>
+    </main>
+    
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <p>&copy; 2025 電波圏外. All rights reserved.</p>
+            <p>Powered by <a href="https://github.com/" target="_blank">GitHub</a> & <a href="https://pages.github.com/" target="_blank">GitHub Pages</a></p>
+        </div>
+    </footer>
+</body>
+</html>`;
     }
 }
 

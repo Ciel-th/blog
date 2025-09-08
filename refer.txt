@@ -1,0 +1,346 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>第1期 - 新的开始 - 我本平凡</title>
+    
+    <!-- SEO Meta Tags -->
+    <meta name="description" content="这是第一期周刊，纪念下周刊第一期和今天的所见">
+    <meta name="author" content="Pingfan">
+    
+    <!-- Open Graph Meta Tags -->
+    <meta property="og:title" content="第1期 - 新的开始">
+    <meta property="og:description" content="这是第一期周刊，纪念下周刊第一期和今天的所见">
+    <meta property="og:type" content="article">
+    <meta property="og:url" content="https://pingfan-website-ftqc.vercel.app/weekly/weekly-001/">
+    
+    <meta property="og:image" content="https://pingfan-website-ftqc.vercel.app/assets/images/weekly/weekly-001-cover.jpeg">
+    
+    
+    <!-- Twitter Card Meta Tags -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="第1期 - 新的开始">
+    <meta name="twitter:description" content="这是第一期周刊，纪念下周刊第一期和今天的所见">
+    
+    <meta name="twitter:image" content="https://pingfan-website-ftqc.vercel.app/assets/images/weekly/weekly-001-cover.jpeg">
+    
+    
+    <!-- Performance Optimizations -->
+    <link rel="dns-prefetch" href="//polyfill.io">
+    <link rel="dns-prefetch" href="//cdn.jsdelivr.net">
+    <link rel="preconnect" href="https://polyfill.io" crossorigin>
+    <link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
+    <link rel="preload" href="/fonts/LXGWWenKai-Regular.ttf" as="font" type="font/ttf" crossorigin>
+    <link rel="preload" href="/styles/main.css" as="style">
+    
+    <!-- Stylesheets -->
+    <link rel="stylesheet" href="/styles/main.css">
+    <link rel="stylesheet" href="/fonts/wenkai.css">
+    
+    <!-- Favicon -->
+    <link rel="icon" type="image/x-icon" href="/favicon.ico">
+    
+    <!-- Vercel Analytics -->
+    <script defer src="https://va.vercel-scripts.com/v1/script.js"></script>
+    
+    <!-- 只在需要时加载外部资源 -->
+    
+        <!-- MathJax for LaTeX Support -->
+        <script>
+            MathJax = {
+                tex: {
+                    inlineMath: [['$', '$'], ['\\(', '\\)']],
+                    displayMath: [['$$', '$$'], ['\\[', '\\]']],
+                    processEscapes: true,
+                    processEnvironments: true
+                },
+                options: {
+                    skipHtmlTags: ['script', 'noscript', 'style', 'textarea', 'pre']
+                }
+            };
+        </script>
+        <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+        
+        <!-- Mermaid for Diagrams -->
+        <script src="https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.min.js"></script>
+        <script>
+            mermaid.initialize({
+                startOnLoad: true,
+                theme: 'default',
+                securityLevel: 'loose',
+                fontFamily: 'LXGW WenKai, -apple-system, BlinkMacSystemFont, sans-serif'
+            });
+        </script>
+    
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <div class="container">
+            <div class="logo">
+                <a href="/">我本平凡</a>
+            </div>
+            <nav class="nav">
+                <a href="/" class="nav-link">首页</a>
+                <a href="/weekly/" class="nav-link">周刊</a>
+                <a href="/about/" class="nav-link">关于</a>
+                <a href="/links/" class="nav-link">找到我</a>
+                <a href="/feed.xml" class="nav-link rss-link" target="_blank">RSS</a>
+            </nav>
+        </div>
+    </header>
+    
+    <!-- Main Content -->
+    <main class="main">
+        <div class="container">
+            <article class="weekly">
+    <header class="weekly-header">
+        <h1 class="weekly-title">第1期 - 新的开始</h1>
+        <div class="weekly-meta">
+            <time class="weekly-date" datetime="2025-08-25T00:00:00+08:00">2025年08月25日</time>
+        </div>
+        
+        <div class="weekly-excerpt">
+            这是第一期周刊，纪念下周刊第一期和今天的所见
+        </div>
+        
+    </header>
+    
+    
+    <div class="weekly-cover">
+        <img src="/assets/images/weekly/weekly-001-cover.jpeg" alt="第1期 - 新的开始 封面" class="cover-image">
+    </div>
+    
+    
+    <div class="weekly-content">
+        <h1 id="第1期---新的开始">第1期 - 新的开始</h1>
+
+<p>封面图拍摄于今天下午，气温25左右，属于是这段时间内最热的一天了，骑车到附近的一个小山包。</p>
+
+<h2 id="技术栈">技术栈</h2>
+
+<p>这套技术栈成本可以是0，唯一需要花钱的就是域名了，第一年一般10刀以内，往后会贵一些。</p>
+
+<h3 id="工具">工具</h3>
+
+<ul>
+  <li>Trae：第一个月会员3刀，到期可以换个账号，里面的Claude-4-sonnet真的让人割舍不了。</li>
+  <li>Google Gemini CLI：免费里面最好用的了。</li>
+</ul>
+
+<h3 id="核心框架">核心框架</h3>
+<ul>
+  <li>Jekyll 4.x ：静态网站生成器，基于 Ruby</li>
+  <li>GitHub Pages ：通过 github-pages gem 集成，版本 ~228
+    <h3 id="内容处理">内容处理</h3>
+  </li>
+  <li>Kramdown ：Markdown 解析器，支持 GitHub Flavored Markdown (GFM)</li>
+  <li>Rouge ：代码语法高亮</li>
+  <li>MathJax ：数学公式渲染</li>
+  <li>Mermaid ：图表和流程图支持
+    <h3 id="jekyll-插件">Jekyll 插件</h3>
+  </li>
+  <li>jekyll-feed ：RSS 订阅功能</li>
+  <li>jekyll-sitemap ：自动生成站点地图</li>
+  <li>jekyll-seo-tag ：SEO 优化标签
+    <h3 id="前端技术">前端技术</h3>
+  </li>
+  <li>原生 JavaScript ：用于博客交互功能（分页、搜索、标签过滤等）</li>
+  <li>CSS3 ：样式设计，包括渐变背景和响应式布局</li>
+  <li>SCSS ：CSS 预处理器（通过 Jekyll 处理）
+    <h3 id="字体和资源">字体和资源</h3>
+  </li>
+  <li>LXGW WenKai 字体 ：中文显示字体</li>
+  <li>Font-display: swap ：优化字体加载性能
+    <h3 id="部署平台">部署平台</h3>
+  </li>
+  <li>GitHub Pages ：主要部署平台，通过 GitHub Actions 自动部署</li>
+  <li>Vercel ：备用部署平台，支持自定义域名 pingfan.me
+    <h3 id="分析工具">分析工具</h3>
+  </li>
+  <li>Vercel Analytics ：网站访问统计
+    <h3 id="性能优化">性能优化</h3>
+  </li>
+  <li>DNS 预解析和预连接（针对 CDN 资源）</li>
+  <li>资源预加载（字体、CSS）</li>
+  <li>响应式图片和布局</li>
+</ul>
+
+<h2 id="所见">所见</h2>
+
+<p>骑车一路上了山顶，休息的时候突然发现椅子上有字，发现是一条狗子。</p>
+
+<p>缅怀家人的这种椅子特别多，但这是第一次见缅怀狗子的。</p>
+
+<div style="text-align: center; margin: 20px 0;">
+<img src="/assets/images/weekly/weekly1.1.jpeg" alt="dog" style="max-width: 100%; height: auto; width: 600px; border-radius: 8px; box-shadow: 0 4px 8px rgba(0,0,0,0.1);" />
+</div>
+
+<p>愈发觉得自己这辈子养不上狗了。</p>
+
+<!-- ### 技术相关
+
+**AI 工具探索**
+
+这周深度体验了几个新的 AI 工具：
+
+- **Claude 3.5 Sonnet**：在代码理解和生成方面表现出色，特别是处理复杂逻辑时
+- **Cursor**：作为 IDE 的集成体验很好，实时补全很流畅
+- **Perplexity**：用来做研究和信息收集，比传统搜索引擎效率高很多
+
+**语言学习**
+
+继续推进德语学习：
+- 完成了 Duolingo 的第三个单元
+- 开始尝试看德语新闻，虽然还是很吃力
+- 发现了一个不错的播客："Slow German"，语速适中，很适合初学者
+
+### 读书笔记
+
+**《Deep Work》- Cal Newport**
+
+重读了这本关于深度工作的经典著作，有几个新的感悟：
+
+1. **环境的重要性**：创造一个专门用于深度工作的环境
+2. **仪式感**：建立固定的开始和结束仪式
+3. **社交媒体的危害**：需要更严格地控制使用时间
+
+计划下周开始实践书中的一些方法。
+
+## 工具推荐
+
+### Raycast
+
+这周发现了 Raycast 这个 macOS 效率工具，用来替代 Spotlight：
+
+- 启动应用更快
+- 支持各种插件扩展
+- 计算器、翻译等功能很实用
+- 界面设计很漂亮
+
+强烈推荐给 Mac 用户。
+
+### Notion Calendar
+
+ Notion 推出的日历应用，体验很不错：
+
+- 界面简洁美观
+- 与 Notion 数据库集成
+- 支持多日历同步
+- 会议链接管理很方便
+
+## 生活随想
+
+### 关于时间管理
+
+这周在思考时间管理的问题。发现自己经常陷入"忙碌陷阱"——看起来很忙，但实际产出不高。
+
+尝试了番茄工作法，效果还不错：
+- 25分钟专注工作
+- 5分钟休息
+- 每4个番茄休息15-30分钟
+
+关键是要真正做到专注，不被手机和其他干扰打断。
+
+### 海外生活感悟
+
+在海外生活快一年了，最大的感受是**适应性**的重要性。
+
+无论是语言、文化还是生活习惯，都需要保持开放的心态去学习和适应。有时候觉得困难，但回头看都是成长。
+
+## 本周发现
+
+### 有趣的网站
+
+- **[Hacker News](https://news.ycombinator.com/)**：技术圈的热门讨论
+- **[Product Hunt](https://www.producthunt.com/)**：发现新产品的好地方
+- **[Indie Hackers](https://www.indiehackers.com/)**：独立开发者社区
+
+### 播客推荐
+
+- **"The Tim Ferriss Show"**：采访各行业顶尖人士
+- **"Lex Fridman Podcast"**：深度技术和哲学讨论
+- **"How I Built This"**：创业故事分享
+
+## 下周计划
+
+1. **学习**：完成 React 新特性的学习
+2. **写作**：完成关于 AI 编程工具的文章
+3. **运动**：恢复每周3次的跑步计划
+4. **社交**：参加当地的技术聚会 -->
+
+<h2 id="结语">结语</h2>
+
+<p>第一期周刊就到这里。希望通过这种方式记录自己的学习和生活，也希望能给读者带来一些有用的信息。</p>
+
+<p>如果你有什么想法或建议，欢迎通过邮件或社交媒体联系我。</p>
+
+    </div>
+    
+    <footer class="weekly-footer">
+        <div class="weekly-navigation">
+            
+            
+            
+            
+            
+            
+            
+            
+            
+        </div>
+        
+        <div class="weekly-archive">
+            <a href="/weekly/" class="archive-link">📚 查看所有周刊</a>
+        </div>
+        
+
+        <div class="weekly-subscribe">
+            <div class="subscribe-box">
+                <h4>📮 订阅周刊</h4>
+                <p>通过 RSS 订阅，第一时间获取最新周刊内容</p>
+                <a href="/feed.xml" class="subscribe-button" target="_blank">
+                    🔗 RSS 订阅
+                </a>
+            </div>
+        </div>
+    </footer>
+</article>
+
+
+
+<!-- Recent Weeklies -->
+
+
+
+<script>
+function copyToClipboard(text) {
+    navigator.clipboard.writeText(text).then(function() {
+        alert('链接已复制到剪贴板！');
+    }, function(err) {
+        console.error('复制失败: ', err);
+    });
+}
+
+// 初始化代码复制按钮
+document.addEventListener('DOMContentLoaded', function() {
+    setTimeout(function() {
+        if (typeof window.initCodeCopyButtons === 'function') {
+            window.initCodeCopyButtons();
+        }
+    }, 100);
+});
+</script>
+        </div>
+    </main>
+    
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <p>&copy; 2025 Pingfan. All rights reserved.</p>
+            <p>Powered by <a href="https://jekyllrb.com/" target="_blank">Jekyll</a> & <a href="https://pages.github.com/" target="_blank">GitHub Pages</a></p>
+        </div>
+    </footer>
+</body>
+</html>
