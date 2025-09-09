@@ -1,7 +1,7 @@
 ---
 title: "202508 本家NEI repo part 1"
 date: "2025-08-02"
-excerpt: "20250802-20250803，Kアリーナ横浜,THE IDOLM@STER, NEVER END IDOL"
+excerpt: "20250802-20250803，Kアリーナ横浜，THE IDOLM@STER，NEVER END IDOL"
 tags: [ "アイマス", "765プロ","repo"]
 cover: "images/repo/nei/NEI_title.jpg"
 ---

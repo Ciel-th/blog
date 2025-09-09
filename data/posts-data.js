@@ -43,7 +43,7 @@ const repoData = [
     {
         "title": "202508 本家NEI repo part 1",
         "date": "2025-08-02",
-        "excerpt": "20250802-20250803，Kアリーナ横浜,THE IDOLM@STER, NEVER END IDOL",
+        "excerpt": "20250802-20250803，Kアリーナ横浜，THE IDOLM@STER，NEVER END IDOL",
         "url": "posts/repo/NEI/NEI_1.html",
         "tags": [
             "アイマス",
