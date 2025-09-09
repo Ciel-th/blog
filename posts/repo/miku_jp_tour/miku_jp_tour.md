@@ -1,12 +1,12 @@
 ---
-title: "202505 初音ミク　JAPAN LIVE TOUR ~BLOOMING~ repo"
+title: "202505 初音ミク JAPAN LIVE TOUR ~BLOOMING~ repo"
 date: "2025-09-08"
 excerpt: "20250502-20250503，ZEPP HANEDA，初音ミク，JAPAN LIVE TOUR ~BLOOMING~"
 tags: [ "初音ミク", "repo"]
 cover: "images/WorkNotes/202509_02/1st_blog_title.jpg"
 ---
 
-# 202505 初音ミク　JAPAN LIVE TOUR ~BLOOMING~ repo
+# 202505 初音ミク JAPAN LIVE TOUR ~BLOOMING~ repo
 > **写在正文之前**  
 >
 > 其实本来没想写的，但正好博客更新，想着充实一下博客内容，遂着手写日巡repo，说实话这次日巡的选曲质量和场内气氛都相当优秀，大概是能让我记住一辈子的程度吧。  

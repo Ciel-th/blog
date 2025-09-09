@@ -52,6 +52,9 @@ class MarkdownParser {
     markdownToHtml(markdown) {
         let html = markdown;
         
+        // 保护波浪号，防止被删除线处理误处理
+        html = html.replace(/~/g, '&#126;');
+        
         // 先处理代码块，保护其内容不被后续处理影响
         const codeBlocks = [];
         html = html.replace(/```(\w+)?\n([\s\S]*?)```/g, (match, lang, code) => {
@@ -181,8 +184,48 @@ class MarkdownParser {
             return '<ol>' + items + '</ol>';
         });
         
-        // 引用
-        html = html.replace(/^>\s+(.+)$/gm, '<blockquote>$1</blockquote>');
+        // 引用（处理连续的引用行）
+        // 先标记所有引用行，保留空行
+        html = html.replace(/^>(.*)$/gm, function(match, content) {
+            if (content.trim() === '') {
+                return '<quote-line></quote-line>';
+            } else {
+                return '<quote-line>' + content.trim() + '</quote-line>';
+            }
+        });
+        
+        // 将连续的引用行（包括中间的空行）合并为一个blockquote
+        html = html.replace(/(<quote-line>[\s\S]*?<\/quote-line>(?:\s*<quote-line>[\s\S]*?<\/quote-line>)*)/g, function(match) {
+            // 提取所有引用内容并合并
+            let content = match.replace(/<quote-line>/g, '').replace(/<\/quote-line>/g, '\n')
+                .replace(/^\s*>\s*/gm, '') // 移除残留的引用符号
+                .replace(/\n\s*\n/g, '\n\n') // 保持空行
+                .trim();
+            
+            // 处理段落：将空行转换为段落分隔
+            const lines = content.split('\n');
+            const paragraphs = [];
+            let currentParagraph = [];
+            
+            for (const line of lines) {
+                if (line.trim() === '') {
+                    if (currentParagraph.length > 0) {
+                        paragraphs.push(currentParagraph.join('  <br>'));
+                        currentParagraph = [];
+                    }
+                } else {
+                    currentParagraph.push(line);
+                }
+            }
+            
+            if (currentParagraph.length > 0) {
+                paragraphs.push(currentParagraph.join('  <br>'));
+            }
+            
+            const formattedContent = paragraphs.join('<br><br>');
+            
+            return '<blockquote>' + formattedContent + '</blockquote>';
+        });
         
         // 水平分割线
         html = html.replace(/^---$/gm, '<hr>');
