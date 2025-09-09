@@ -24,6 +24,17 @@ const workNotesData = [
             "博客"
         ],
         "cover": "images/WorkNotes/202509_02/1st_blog_title.jpg"
+    },
+    {
+        "title": "Markdown语法测试",
+        "date": "2024-01-15",
+        "excerpt": "测试所有支持的Markdown语法效果",
+        "url": "posts/WorkNotes/test/markdown-syntax-test.html",
+        "tags": [
+            "测试",
+            "Markdown"
+        ],
+        "cover": ""
     }
 ];
 

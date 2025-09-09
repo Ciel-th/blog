@@ -7,7 +7,7 @@ cover: "images/WorkNotes/202509_02/1st_blog_title.jpg"
 ---
 
 # 欢迎使用Markdown写博客
-先介绍技术栈。
+先介绍技术栈。~~这是一个删除线测试~~
 ## 技术栈
 - `HTML5` - 页面结构
 - `CSS3` - 样式和布局（支持响应式设计）

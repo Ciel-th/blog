@@ -102,24 +102,73 @@ class MarkdownParser {
         html = html.replace(/^## (.*$)/gim, '<h2>$1</h2>');
         html = html.replace(/^# (.*$)/gim, '<h1>$1</h1>');
         
-        // 粗体
-        html = html.replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>');
+        // 删除线（需要在粗体和斜体之前处理）
+        html = html.replace(/~~(.*?)~~/g, '<del>$1</del>');
         
-        // 斜体
-        html = html.replace(/\*(.*?)\*/g, '<em>$1</em>');
+        // 粗体（支持**和__两种语法）
+        html = html.replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>');
+        html = html.replace(/__(.*?)__/g, '<strong>$1</strong>');
+        
+        // 斜体（支持*和_两种语法，但要避免与粗体冲突）
+        html = html.replace(/(?<!\*)\*([^\*]+?)\*(?!\*)/g, '<em>$1</em>');
+        html = html.replace(/(?<!_)_([^_]+?)_(?!_)/g, '<em>$1</em>');
+        
+        // 高亮文本
+        html = html.replace(/==(.*?)==/g, '<mark>$1</mark>');
+        
+        // 上标和下标
+        html = html.replace(/\^(.*?)\^/g, '<sup>$1</sup>');
+        html = html.replace(/~(.*?)~/g, '<sub>$1</sub>');
         
         // 行内代码
         html = html.replace(/`(.*?)`/g, '<code>$1</code>');
         
+        // 键盘按键
+        html = html.replace(/\[\[([^\]]+)\]\]/g, '<kbd>$1</kbd>');
+        
+        // 脚注定义（在文档末尾，需要在脚注引用之前处理）
+        html = html.replace(/^\[\^([^\]]+)\]:\s*(.+)$/gm, '<div class="footnote" id="fn-$1"><sup>$1</sup> $2 <a href="#fnref-$1">↩</a></div>');
+        
+        // 脚注引用
+        html = html.replace(/\[\^([^\]]+)\]/g, '<sup><a href="#fn-$1" id="fnref-$1">$1</a></sup>');
+        
         // 链接
         html = html.replace(/\[([^\]]+)\]\(([^\)]+)\)/g, '<a href="$2">$1</a>');
         
-        // 处理列表（先标记类型，避免冲突）
-        // 无序列表
-        html = html.replace(/^\s*[-\*\+]\s+(.+)$/gm, '<ul-li>$1</ul-li>');
+        // 任务列表（在普通列表之前处理）
+        html = html.replace(/^\s*[-\*\+]\s+\[([x\s])\]\s+(.+)$/gm, function(match, checked, content) {
+            const isChecked = checked.toLowerCase() === 'x';
+            const checkedAttr = isChecked ? ' checked' : '';
+            const preservedContent = content.replace(/  +/g, function(spaces) {
+                return '&nbsp;'.repeat(spaces.length);
+            });
+            return `<task-li class="task-list-item"><input type="checkbox" disabled${checkedAttr}> ${preservedContent}</task-li>`;
+        });
         
-        // 有序列表
-        html = html.replace(/^\s*\d+\.\s+(.+)$/gm, '<ol-li>$1</ol-li>');
+        // 将任务列表项包装在ul中
+        html = html.replace(/(<task-li[\s\S]*?<\/task-li>)/g, function(match) {
+            const items = match.replace(/<task-li/g, '<li').replace(/<\/task-li>/g, '</li>');
+            return '<ul class="task-list">' + items + '</ul>';
+        });
+        
+        // 处理列表（先标记类型，避免冲突）
+        // 无序列表 - 保留空格对齐
+        html = html.replace(/^\s*[-\*\+]\s+(.+)$/gm, function(match, content) {
+            // 将多个连续空格转换为&nbsp;以保持对齐
+            const preservedContent = content.replace(/  +/g, function(spaces) {
+                return '&nbsp;'.repeat(spaces.length);
+            });
+            return '<ul-li>' + preservedContent + '</ul-li>';
+        });
+        
+        // 有序列表 - 保留空格对齐
+        html = html.replace(/^\s*\d+\.\s+(.+)$/gm, function(match, content) {
+            // 将多个连续空格转换为&nbsp;以保持对齐
+            const preservedContent = content.replace(/  +/g, function(spaces) {
+                return '&nbsp;'.repeat(spaces.length);
+            });
+            return '<ol-li>' + preservedContent + '</ol-li>';
+        });
         
         // 转换为最终HTML
         html = html.replace(/(<ul-li>.*<\/ul-li>)/s, function(match) {
@@ -701,6 +750,91 @@ class HtmlGenerator {
             .article-container {
                 max-width: 100%;
             }
+        }
+        
+        /* 新增Markdown语法样式 */
+        /* 删除线 */
+        del {
+            text-decoration: line-through;
+            color: #888;
+            opacity: 0.8;
+        }
+        
+        /* 高亮文本 */
+        mark {
+            background-color: #fff3cd;
+            color: #856404;
+            padding: 2px 4px;
+            border-radius: 3px;
+        }
+        
+        /* 上标和下标 */
+        sup {
+            vertical-align: super;
+            font-size: 0.75em;
+            line-height: 0;
+        }
+        
+        sub {
+            vertical-align: sub;
+            font-size: 0.75em;
+            line-height: 0;
+        }
+        
+        /* 键盘按键 */
+        kbd {
+            background-color: #f8f9fa;
+            border: 1px solid #dee2e6;
+            border-radius: 3px;
+            box-shadow: 0 1px 0 rgba(0,0,0,0.2), inset 0 0 0 2px #fff;
+            color: #495057;
+            display: inline-block;
+            font-family: 'SFMono-Regular', Consolas, 'Liberation Mono', Menlo, monospace;
+            font-size: 0.875em;
+            font-weight: 700;
+            line-height: 1;
+            padding: 2px 4px;
+            white-space: nowrap;
+        }
+        
+        /* 任务列表 */
+        .task-list {
+            list-style: none;
+            padding-left: 0;
+        }
+        
+        .task-list-item {
+            list-style: none;
+            position: relative;
+            margin: 4px 0;
+        }
+        
+        .task-list-item input[type="checkbox"] {
+            margin-right: 8px;
+            cursor: default;
+        }
+        
+        /* 脚注 */
+        .footnote {
+            font-size: 0.9em;
+            color: #666;
+            border-top: 1px solid #eee;
+            padding-top: 8px;
+            margin-top: 16px;
+        }
+        
+        .footnote sup {
+            color: #0066cc;
+            font-weight: bold;
+        }
+        
+        .footnote a {
+            color: #0066cc;
+            text-decoration: none;
+        }
+        
+        .footnote a:hover {
+            text-decoration: underline;
         }
     </style>
     
