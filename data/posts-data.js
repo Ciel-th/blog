@@ -30,6 +30,17 @@ const workNotesData = [
 // 技术文章数据
 const repoData = [
     {
+        "title": "202505 初音ミク　JAPAN LIVE TOUR ~BLOOMING~ repo",
+        "date": "2025-09-08",
+        "excerpt": "20250502-20250503，ZEPP HANEDA，初音ミク，JAPAN LIVE TOUR ~BLOOMING~",
+        "url": "posts/repo/miku_jp_tour/miku_jp_tour.html",
+        "tags": [
+            "初音ミク",
+            "repo"
+        ],
+        "cover": "images/WorkNotes/202509_02/1st_blog_title.jpg"
+    },
+    {
         "title": "202508 本家NEI repo part 1",
         "date": "2025-08-02",
         "excerpt": "20250802-20250803，Kアリーナ横浜,THE IDOLM@STER, NEVER END IDOL",

@@ -1,0 +1,300 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>202505 初音ミク　JAPAN LIVE TOUR ~BLOOMING~ repo - 電波圏外</title>
+    
+    <!-- SEO Meta Tags -->
+    <meta name="description" content="20250502-20250503，ZEPP HANEDA，初音ミク，JAPAN LIVE TOUR ~BLOOMING~">
+    <meta name="author" content="C_Ciel">
+    
+    <!-- Open Graph Meta Tags -->
+    <meta property="og:title" content="202505 初音ミク　JAPAN LIVE TOUR ~BLOOMING~ repo">
+    <meta property="og:description" content="20250502-20250503，ZEPP HANEDA，初音ミク，JAPAN LIVE TOUR ~BLOOMING~">
+    <meta property="og:type" content="article">
+    <meta property="og:url" content="https://ciel-th.github.io/blog/posts/repo/miku_jp_tour/miku_jp_tour.html">
+    
+    <!-- Twitter Card Meta Tags -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="202505 初音ミク　JAPAN LIVE TOUR ~BLOOMING~ repo">
+    <meta name="twitter:description" content="20250502-20250503，ZEPP HANEDA，初音ミク，JAPAN LIVE TOUR ~BLOOMING~">
+    
+    <!-- Performance Optimizations -->
+    <link rel="dns-prefetch" href="//polyfill.io">
+    <link rel="dns-prefetch" href="//cdn.jsdelivr.net">
+    <link rel="preconnect" href="https://polyfill.io" crossorigin>
+    <link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
+    <link rel="preload" href="../../../fonts/LXGWWenKai-Regular.ttf" as="font" type="font/ttf" crossorigin>
+    <link rel="preload" href="../../../styles/main.css" as="style">
+    
+    <!-- Stylesheets -->
+    <link rel="stylesheet" href="../../../styles/main.css">
+    <link rel="stylesheet" href="../../../fonts/wenkai.css">
+    <style>
+        /* 目录样式 */
+        .article-container {
+            display: flex;
+            max-width: 1200px;
+            margin: 0 auto;
+            position: relative;
+        }
+        
+        .article-wrapper {
+            flex: 1;
+            max-width: 800px;
+            margin-right: 20px;
+        }
+        
+        .table-of-contents {
+            position: fixed;
+            right: 20px;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 280px;
+            max-height: 70vh;
+            background: rgba(255, 255, 255, 0.98);
+            border: 1px solid #e1e5e9;
+            border-radius: 8px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+            z-index: 1000;
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            backdrop-filter: blur(10px);
+        }
+        
+        .toc-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 16px 20px 12px;
+            border-bottom: 1px solid #f0f0f0;
+        }
+        
+        .toc-title {
+            font-size: 16px;
+            font-weight: 600;
+            color: #333;
+            margin: 0;
+        }
+        
+        .toc-toggle {
+            background: none;
+            border: none;
+            font-size: 18px;
+            color: #666;
+            cursor: pointer;
+            padding: 4px;
+            border-radius: 4px;
+            transition: all 0.2s ease;
+        }
+        
+        .toc-toggle:hover {
+            background-color: #f5f5f5;
+            color: #333;
+        }
+        
+        .toc-nav {
+            padding: 12px 0;
+            max-height: calc(70vh - 60px);
+            overflow-y: auto;
+        }
+        
+        .toc-nav::-webkit-scrollbar {
+            width: 4px;
+        }
+        
+        .toc-nav::-webkit-scrollbar-track {
+            background: transparent;
+        }
+        
+        .toc-nav::-webkit-scrollbar-thumb {
+            background: #ddd;
+            border-radius: 2px;
+        }
+        
+        .toc-nav::-webkit-scrollbar-thumb:hover {
+            background: #bbb;
+        }
+        
+        .toc-list {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+        
+        .toc-item {
+            margin: 0;
+        }
+        
+        .toc-link {
+            display: block;
+            padding: 6px 20px;
+            color: #666;
+            text-decoration: none;
+            font-size: 14px;
+            line-height: 1.4;
+            transition: all 0.2s ease;
+            border-left: 3px solid transparent;
+        }
+        
+        .toc-link:hover {
+            color: #333;
+            background-color: #f8f9fa;
+        }
+        
+        .toc-link.active {
+            color: #0066cc;
+            background-color: #f0f7ff;
+            border-left-color: #0066cc;
+            font-weight: 500;
+        }
+        
+        /* 不同级别标题的缩进 */
+        .toc-h1 .toc-link { padding-left: 20px; font-weight: 500; }
+        .toc-h2 .toc-link { padding-left: 32px; }
+        .toc-h3 .toc-link { padding-left: 44px; }
+        .toc-h4 .toc-link { padding-left: 56px; }
+        .toc-h5 .toc-link { padding-left: 68px; }
+        .toc-h6 .toc-link { padding-left: 80px; }
+        
+        /* 响应式设计 */
+        @media (max-width: 1400px) {
+            .table-of-contents {
+                display: none;
+            }
+            
+            .article-wrapper {
+                margin-right: 0;
+            }
+        }
+        
+        @media (max-width: 768px) {
+            .article-container {
+                max-width: 100%;
+            }
+        }
+    </style>
+    
+    <!-- Favicon -->
+    <link rel="icon" type="image/x-icon" href="/favicon.ico">
+    
+    <!-- Vercel Analytics -->
+    <script defer src="https://va.vercel-scripts.com/v1/script.js"></script>
+    
+    <!-- MathJax for LaTeX Support -->
+    <script>
+        MathJax = {
+            tex: {
+                inlineMath: [['$', '$'], ['\(', '\)']],
+                displayMath: [['$$', '$$'], ['\[', '\]']],
+                processEscapes: true,
+                processEnvironments: true
+            },
+            options: {
+                skipHtmlTags: ['script', 'noscript', 'style', 'textarea', 'pre']
+            }
+        };
+    </script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    
+    <!-- Mermaid for Diagrams -->
+    <script src="https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.min.js"></script>
+    <script>
+        mermaid.initialize({
+            startOnLoad: true,
+            theme: 'default',
+            securityLevel: 'loose',
+            fontFamily: 'LXGW WenKai, -apple-system, BlinkMacSystemFont, sans-serif'
+        });
+    </script>
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <div class="container">
+            <div class="logo">
+                <a href="../../../index.html">電波圏外</a>
+            </div>
+            <nav class="nav">
+                <a href="../../../index.html" class="nav-link">首页</a>
+                <a href="../../../work-notes.html" class="nav-link">工作杂记</a>
+                <a href="../../../repo.html" class="nav-link">repo</a>
+                <a href="../../../japanese-learning.html" class="nav-link">日语学习记录</a>
+                <a href="../../../about.html" class="nav-link">关于我</a>
+            </nav>
+        </div>
+    </header>
+    
+    <!-- Main Content -->
+    <main class="main">
+        <div class="article-container">
+            <div class="article-wrapper">
+                <div class="container">
+                    <article class="post">
+                        <header class="post-header">
+                            <h1 class="post-title">202505 初音ミク　JAPAN LIVE TOUR ~BLOOMING~ repo</h1>
+                            <div class="post-meta">
+                                <time class="post-date" datetime="2025-09-08T00:00:00+08:00">2025年09月08日</time>
+                                
+                                <span class="post-tags">
+                                    <span class="tag">#初音ミク</span>
+                                    <span class="tag">#repo</span>
+                                </span>
+                                
+                            </div>
+                            
+                            <div class="post-excerpt">
+                                20250502-20250503，ZEPP HANEDA，初音ミク，JAPAN LIVE TOUR ~BLOOMING~
+                            </div>
+                            
+                        </header>
+                        
+                        <div class="post-content">
+                            <h1 id="heading-1">202505 初音ミク　JAPAN LIVE TOUR ~BLOOMING~ repo</h1><br>其实本来没想写的，但正好博客更新，想着充实一下博客内容，遂着手写日巡repo，说实话这次日巡的选曲质量和场内气氛都相当优秀，大概是能让我记住一辈子的程度吧。<br>那么废话不多说，本篇repo虽标题为日巡repo，但我还是打算将五月份这次日本之旅的记忆全部记录下来，各部分有目录跳转，对某部分不感兴趣的朋友跳过即可。<br><h2 id="heading-2">行程：</h2><ul><li>20250427 北京-大阪-京都     取票 取手机卡 入住</li><li>20250428 京都-大阪-京都     大阪水族馆 面试 通天阁</li><li>20250429 京都-丰乡-京都     KON巡礼 面试 GEAR演出</li><li>20250430 京都-横滨      　　逛街 入住</li><li>20250501 横滨-秋叶原-横滨   逛街 夜排场贩</li><li>20250502 横滨-东京-横滨     LIVE DAY1</li><li>20250503 横滨-东京        　LIVE DAY2 换民宿</li><li>20250504 东京　         　　逛秋叶原</li><li>20250505 东京　         　　逛秋叶原</li><li>20250506 东京　         　　逛秋叶原，涩谷pc，秋叶原怪猎主题餐厅</li><li>20250507 东京-北京　        浅草寺</li></ul><br><h3 id="heading-3">20250426</h3><br>前情提要：当时还在前司实习准备转正，但是由于种种原因当时已经不打算继续留在这家了，再加上五一假期能能休息很长时间，因此26号干完工作后顿有解脱之感，六点下班七点在学校做了个笔试，八点ac之后洗了个澡直接去大兴机场，在机场又做了一个笔试之后已经11：30左右。<br>由于是第二天早上七点起飞的航班，还是在南昌转机去大阪，因此询问了一下直接在国内线值机过了安检，在登机口附近找了个地方躺着休息（不得不说大兴机场确实比首都机场强），但其实也没睡着就是了。<br><h3 id="heading-4">20250427</h3><br>早上五点多才想起来没请假，于是赶紧飞书里请了个假，在机场吃了一盘比我命都贵的煎饺之后就准备登机去南昌中转了。<br>然而好巧不巧，北京到南昌只有两个小时，但就这两个小时里我妈来了个夺命连环call，我在飞机上自然接不到，落地后看见未接电话才发现大事不妙，出了航站楼赶紧回拨，早上七八点电话打不通确实有点蹊跷，而且机场里面广播一直在响，因为这次毕业旅行并没和我妈报备所以还是很心虚的，编了几句之后就赶紧挂了，说的越多露馅的越多……<br>另外提一句，南昌的这个国际机场实在是简陋的不行，去了国际航站楼我以为是鬼楼，除了大门口保洁没一个工作人员，下午一点起飞的飞机海关十二点了都不上班，出关的时候还被猛猛盘问为什么来南昌，去日本干什么等等，其实我就是个啥比二次元没看出来吗（<br>六点落地，去取了心心念念的hanacell，因为这次日巡在大阪首场散场歌单出来之后我就马上收了一张day1日场的票不过是罗森电子票，<br>
+                        </div>
+                
+                        <footer class="post-footer">
+                            <div class="post-navigation">
+                                <!-- 文章导航将在这里添加 -->
+                            </div>
+                        </footer>
+                    </article>
+                </div>
+            </div>
+            
+            <!-- 目录 -->
+            <div class="table-of-contents">
+  <div class="toc-header">
+    <h3 class="toc-title">目录</h3>
+    <button class="toc-toggle" aria-label="折叠目录">−</button>
+  </div>
+  <nav class="toc-nav">
+    <ul class="toc-list">
+      <li class="toc-item toc-h1">
+        <a href="#heading-1" class="toc-link">202505 初音ミク　JAPAN LIVE TOUR ~BLOOMING~ repo</a>
+      </li>
+      <li class="toc-item toc-h2">
+        <a href="#heading-2" class="toc-link">行程：</a>
+      </li>
+      <li class="toc-item toc-h3">
+        <a href="#heading-3" class="toc-link">20250426</a>
+      </li>
+      <li class="toc-item toc-h3">
+        <a href="#heading-4" class="toc-link">20250427</a>
+      </li>
+    </ul>
+  </nav>
+</div>
+
+        </div>
+    </main>
+    
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <p>&copy; 2025 電波圏外. All rights reserved.</p>
+            <p>Powered by <a href="https://github.com/" target="_blank">GitHub</a> & <a href="https://pages.github.com/" target="_blank">GitHub Pages</a></p>
+        </div>
+    </footer>
+</body>
+</html>

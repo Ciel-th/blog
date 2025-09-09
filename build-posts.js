@@ -114,13 +114,23 @@ class MarkdownParser {
         // 链接
         html = html.replace(/\[([^\]]+)\]\(([^\)]+)\)/g, '<a href="$2">$1</a>');
         
+        // 处理列表（先标记类型，避免冲突）
         // 无序列表
-        html = html.replace(/^\s*[-\*\+]\s+(.+)$/gm, '<li>$1</li>');
-        html = html.replace(/(<li>.*<\/li>)/s, '<ul>$1</ul>');
+        html = html.replace(/^\s*[-\*\+]\s+(.+)$/gm, '<ul-li>$1</ul-li>');
         
         // 有序列表
-        html = html.replace(/^\s*\d+\.\s+(.+)$/gm, '<li>$1</li>');
-        html = html.replace(/(<li>.*<\/li>)/s, '<ol>$1</ol>');
+        html = html.replace(/^\s*\d+\.\s+(.+)$/gm, '<ol-li>$1</ol-li>');
+        
+        // 转换为最终HTML
+        html = html.replace(/(<ul-li>.*<\/ul-li>)/s, function(match) {
+            const items = match.replace(/<ul-li>/g, '<li>').replace(/<\/ul-li>/g, '</li>');
+            return '<ul>' + items + '</ul>';
+        });
+        
+        html = html.replace(/(<ol-li>.*<\/ol-li>)/s, function(match) {
+            const items = match.replace(/<ol-li>/g, '<li>').replace(/<\/ol-li>/g, '</li>');
+            return '<ol>' + items + '</ol>';
+        });
         
         // 引用
         html = html.replace(/^>\s+(.+)$/gm, '<blockquote>$1</blockquote>');

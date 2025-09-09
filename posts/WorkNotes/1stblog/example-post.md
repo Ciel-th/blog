@@ -142,10 +142,10 @@ function hello() {
 - 支持标准的Markdown表格语法
 
 ## 博客新增文章的流程
--将md文件放入posts目录下的对应子文件夹中
--在posts目录下运行`npm run build`
--提交到Github仓库
--等待Github Actions自动构建和部署
+- 将md文件放入posts目录下的对应子文件夹中
+- 在posts目录下运行`npm run build`
+- 提交到Github仓库
+- 等待Github Actions自动构建和部署
 ## 浏览器支持
 - Chrome (推荐)
 - Firefox
