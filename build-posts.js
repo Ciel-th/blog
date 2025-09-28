@@ -154,6 +154,48 @@ class MarkdownParser {
             return '<ul class="task-list">' + items + '</ul>';
         });
         
+        // 处理引用（在列表处理之前，包括缩进的引用）
+        html = html.replace(/(^|\n)(\s*)>(.*)$/gm, function(match, prefix, indent, content) {
+            if (content.trim() === '') {
+                return prefix + indent + '<quote-line></quote-line>';
+            } else {
+                return prefix + indent + '<quote-line>' + content.trim() + '</quote-line>';
+            }
+        });
+        
+        // 将连续的引用行合并为blockquote
+        html = html.replace(/(<quote-line>[\s\S]*?<\/quote-line>(?:\s*<quote-line>[\s\S]*?<\/quote-line>)*)/g, function(match) {
+            // 提取所有引用内容并合并
+            let content = match.replace(/<quote-line>/g, '').replace(/<\/quote-line>/g, '\n')
+                .replace(/^\s*>\s*/gm, '') // 移除残留的引用符号
+                .replace(/\n\s*\n/g, '\n\n') // 保持空行
+                .trim();
+            
+            // 处理段落：将空行转换为段落分隔
+            const lines = content.split('\n');
+            const paragraphs = [];
+            let currentParagraph = [];
+            
+            for (const line of lines) {
+                if (line.trim() === '') {
+                    if (currentParagraph.length > 0) {
+                        paragraphs.push(currentParagraph.join('  <br>'));
+                        currentParagraph = [];
+                    }
+                } else {
+                    currentParagraph.push(line);
+                }
+            }
+            
+            if (currentParagraph.length > 0) {
+                paragraphs.push(currentParagraph.join('  <br>'));
+            }
+            
+            const formattedContent = paragraphs.join('<br><br>');
+            
+            return '<blockquote>' + formattedContent + '</blockquote>';
+        });
+        
         // 处理列表（先标记类型，避免冲突）
         // 无序列表 - 支持缩进和嵌套
         const lines = html.split('\n');
@@ -353,74 +395,9 @@ class MarkdownParser {
         // 再次修复可能在表格处理过程中产生的错误<ol><li>标签
         html = html.replace(/<ol><li>([\s\S]*?)<\/ol-li>/g, '<ol-li data-indent="0">$1</ol-li>');
         
-        // 引用处理 - 改进版本
-        // 先处理列表项内的引用
-        html = html.replace(/(<[ou]l-li[^>]*>)([\s\S]*?)(<\/[ou]l-li>)/g, function(match, openTag, content, closeTag) {
-            let processedContent = content;
-            
-            // 处理连续的引用行
-            processedContent = processedContent.replace(/(<br>>.*?)(?=<br>(?!>)|<\/li>|<\/ol>|$)/gs, function(quoteBlock) {
-                // 提取所有引用行
-                const quoteLines = quoteBlock.split('<br>').filter(line => line.startsWith('>')).map(line => line.substring(1).trim());
-                if (quoteLines.length > 0) {
-                    const quoteContent = quoteLines.join('<br>');
-                    return '<br><blockquote>' + quoteContent + '</blockquote>';
-                }
-                return quoteBlock;
-            });
-            
-            // 处理剩余的单个引用行（没有被上面处理的）
-            processedContent = processedContent.replace(/<br>>([^<]*?)(?=<br>|<\/li>|<\/ol>|$)/g, function(quoteMatch, quoteContent) {
-                if (quoteContent.trim()) {
-                    return '<br><blockquote>' + quoteContent.trim() + '</blockquote>';
-                }
-                return quoteMatch;
-            });
-            
-            return openTag + processedContent + closeTag;
-        });
+
         
-        // 处理非列表项中的引用（行首的引用）
-        html = html.replace(/^>(.*)$/gm, function(match, content) {
-            if (content.trim() === '') {
-                return '<quote-line></quote-line>';
-            } else {
-                return '<quote-line>' + content.trim() + '</quote-line>';
-            }
-        });
-        
-        // 将连续的引用行合并为blockquote
-        html = html.replace(/(<quote-line>[\s\S]*?<\/quote-line>(?:\s*<quote-line>[\s\S]*?<\/quote-line>)*)/g, function(match) {
-            // 提取所有引用内容并合并
-            let content = match.replace(/<quote-line>/g, '').replace(/<\/quote-line>/g, '\n')
-                .replace(/^\s*>\s*/gm, '') // 移除残留的引用符号
-                .replace(/\n\s*\n/g, '\n\n') // 保持空行
-                .trim();
-            
-            // 处理段落：将空行转换为段落分隔
-            const lines = content.split('\n');
-            const paragraphs = [];
-            let currentParagraph = [];
-            
-            for (const line of lines) {
-                if (line.trim() === '') {
-                    if (currentParagraph.length > 0) {
-                        paragraphs.push(currentParagraph.join('  <br>'));
-                        currentParagraph = [];
-                    }
-                } else {
-                    currentParagraph.push(line);
-                }
-            }
-            
-            if (currentParagraph.length > 0) {
-                paragraphs.push(currentParagraph.join('  <br>'));
-            }
-            
-            const formattedContent = paragraphs.join('<br><br>');
-            
-            return '<blockquote>' + formattedContent + '</blockquote>';
-        });
+
         
         // 水平分割线
         html = html.replace(/^---$/gm, '<hr>');
