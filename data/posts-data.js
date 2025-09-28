@@ -55,7 +55,19 @@ const repoData = [
 ];
 
 // 日语学习数据
-const japaneseData = [];
+const japaneseData = [
+    {
+        "title": "日语学习笔记综合日语 第6課",
+        "date": "2025-09-25",
+        "excerpt": "综合日语第6課学习记录",
+        "url": "posts/JpnLearning/jpnlearn0925.html",
+        "tags": [
+            "日语",
+            "综合日语"
+        ],
+        "cover": "/images/JpnLearning/cover.jpg"
+    }
+];
 
 // 获取所有文章数据并按时间排序
 function getAllPostsData() {

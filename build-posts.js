@@ -97,13 +97,13 @@ class MarkdownParser {
         // 处理表格（简单的表格支持）
         html = this.processMarkdownTables(html);
         
-        // 标题（从六级到一级，避免匹配冲突）
-        html = html.replace(/^###### (.*$)/gim, '<h6>$1</h6>');
-        html = html.replace(/^##### (.*$)/gim, '<h5>$1</h5>');
-        html = html.replace(/^#### (.*$)/gim, '<h4>$1</h4>');
-        html = html.replace(/^### (.*$)/gim, '<h3>$1</h3>');
-        html = html.replace(/^## (.*$)/gim, '<h2>$1</h2>');
-        html = html.replace(/^# (.*$)/gim, '<h1>$1</h1>');
+        // 标题（从六级到一级，避免匹配冲突）- 支持全角和半角空格
+        html = html.replace(/^######[\s　]+(.*$)/gim, '<h6>$1</h6>');
+        html = html.replace(/^#####[\s　]+(.*$)/gim, '<h5>$1</h5>');
+        html = html.replace(/^####[\s　]+(.*$)/gim, '<h4>$1</h4>');
+        html = html.replace(/^###[\s　]+(.*$)/gim, '<h3>$1</h3>');
+        html = html.replace(/^##[\s　]+(.*$)/gim, '<h2>$1</h2>');
+        html = html.replace(/^#[\s　]+(.*$)/gim, '<h1>$1</h1>');
         
         // 删除线（需要在粗体和斜体之前处理）
         html = html.replace(/~~(.*?)~~/g, '<del>$1</del>');
@@ -155,37 +155,232 @@ class MarkdownParser {
         });
         
         // 处理列表（先标记类型，避免冲突）
-        // 无序列表 - 保留空格对齐
-        html = html.replace(/^\s*[-\*\+]\s+(.+)$/gm, function(match, content) {
-            // 将多个连续空格转换为&nbsp;以保持对齐
-            const preservedContent = content.replace(/  +/g, function(spaces) {
-                return '&nbsp;'.repeat(spaces.length);
+        // 无序列表 - 支持缩进和嵌套
+        const lines = html.split('\n');
+        const result = [];
+        let i = 0;
+        
+        while (i < lines.length) {
+            const line = lines[i];
+            
+            // 清理行末的回车符和换行符
+            const cleanLine = line.replace(/\r?\n?$/, '');
+            
+            // 检查是否是列表项
+            const unorderedMatch = cleanLine.match(/^(\s*)[-\*\+]\s+(.+)$/);
+            const orderedMatch = cleanLine.match(/^(\s*)\d+\.\s+(.+)$/);
+            
+
+            
+            if (unorderedMatch || orderedMatch) {
+                const match = unorderedMatch || orderedMatch;
+                const indent = match[1];
+                const text = match[2];
+                const indentLevel = Math.floor(indent.length / 4);
+                const listType = unorderedMatch ? 'ul' : 'ol';
+                
+
+                
+                // 收集列表项的所有内容（包括多行和子列表）
+                let listContent = text.replace(/  +/g, function(spaces) {
+                    return '&nbsp;'.repeat(spaces.length);
+                });
+                i++;
+                
+                // 收集后续的缩进内容
+                while (i < lines.length) {
+                    const nextLine = lines[i];
+                    const cleanNextLine = nextLine.replace(/\r?\n?$/, '');
+                    
+                    // 如果是空行，跳过
+                    if (cleanNextLine.trim() === '') {
+                        i++;
+                        continue;
+                    }
+                    
+                    // 检查是否是同级或更高级的列表项
+                    const nextUnorderedMatch = cleanNextLine.match(/^(\s*)[-\*\+]\s+(.+)$/);
+                    const nextOrderedMatch = cleanNextLine.match(/^(\s*)\d+\.\s+(.+)$/);
+                    
+                    if (nextUnorderedMatch || nextOrderedMatch) {
+                        const nextMatch = nextUnorderedMatch || nextOrderedMatch;
+                        const nextIndent = nextMatch[1];
+                        const nextIndentLevel = Math.floor(nextIndent.length / 4);
+                        
+                        // 如果是同级或更高级的列表项，停止收集
+                        if (nextIndentLevel <= indentLevel) {
+                            break;
+                        }
+                    }
+                    
+                    // 检查是否是缩进内容
+                    const expectedIndent = indent + '    ';
+                    if (cleanNextLine.startsWith(expectedIndent)) {
+                        // 移除基础缩进，保留相对缩进
+                        const relativeContent = cleanNextLine.substring(expectedIndent.length);
+                        listContent += '<br>' + relativeContent.replace(/  +/g, function(spaces) {
+                            return '&nbsp;'.repeat(spaces.length);
+                        });
+                        i++;
+                    } else {
+                        break;
+                    }
+                }
+                
+                result.push(`<${listType}-li data-indent="${indentLevel}">${listContent}</${listType}-li>`);
+                i--; // 因为外层循环会i++，所以这里减1
+            } else {
+                result.push(line);
+            }
+            
+            i++;
+        }
+        
+        html = result.join('\n');
+        
+        // 有序列表处理已在上面的统一循环中完成
+        
+        // 处理列表项的多行内容（缩进的后续行）
+        html = html.replace(/(<[ou]l-li[^>]*>.*?<\/[ou]l-li>)\n((?:\s{4,}.*\n?)*)/gm, function(match, listItem, indentedContent) {
+            if (indentedContent.trim()) {
+                // 处理缩进内容，移除一级缩进并转换为<br>分隔
+                const processedContent = indentedContent
+                    .split('\n')
+                    .filter(line => line.trim())
+                    .map(line => line.replace(/^\s{4}/, '')) // 移除4个空格的缩进
+                    .map(line => {
+                        // 处理子列表
+                        if (line.match(/^[-\*\+]\s+/)) {
+                            return '<ul><li>' + line.replace(/^[-\*\+]\s+/, '') + '</li></ul>';
+                        }
+                        return line;
+                    })
+                    .join('<br>');
+                
+                // 将内容插入到列表项中
+                return listItem.replace(/(<\/[ou]l-li>)$/, '<br>' + processedContent + '$1');
+            }
+            return listItem;
+        });
+        
+        // 转换为最终HTML - 处理嵌套列表
+        html = html.replace(/(<ul-li[\s\S]*?<\/ul-li>)/g, function(match) {
+            const lines = match.split('\n');
+            let result = '<ul>';
+            let currentIndent = 0;
+            
+            lines.forEach(line => {
+                const ulMatch = line.match(/<ul-li data-indent="(\d+)">(.*)<\/ul-li>/);
+                if (ulMatch) {
+                    const indent = parseInt(ulMatch[1]);
+                    const content = ulMatch[2];
+                    
+                    if (indent > currentIndent) {
+                        // 开始新的嵌套级别
+                        for (let i = currentIndent; i < indent; i++) {
+                            result += '<ul>';
+                        }
+                    } else if (indent < currentIndent) {
+                        // 结束嵌套级别
+                        for (let i = currentIndent; i > indent; i--) {
+                            result += '</ul></li>';
+                        }
+                    }
+                    
+                    result += '<li>' + content + '</li>';
+                    currentIndent = indent;
+                }
             });
-            return '<ul-li>' + preservedContent + '</ul-li>';
+            
+            // 关闭所有打开的标签
+            for (let i = currentIndent; i >= 0; i--) {
+                result += '</ul>';
+            }
+            
+            return result;
         });
         
-        // 有序列表 - 保留空格对齐
-        html = html.replace(/^\s*\d+\.\s+(.+)$/gm, function(match, content) {
-            // 将多个连续空格转换为&nbsp;以保持对齐
-            const preservedContent = content.replace(/  +/g, function(spaces) {
-                return '&nbsp;'.repeat(spaces.length);
+        // 首先修复错误的<ol><li>标签，将其转换为<ol-li>
+        html = html.replace(/<ol><li>([\s\S]*?)<\/ol-li>/g, '<ol-li data-indent="0">$1</ol-li>');
+        
+        // 处理连续的ol-li标签，将它们合并到一个ol中
+        html = html.replace(/(<ol-li[\s\S]*?<\/ol-li>)+/g, function(match) {
+            // 提取所有ol-li标签
+            const olItems = match.match(/<ol-li data-indent="(\d+)">([\s\S]*?)<\/ol-li>/g);
+            if (!olItems) return match;
+            
+            let result = '<ol>';
+            let currentIndent = 0;
+            
+            olItems.forEach(item => {
+                const olMatch = item.match(/<ol-li data-indent="(\d+)">([\s\S]*?)<\/ol-li>/);
+                if (olMatch) {
+                    const indent = parseInt(olMatch[1]);
+                    const content = olMatch[2];
+                    
+                    if (indent > currentIndent) {
+                        // 开始新的嵌套级别
+                        for (let i = currentIndent; i < indent; i++) {
+                            result += '<ol>';
+                        }
+                    } else if (indent < currentIndent) {
+                        // 结束嵌套级别
+                        for (let i = currentIndent; i > indent; i--) {
+                            result += '</ol></li>';
+                        }
+                    }
+                    
+                    result += '<li>' + content + '</li>';
+                    currentIndent = indent;
+                }
             });
-            return '<ol-li>' + preservedContent + '</ol-li>';
+            
+            // 关闭所有打开的标签
+            for (let i = currentIndent; i >= 0; i--) {
+                result += '</ol>';
+            }
+            
+            return result;
         });
         
-        // 转换为最终HTML
-        html = html.replace(/(<ul-li>.*<\/ul-li>)/s, function(match) {
-            const items = match.replace(/<ul-li>/g, '<li>').replace(/<\/ul-li>/g, '</li>');
-            return '<ul>' + items + '</ul>';
+        // 处理列表项内的表格
+        html = html.replace(/<li>([\s\S]*?)<\/li>/g, (match, content) => {
+            // 对列表项内容进行表格处理
+            const processedContent = this.processListItemTables(content);
+            return `<li>${processedContent}</li>`;
         });
         
-        html = html.replace(/(<ol-li>.*<\/ol-li>)/s, function(match) {
-            const items = match.replace(/<ol-li>/g, '<li>').replace(/<\/ol-li>/g, '</li>');
-            return '<ol>' + items + '</ol>';
+        // 再次修复可能在表格处理过程中产生的错误<ol><li>标签
+        html = html.replace(/<ol><li>([\s\S]*?)<\/ol-li>/g, '<ol-li data-indent="0">$1</ol-li>');
+        
+        // 引用处理 - 改进版本
+        // 先处理列表项内的引用
+        html = html.replace(/(<[ou]l-li[^>]*>)([\s\S]*?)(<\/[ou]l-li>)/g, function(match, openTag, content, closeTag) {
+            let processedContent = content;
+            
+            // 处理连续的引用行
+            processedContent = processedContent.replace(/(<br>>.*?)(?=<br>(?!>)|<\/li>|<\/ol>|$)/gs, function(quoteBlock) {
+                // 提取所有引用行
+                const quoteLines = quoteBlock.split('<br>').filter(line => line.startsWith('>')).map(line => line.substring(1).trim());
+                if (quoteLines.length > 0) {
+                    const quoteContent = quoteLines.join('<br>');
+                    return '<br><blockquote>' + quoteContent + '</blockquote>';
+                }
+                return quoteBlock;
+            });
+            
+            // 处理剩余的单个引用行（没有被上面处理的）
+            processedContent = processedContent.replace(/<br>>([^<]*?)(?=<br>|<\/li>|<\/ol>|$)/g, function(quoteMatch, quoteContent) {
+                if (quoteContent.trim()) {
+                    return '<br><blockquote>' + quoteContent.trim() + '</blockquote>';
+                }
+                return quoteMatch;
+            });
+            
+            return openTag + processedContent + closeTag;
         });
         
-        // 引用（处理连续的引用行）
-        // 先标记所有引用行，保留空行
+        // 处理非列表项中的引用（行首的引用）
         html = html.replace(/^>(.*)$/gm, function(match, content) {
             if (content.trim() === '') {
                 return '<quote-line></quote-line>';
@@ -194,7 +389,7 @@ class MarkdownParser {
             }
         });
         
-        // 将连续的引用行（包括中间的空行）合并为一个blockquote
+        // 将连续的引用行合并为blockquote
         html = html.replace(/(<quote-line>[\s\S]*?<\/quote-line>(?:\s*<quote-line>[\s\S]*?<\/quote-line>)*)/g, function(match) {
             // 提取所有引用内容并合并
             let content = match.replace(/<quote-line>/g, '').replace(/<\/quote-line>/g, '\n')
@@ -247,8 +442,35 @@ class MarkdownParser {
             return paragraph;
         }).join('\n\n');
         
-        // 换行（但不影响代码块占位符）
+        // 最后处理换行 - 但要保护块级元素内部的结构
+        // 先保护表格内容
+        const tableBlocks = [];
+        html = html.replace(/<table[\s\S]*?<\/table>/g, (match) => {
+            const placeholder = `__TABLE_BLOCK_${tableBlocks.length}__`;
+            tableBlocks.push(match);
+            return placeholder;
+        });
+        
+        // 保护其他块级元素
+        const blockElements = [];
+        html = html.replace(/<(h[1-6]|pre|ul|ol|blockquote|figure|hr)[^>]*>[\s\S]*?<\/\1>|<hr[^>]*>/g, (match) => {
+            const placeholder = `__BLOCK_ELEMENT_${blockElements.length}__`;
+            blockElements.push(match);
+            return placeholder;
+        });
+        
+        // 现在可以安全地处理换行
         html = html.replace(/\n/g, '<br>');
+        
+        // 恢复块级元素
+        blockElements.forEach((block, index) => {
+            html = html.replace(`__BLOCK_ELEMENT_${index}__`, block);
+        });
+        
+        // 恢复表格
+        tableBlocks.forEach((block, index) => {
+            html = html.replace(`__TABLE_BLOCK_${index}__`, block);
+        });
         
         // 恢复代码块
         codeBlocks.forEach((block, index) => {
@@ -258,6 +480,81 @@ class MarkdownParser {
         return html;
     }
     
+    // 处理列表项内的表格（表格内容已被转换为<br>标签）
+    processListItemTables(content) {
+        // 使用正则表达式匹配完整的表格
+        const tablePattern = /(\|[^<]*\|(?:<br>\|[^<]*\|)+)/g;
+        
+        return content.replace(tablePattern, (match) => {
+            // 将<br>替换回换行符进行处理
+            const tableContent = match.replace(/<br>/g, '\n');
+            const lines = tableContent.trim().split('\n').filter(line => line.trim());
+            
+            if (lines.length < 3) return match; // 至少需要表头、分隔符和一行数据
+            
+            const headerLine = lines[0];
+            const separatorLine = lines[1];
+            const dataLines = lines.slice(2);
+            
+            // 检查是否是有效的表格格式
+            if (!headerLine.includes('|') || !separatorLine.includes('|')) {
+                return match;
+            }
+            
+            // 检查分隔符行是否包含表格分隔符特征
+            if (!separatorLine.includes(':') && !separatorLine.includes('-')) {
+                return match;
+            }
+            
+            // 解析表头
+            const headerCells = headerLine.split('|').slice(1, -1).map(h => h.trim());
+            
+            // 解析对齐信息
+            const alignmentCells = separatorLine.split('|').slice(1, -1).map(sep => {
+                const trimmed = sep.trim();
+                if (trimmed.startsWith(':') && trimmed.endsWith(':')) {
+                    return 'center';
+                } else if (trimmed.endsWith(':')) {
+                    return 'right';
+                } else if (trimmed.startsWith(':')) {
+                    return 'left';
+                } else {
+                    return 'left'; // 默认左对齐
+                }
+            });
+            
+            // 解析数据行
+            const rows = dataLines.map(line => {
+                return line.split('|').slice(1, -1).map(cell => cell.trim());
+            });
+            
+            // 生成HTML表格
+            let tableHtml = '<table class="markdown-table">\n';
+            
+            // 表头
+            tableHtml += '  <thead>\n    <tr>\n';
+            headerCells.forEach((header, index) => {
+                const align = alignmentCells[index] || 'left';
+                tableHtml += `      <th style="text-align: ${align}">${header}</th>\n`;
+            });
+            tableHtml += '    </tr>\n  </thead>\n';
+            
+            // 表体
+            tableHtml += '  <tbody>\n';
+            rows.forEach(row => {
+                tableHtml += '    <tr>\n';
+                row.forEach((cell, index) => {
+                    const align = alignmentCells[index] || 'left';
+                    tableHtml += `      <td style="text-align: ${align}">${cell}</td>\n`;
+                });
+                tableHtml += '    </tr>\n';
+            });
+            tableHtml += '  </tbody>\n</table>';
+            
+            return tableHtml;
+        });
+    }
+
     // 处理Markdown表格
     processMarkdownTables(html) {
         // 匹配表格模式：表格标题（可选） + 表格内容
@@ -273,6 +570,20 @@ class MarkdownParser {
             // 解析表头
             const headers = headerLine.split('|').slice(1, -1).map(h => h.trim());
             
+            // 解析对齐信息
+            const alignments = separatorLine.split('|').slice(1, -1).map(sep => {
+                const trimmed = sep.trim();
+                if (trimmed.startsWith(':') && trimmed.endsWith(':')) {
+                    return 'center';
+                } else if (trimmed.endsWith(':')) {
+                    return 'right';
+                } else if (trimmed.startsWith(':')) {
+                    return 'left';
+                } else {
+                    return 'left'; // 默认左对齐
+                }
+            });
+            
             // 解析数据行
             const rows = dataLines.map(line => {
                 return line.split('|').slice(1, -1).map(cell => cell.trim());
@@ -283,8 +594,9 @@ class MarkdownParser {
             
             // 表头
             tableHtml += '  <thead>\n    <tr>\n';
-            headers.forEach(header => {
-                tableHtml += `      <th>${header}</th>\n`;
+            headers.forEach((header, index) => {
+                const align = alignments[index] || 'left';
+                tableHtml += `      <th style="text-align: ${align}">${header}</th>\n`;
             });
             tableHtml += '    </tr>\n  </thead>\n';
             
@@ -292,8 +604,9 @@ class MarkdownParser {
             tableHtml += '  <tbody>\n';
             rows.forEach(row => {
                 tableHtml += '    <tr>\n';
-                row.forEach(cell => {
-                    tableHtml += `      <td>${cell}</td>\n`;
+                row.forEach((cell, index) => {
+                    const align = alignments[index] || 'left';
+                    tableHtml += `      <td style="text-align: ${align}">${cell}</td>\n`;
                 });
                 tableHtml += '    </tr>\n';
             });
@@ -301,10 +614,10 @@ class MarkdownParser {
             
             // 如果有表格标题，包装在figure中
             if (tableTitle) {
-                return `<figure class="table-figure">\n  <figcaption class="table-caption">${tableTitle}</figcaption>\n  ${tableHtml}\n</figure>`;
+                return `<figure class="table-figure">\n  <figcaption class="table-caption">${tableTitle}</figcaption>\n  ${tableHtml}\n</figure>\n`;
             }
             
-            return tableHtml;
+            return tableHtml + '\n';
         });
     }
 }

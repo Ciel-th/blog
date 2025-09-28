@@ -1,0 +1,834 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>日语学习笔记综合日语 第6課 - 電波圏外</title>
+    
+    <!-- SEO Meta Tags -->
+    <meta name="description" content="综合日语第6課学习记录">
+    <meta name="author" content="C_Ciel">
+    
+    <!-- Open Graph Meta Tags -->
+    <meta property="og:title" content="日语学习笔记综合日语 第6課">
+    <meta property="og:description" content="综合日语第6課学习记录">
+    <meta property="og:type" content="article">
+    <meta property="og:url" content="https://ciel-th.github.io/blog/posts/JpnLearning/jpnlearn0925.html">
+    
+    <!-- Twitter Card Meta Tags -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="日语学习笔记综合日语 第6課">
+    <meta name="twitter:description" content="综合日语第6課学习记录">
+    
+    <!-- Performance Optimizations -->
+    <link rel="dns-prefetch" href="//polyfill.io">
+    <link rel="dns-prefetch" href="//cdn.jsdelivr.net">
+    <link rel="preconnect" href="https://polyfill.io" crossorigin>
+    <link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
+    <link rel="preload" href="../../fonts/LXGWWenKai-Regular.ttf" as="font" type="font/ttf" crossorigin>
+    <link rel="preload" href="../../styles/main.css" as="style">
+    
+    <!-- Stylesheets -->
+    <link rel="stylesheet" href="../../styles/main.css">
+    <link rel="stylesheet" href="../../fonts/wenkai.css">
+    <style>
+        /* 目录样式 */
+        .article-container {
+            display: flex;
+            max-width: 1200px;
+            margin: 0 auto;
+            position: relative;
+        }
+        
+        .article-wrapper {
+            flex: 1;
+            max-width: 800px;
+            margin-right: 20px;
+        }
+        
+        .table-of-contents {
+            position: fixed;
+            right: 20px;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 280px;
+            max-height: 70vh;
+            background: rgba(255, 255, 255, 0.98);
+            border: 1px solid #e1e5e9;
+            border-radius: 8px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+            z-index: 1000;
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            backdrop-filter: blur(10px);
+        }
+        
+        .toc-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 16px 20px 12px;
+            border-bottom: 1px solid #f0f0f0;
+        }
+        
+        .toc-title {
+            font-size: 16px;
+            font-weight: 600;
+            color: #333;
+            margin: 0;
+        }
+        
+        .toc-toggle {
+            background: none;
+            border: none;
+            font-size: 18px;
+            color: #666;
+            cursor: pointer;
+            padding: 4px;
+            border-radius: 4px;
+            transition: all 0.2s ease;
+        }
+        
+        .toc-toggle:hover {
+            background-color: #f5f5f5;
+            color: #333;
+        }
+        
+        .toc-nav {
+            padding: 12px 0;
+            max-height: calc(70vh - 60px);
+            overflow-y: auto;
+        }
+        
+        .toc-nav::-webkit-scrollbar {
+            width: 4px;
+        }
+        
+        .toc-nav::-webkit-scrollbar-track {
+            background: transparent;
+        }
+        
+        .toc-nav::-webkit-scrollbar-thumb {
+            background: #ddd;
+            border-radius: 2px;
+        }
+        
+        .toc-nav::-webkit-scrollbar-thumb:hover {
+            background: #bbb;
+        }
+        
+        .toc-list {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+        
+        .toc-item {
+            margin: 0;
+        }
+        
+        .toc-link {
+            display: block;
+            padding: 6px 20px;
+            color: #666;
+            text-decoration: none;
+            font-size: 14px;
+            line-height: 1.4;
+            transition: all 0.2s ease;
+            border-left: 3px solid transparent;
+        }
+        
+        .toc-link:hover {
+            color: #333;
+            background-color: #f8f9fa;
+        }
+        
+        .toc-link.active {
+            color: #0066cc;
+            background-color: #f0f7ff;
+            border-left-color: #0066cc;
+            font-weight: 500;
+        }
+        
+        /* 不同级别标题的缩进 */
+        .toc-h1 .toc-link { padding-left: 20px; font-weight: 500; }
+        .toc-h2 .toc-link { padding-left: 32px; }
+        .toc-h3 .toc-link { padding-left: 44px; }
+        .toc-h4 .toc-link { padding-left: 56px; }
+        .toc-h5 .toc-link { padding-left: 68px; }
+        .toc-h6 .toc-link { padding-left: 80px; }
+        
+        /* 响应式设计 */
+        @media (max-width: 1400px) {
+            .table-of-contents {
+                display: none;
+            }
+            
+            .article-wrapper {
+                margin-right: 0;
+            }
+        }
+        
+        @media (max-width: 768px) {
+            .article-container {
+                max-width: 100%;
+            }
+        }
+        
+        /* 新增Markdown语法样式 */
+        /* 删除线 */
+        del {
+            text-decoration: line-through;
+            color: #888;
+            opacity: 0.8;
+        }
+        
+        /* 高亮文本 */
+        mark {
+            background-color: #fff3cd;
+            color: #856404;
+            padding: 2px 4px;
+            border-radius: 3px;
+        }
+        
+        /* 上标和下标 */
+        sup {
+            vertical-align: super;
+            font-size: 0.75em;
+            line-height: 0;
+        }
+        
+        sub {
+            vertical-align: sub;
+            font-size: 0.75em;
+            line-height: 0;
+        }
+        
+        /* 键盘按键 */
+        kbd {
+            background-color: #f8f9fa;
+            border: 1px solid #dee2e6;
+            border-radius: 3px;
+            box-shadow: 0 1px 0 rgba(0,0,0,0.2), inset 0 0 0 2px #fff;
+            color: #495057;
+            display: inline-block;
+            font-family: 'SFMono-Regular', Consolas, 'Liberation Mono', Menlo, monospace;
+            font-size: 0.875em;
+            font-weight: 700;
+            line-height: 1;
+            padding: 2px 4px;
+            white-space: nowrap;
+        }
+        
+        /* 任务列表 */
+        .task-list {
+            list-style: none;
+            padding-left: 0;
+        }
+        
+        .task-list-item {
+            list-style: none;
+            position: relative;
+            margin: 4px 0;
+        }
+        
+        .task-list-item input[type="checkbox"] {
+            margin-right: 8px;
+            cursor: default;
+        }
+        
+        /* 脚注 */
+        .footnote {
+            font-size: 0.9em;
+            color: #666;
+            border-top: 1px solid #eee;
+            padding-top: 8px;
+            margin-top: 16px;
+        }
+        
+        .footnote sup {
+            color: #0066cc;
+            font-weight: bold;
+        }
+        
+        .footnote a {
+            color: #0066cc;
+            text-decoration: none;
+        }
+        
+        .footnote a:hover {
+            text-decoration: underline;
+        }
+    </style>
+    
+    <!-- Favicon -->
+    <link rel="icon" type="image/x-icon" href="/favicon.ico">
+    
+    <!-- Vercel Analytics -->
+    <script defer src="https://va.vercel-scripts.com/v1/script.js"></script>
+    
+    <!-- MathJax for LaTeX Support -->
+    <script>
+        MathJax = {
+            tex: {
+                inlineMath: [['$', '$'], ['\(', '\)']],
+                displayMath: [['$$', '$$'], ['\[', '\]']],
+                processEscapes: true,
+                processEnvironments: true
+            },
+            options: {
+                skipHtmlTags: ['script', 'noscript', 'style', 'textarea', 'pre']
+            }
+        };
+    </script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    
+    <!-- Mermaid for Diagrams -->
+    <script src="https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.min.js"></script>
+    <script>
+        mermaid.initialize({
+            startOnLoad: true,
+            theme: 'default',
+            securityLevel: 'loose',
+            fontFamily: 'LXGW WenKai, -apple-system, BlinkMacSystemFont, sans-serif'
+        });
+    </script>
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <div class="container">
+            <div class="logo">
+                <a href="../../index.html">電波圏外</a>
+            </div>
+            <nav class="nav">
+                <a href="../../index.html" class="nav-link">首页</a>
+                <a href="../../work-notes.html" class="nav-link">工作杂记</a>
+                <a href="../../repo.html" class="nav-link">repo</a>
+                <a href="../../japanese-learning.html" class="nav-link">日语学习记录</a>
+                <a href="../../about.html" class="nav-link">关于我</a>
+            </nav>
+        </div>
+    </header>
+    
+    <!-- Main Content -->
+    <main class="main">
+        <div class="article-container">
+            <div class="article-wrapper">
+                <div class="container">
+                    <article class="post">
+                        <header class="post-header">
+                            <h1 class="post-title">日语学习笔记综合日语 第6課</h1>
+                            <div class="post-meta">
+                                <time class="post-date" datetime="2025-09-25T00:00:00+08:00">2025年09月25日</time>
+                                
+                                <span class="post-tags">
+                                    <span class="tag">#日语</span>
+                                    <span class="tag">#综合日语</span>
+                                </span>
+                                
+                            </div>
+                            
+                            <div class="post-excerpt">
+                                综合日语第6課学习记录
+                            </div>
+                            
+                        </header>
+                        
+                        <div class="post-content">
+                            <h1 id="heading-1">综合日语 第6課 キャンパス·スケジュール</h1><br><br><h2 id="heading-2">ユニット1 会話</h2><br><br><h3 id="heading-3">新出単語</h3><br><br><table class="markdown-table">
+  <thead>
+    <tr>
+      <th style="text-align: center">单词</th>
+      <th style="text-align: center">释意</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td style="text-align: center">売店（ばいてん）</td>
+      <td style="text-align: center">小卖部</td>
+    </tr>
+    <tr>
+      <td style="text-align: center">建物（たてもの）</td>
+      <td style="text-align: center">建筑</td>
+    </tr>
+    <tr>
+      <td style="text-align: center">白い（しろい）</td>
+      <td style="text-align: center">白色的</td>
+    </tr>
+    <tr>
+      <td style="text-align: center">向こう（むこう）</td>
+      <td style="text-align: center">对面</td>
+    </tr>
+    <tr>
+      <td style="text-align: center">大きい（おおきい）</td>
+      <td style="text-align: center">大的</td>
+    </tr>
+    <tr>
+      <td style="text-align: center">立派（りっぱ）</td>
+      <td style="text-align: center">好的，出色的，漂亮的</td>
+    </tr>
+    <tr>
+      <td style="text-align: center">閲覧室（えつらんしつ）</td>
+      <td style="text-align: center">阅览室</td>
+    </tr>
+    <tr>
+      <td style="text-align: center">辞書（じしょ）</td>
+      <td style="text-align: center">字典</td>
+    </tr>
+    <tr>
+      <td style="text-align: center">検索（けんさく）</td>
+      <td style="text-align: center">搜索</td>
+    </tr>
+    <tr>
+      <td style="text-align: center">それから</td>
+      <td style="text-align: center">另外，还有</td>
+    </tr>
+    <tr>
+      <td style="text-align: center">貸し出しカウンター</td>
+      <td style="text-align: center">借书处</td>
+    </tr>
+    <tr>
+      <td style="text-align: center">お手洗い（おてあらい）</td>
+      <td style="text-align: center">洗手间</td>
+    </tr>
+    <tr>
+      <td style="text-align: center">病院（びょういん）</td>
+      <td style="text-align: center">医院</td>
+    </tr>
+    <tr>
+      <td style="text-align: center">古い（ふるい）</td>
+      <td style="text-align: center">旧的</td>
+    </tr>
+    <tr>
+      <td style="text-align: center">本（ほん）</td>
+      <td style="text-align: center">书</td>
+    </tr>
+    <tr>
+      <td style="text-align: center">高い（たかい）</td>
+      <td style="text-align: center">高的；贵的</td>
+    </tr>
+    <tr>
+      <td style="text-align: center">明るい（あかるい）</td>
+      <td style="text-align: center">明亮的</td>
+    </tr>
+    <tr>
+      <td style="text-align: center">部屋（へや）</td>
+      <td style="text-align: center">房间</td>
+    </tr>
+    <tr>
+      <td style="text-align: center">複雑（ふくざつ）</td>
+      <td style="text-align: center">复杂的</td>
+    </tr>
+    <tr>
+      <td style="text-align: center">黒い（くろい）</td>
+      <td style="text-align: center">黑色的</td>
+    </tr>
+    <tr>
+      <td style="text-align: center">箱（はこ）</td>
+      <td style="text-align: center">盒子</td>
+    </tr>
+    <tr>
+      <td style="text-align: center">郵便局（ゆうびんきょく）</td>
+      <td style="text-align: center">邮局</td>
+    </tr>
+    <tr>
+      <td style="text-align: center">駅（えき）</td>
+      <td style="text-align: center">火车站；地铁站；车站</td>
+    </tr>
+    <tr>
+      <td style="text-align: center">小さい（ちいさい）</td>
+      <td style="text-align: center">小的</td>
+    </tr>
+    <tr>
+      <td style="text-align: center">教科書（きょうかしょ）</td>
+      <td style="text-align: center">教科书</td>
+    </tr>
+    <tr>
+      <td style="text-align: center">ビル</td>
+      <td style="text-align: center">建筑</td>
+    </tr>
+    <tr>
+      <td style="text-align: center">会議室（かいぎしつ）</td>
+      <td style="text-align: center">会议室</td>
+    </tr>
+    <tr>
+      <td style="text-align: center">広い（ひろい）</td>
+      <td style="text-align: center">大的；宽敞的</td>
+    </tr>
+    <tr>
+      <td style="text-align: center">食堂（しょくどう）</td>
+      <td style="text-align: center">食堂</td>
+    </tr>
+    <tr>
+      <td style="text-align: center">スーパー</td>
+      <td style="text-align: center">超市</td>
+    </tr>
+    <tr>
+      <td style="text-align: center">花屋（はなや）</td>
+      <td style="text-align: center">花店</td>
+    </tr>
+    <tr>
+      <td style="text-align: center">果物屋（くだものや）</td>
+      <td style="text-align: center">水果店</td>
+    </tr>
+    <tr>
+      <td style="text-align: center">喫茶店（きっさでん）</td>
+      <td style="text-align: center">茶馆，咖啡厅</td>
+    </tr>
+    <tr>
+      <td style="text-align: center">パン</td>
+      <td style="text-align: center">面包</td>
+    </tr>
+    <tr>
+      <td style="text-align: center">銀行（ぎんこう）</td>
+      <td style="text-align: center">银行</td>
+    </tr>
+  </tbody>
+</table><br><ol><li>これ、それ、あれ、どれ（指代事物） <br>ここ、そこ、あそこ、どこ（指代地点）<br>- こ：离自己近<br>- そ：离对方近<br>- あ：离二者均远<br>- ど：疑问</li><li>も＜类同＞：也<br>ＡはＢです、ＣもＢです。</li><li>形容词分类<br><table class="markdown-table">
+  <thead>
+    <tr>
+      <th style="text-align: center">&nbsp;&nbsp;</th>
+      <th style="text-align: center">词典形</th>
+      <th style="text-align: center">连体形</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td style="text-align: center">Ⅰ类形容词</td>
+      <td style="text-align: center">大き·い（词干+词尾）</td>
+      <td style="text-align: center">大き·い（词干+词尾）</td>
+    </tr>
+    <tr>
+      <td style="text-align: center">Ⅱ类形容词</td>
+      <td style="text-align: center">立派（词干）</td>
+      <td style="text-align: center">立派·な（词干+词尾）</td>
+    </tr>
+  </tbody>
+</table></li></ol><h2 id="heading-4">ユニット2 会話</h2><br><br><h3 id="heading-5">新出単語</h3><br><br><table class="markdown-table">
+  <thead>
+    <tr>
+      <th style="text-align: center">单词</th>
+      <th style="text-align: center">释意</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td style="text-align: center">授業（じゅぎょう）</td>
+      <td style="text-align: center">课；上课</td>
+    </tr>
+    <tr>
+      <td style="text-align: center">一コマ</td>
+      <td style="text-align: center">一节课</td>
+    </tr>
+    <tr>
+      <td style="text-align: center">一時間目（いちじかんめ）</td>
+      <td style="text-align: center">第一节课</td>
+    </tr>
+    <tr>
+      <td style="text-align: center">午後（ごご）</td>
+      <td style="text-align: center">下午</td>
+    </tr>
+    <tr>
+      <td style="text-align: center">大体（だいたい）</td>
+      <td style="text-align: center">大约</td>
+    </tr>
+    <tr>
+      <td style="text-align: center">時間割（じかんわり）</td>
+      <td style="text-align: center">时间表</td>
+    </tr>
+    <tr>
+      <td style="text-align: center">選択科目（せんたくかもく）</td>
+      <td style="text-align: center">选修课</td>
+    </tr>
+    <tr>
+      <td style="text-align: center">夕方（ゆうがた）</td>
+      <td style="text-align: center">傍晚</td>
+    </tr>
+    <tr>
+      <td style="text-align: center">自習（じしゅう）</td>
+      <td style="text-align: center">自习</td>
+    </tr>
+    <tr>
+      <td style="text-align: center">後で（あとで）</td>
+      <td style="text-align: center">待会儿；再见</td>
+    </tr>
+    <tr>
+      <td style="text-align: center">どんな</td>
+      <td style="text-align: center">什么样的</td>
+    </tr>
+    <tr>
+      <td style="text-align: center">とても</td>
+      <td style="text-align: center">非常；很</td>
+    </tr>
+    <tr>
+      <td style="text-align: center">厳しい（きびしい）</td>
+      <td style="text-align: center">严厉的；严格的</td>
+    </tr>
+    <tr>
+      <td style="text-align: center">難しい（むずかしい）</td>
+      <td style="text-align: center">难的</td>
+    </tr>
+    <tr>
+      <td style="text-align: center">明日（あした）</td>
+      <td style="text-align: center">明天</td>
+    </tr>
+    <tr>
+      <td style="text-align: center">精読（せいどく）</td>
+      <td style="text-align: center">精读</td>
+    </tr>
+    <tr>
+      <td style="text-align: center">表（ひょう）</td>
+      <td style="text-align: center">表</td>
+    </tr>
+    <tr>
+      <td style="text-align: center">午前（ごぜん）</td>
+      <td style="text-align: center">上午</td>
+    </tr>
+    <tr>
+      <td style="text-align: center">体育（たいいく）</td>
+      <td style="text-align: center">体育</td>
+    </tr>
+    <tr>
+      <td style="text-align: center">英語（えいご）</td>
+      <td style="text-align: center">英语</td>
+    </tr>
+    <tr>
+      <td style="text-align: center">哲学（てつがく）</td>
+      <td style="text-align: center">哲学</td>
+    </tr>
+    <tr>
+      <td style="text-align: center">心理学（しんりがく）</td>
+      <td style="text-align: center">心理学</td>
+    </tr>
+    <tr>
+      <td style="text-align: center">文学史（ぶんがくし）</td>
+      <td style="text-align: center">文学史</td>
+    </tr>
+    <tr>
+      <td style="text-align: center">芸術史（げいじゅつし）</td>
+      <td style="text-align: center">艺术史</td>
+    </tr>
+  </tbody>
+</table><br><ol><li>～時～分<br>時（じ）、分（ふん）、半（はん）<br>～時（特殊）：<br>- 4 時（よじ）<br>- 9 時（くじ）<br>～分（特殊）：<br>- 1 分（いっぷん）<br>- 3 分（さんぷん）<br>- 4 分（よんぷん）<br>- 6 分（ろっぷん）<br>- 8 分（はっぷん/はちふん）<br>- 10 分（じ（ゅ）っぷん）<br>- 何分（なんぷん）<br>1 時 10 分 前（まえ） = 12 時 50 分</li><li>～日～月<br>日（にち）、月（がつ）<br>～日（特殊）：<br>- 1 日（ついたち）<br>- 2 日（ふつか）<br>- 3 日（みっか）<br>- 4 日（よっか）<br>- 5 日（いつか）<br>- 6 日（むいか）<br>- 7 日（なのか）<br>- 8 日（ようか）<br>- 9 日（ここのか）<br>- 10 日（とおか）<br>- 14 日（じゅうよっか）<br>- 20 日（はつか）<br>- 24 日（にじゅうよっか）<br>～月（特殊）：<br>- 4 月（しがつ）<br>- 9 月（くがつ）</li><li>年（ねん）<br>直接读成四位数即可</li><li>曜日（曜日）<br><table class="markdown-table">
+  <thead>
+    <tr>
+      <th style="text-align: center">日期</th>
+      <th style="text-align: center">读音</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td style="text-align: center">周一</td>
+      <td style="text-align: center">月（げつ）曜日</td>
+    </tr>
+    <tr>
+      <td style="text-align: center">周二</td>
+      <td style="text-align: center">火（か）曜日</td>
+    </tr>
+    <tr>
+      <td style="text-align: center">周三</td>
+      <td style="text-align: center">水（すい）曜日</td>
+    </tr>
+    <tr>
+      <td style="text-align: center">周四</td>
+      <td style="text-align: center">木（もく）曜日</td>
+    </tr>
+    <tr>
+      <td style="text-align: center">周五</td>
+      <td style="text-align: center">金（きん）曜日</td>
+    </tr>
+    <tr>
+      <td style="text-align: center">周六</td>
+      <td style="text-align: center">土（ど）曜日</td>
+    </tr>
+    <tr>
+      <td style="text-align: center">周日</td>
+      <td style="text-align: center">日（にち）曜日</td>
+    </tr>
+  </tbody>
+</table></li><li>から～まで（时间，住所，顺序等）<br>> A：はい、桜図書館です。<br>> B：すみません、そちらは何時から何時までですか。<br>> A：朝（あさ）九時から夜（よる）八時までです。<br>> B：休みは何曜日ですか。<br>> A：毎週（まいしゅ）月曜日です。<br>> B：わかりました、ありがとうございました。</li><li>～じゃありませんか<br>不是～吗？</li><li>どんな～ですか<br>什么样的，怎样的<br>> この大学はどんな大学ですか。</li></ol><h2 id="heading-6">ユニット3 読解文</h2><br><br><h3 id="heading-7">新出単語</h3><br><br><table class="markdown-table">
+  <thead>
+    <tr>
+      <th style="text-align: center">单词</th>
+      <th style="text-align: center">释意</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td style="text-align: center">サークル情報（じょうほう）</td>
+      <td style="text-align: center">社团信息</td>
+    </tr>
+    <tr>
+      <td style="text-align: center">遣唐使（けんとうし）</td>
+      <td style="text-align: center">遣唐使</td>
+    </tr>
+    <tr>
+      <td style="text-align: center">十月号（じゅうがつごう）</td>
+      <td style="text-align: center">十月号；第10期</td>
+    </tr>
+    <tr>
+      <td style="text-align: center">新入生（しんにゅうせん）</td>
+      <td style="text-align: center">新生</td>
+    </tr>
+    <tr>
+      <td style="text-align: center">歓迎（かんげい）</td>
+      <td style="text-align: center">欢迎</td>
+    </tr>
+    <tr>
+      <td style="text-align: center">留学生会（りゅうがくせいかい）</td>
+      <td style="text-align: center">留学生会</td>
+    </tr>
+    <tr>
+      <td style="text-align: center">専門（せんもん）</td>
+      <td style="text-align: center">专业</td>
+    </tr>
+    <tr>
+      <td style="text-align: center">や</td>
+      <td style="text-align: center">和</td>
+    </tr>
+    <tr>
+      <td style="text-align: center">中国経済（ちゅうごくけいざい）</td>
+      <td style="text-align: center">中国经济</td>
+    </tr>
+    <tr>
+      <td style="text-align: center">など</td>
+      <td style="text-align: center">等等</td>
+    </tr>
+    <tr>
+      <td style="text-align: center">以下（いか）</td>
+      <td style="text-align: center">以下</td>
+    </tr>
+    <tr>
+      <td style="text-align: center">卒業論文（そつぎょろんぶん）</td>
+      <td style="text-align: center">毕业论文</td>
+    </tr>
+    <tr>
+      <td style="text-align: center">テーマ</td>
+      <td style="text-align: center">Thema（德），主题</td>
+    </tr>
+    <tr>
+      <td style="text-align: center">株式市場（かぶしきしじょう）</td>
+      <td style="text-align: center">股票市场</td>
+    </tr>
+    <tr>
+      <td style="text-align: center">活動（かつどう）</td>
+      <td style="text-align: center">活动；工作</td>
+    </tr>
+    <tr>
+      <td style="text-align: center">発行（はっこう）</td>
+      <td style="text-align: center">发行</td>
+    </tr>
+    <tr>
+      <td style="text-align: center">研究発表会（けんきゅうはっぴょうかい）</td>
+      <td style="text-align: center">研究发表会</td>
+    </tr>
+    <tr>
+      <td style="text-align: center">交流（こうりゅう）</td>
+      <td style="text-align: center">交流</td>
+    </tr>
+    <tr>
+      <td style="text-align: center">活動日（かつどうび）</td>
+      <td style="text-align: center">活动日</td>
+    </tr>
+    <tr>
+      <td style="text-align: center">场所（ばしょ）</td>
+      <td style="text-align: center">場所</td>
+    </tr>
+    <tr>
+      <td style="text-align: center">会館（かいかん）</td>
+      <td style="text-align: center">会馆</td>
+    </tr>
+    <tr>
+      <td style="text-align: center">階（かい）</td>
+      <td style="text-align: center">层</td>
+    </tr>
+    <tr>
+      <td style="text-align: center">小会議室（しょうかいぎしつ）</td>
+      <td style="text-align: center">小会议室</td>
+    </tr>
+    <tr>
+      <td style="text-align: center">お知らせ（おしらせ）</td>
+      <td style="text-align: center">通知</td>
+    </tr>
+    <tr>
+      <td style="text-align: center">コンパ</td>
+      <td style="text-align: center">聚餐</td>
+    </tr>
+    <tr>
+      <td style="text-align: center">日時</td>
+      <td style="text-align: center">日期与时间</td>
+    </tr>
+    <tr>
+      <td style="text-align: center">大集会室（だいしゅうかいしつ）</td>
+      <td style="text-align: center">大集会室</td>
+    </tr>
+    <tr>
+      <td style="text-align: center">会費（かいひ）</td>
+      <td style="text-align: center">会費</td>
+    </tr>
+    <tr>
+      <td style="text-align: center">元（げん）</td>
+      <td style="text-align: center">元</td>
+    </tr>
+    <tr>
+      <td style="text-align: center">鑑賞（かんしょう）</td>
+      <td style="text-align: center">鉴赏</td>
+    </tr>
+  </tbody>
+</table><br><ol><li>～階（かい）<br>特殊：（1，6，8，10促音，3浊音）<br>1　階：いっかい<br>3　階：さんがい<br>6　階：ろっかい<br>8　階：はっかい<br>10　階：じ（ゅ）っがい</li><li>や＜并列＞<br>や和と的区别是：と列举全部的事物，而や暗含除了列举的事物之外，还包含其他的事物。</li></ol>
+                        </div>
+                
+                        <footer class="post-footer">
+                            <div class="post-navigation">
+                                <!-- 文章导航将在这里添加 -->
+                            </div>
+                        </footer>
+                    </article>
+                </div>
+            </div>
+            
+            <!-- 目录 -->
+            <div class="table-of-contents">
+  <div class="toc-header">
+    <h3 class="toc-title">目录</h3>
+    <button class="toc-toggle" aria-label="折叠目录">−</button>
+  </div>
+  <nav class="toc-nav">
+    <ul class="toc-list">
+      <li class="toc-item toc-h1">
+        <a href="#heading-1" class="toc-link">综合日语 第6課 キャンパス·スケジュール</a>
+      </li>
+      <li class="toc-item toc-h2">
+        <a href="#heading-2" class="toc-link">ユニット1 会話</a>
+      </li>
+      <li class="toc-item toc-h3">
+        <a href="#heading-3" class="toc-link">新出単語</a>
+      </li>
+      <li class="toc-item toc-h2">
+        <a href="#heading-4" class="toc-link">ユニット2 会話</a>
+      </li>
+      <li class="toc-item toc-h3">
+        <a href="#heading-5" class="toc-link">新出単語</a>
+      </li>
+      <li class="toc-item toc-h2">
+        <a href="#heading-6" class="toc-link">ユニット3 読解文</a>
+      </li>
+      <li class="toc-item toc-h3">
+        <a href="#heading-7" class="toc-link">新出単語</a>
+      </li>
+    </ul>
+  </nav>
+</div>
+
+        </div>
+    </main>
+    
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <p>&copy; 2025 電波圏外. All rights reserved.</p>
+            <p>Powered by <a href="https://github.com/" target="_blank">GitHub</a> & <a href="https://pages.github.com/" target="_blank">GitHub Pages</a></p>
+        </div>
+    </footer>
+</body>
+</html>
